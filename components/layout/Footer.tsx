@@ -1,0 +1,95 @@
+import Link from "next/link";
+import { Building2, Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import { SITE, FOOTER_LINKS, NAV_LINKS } from "@/constants/site";
+
+export function Footer() {
+  return (
+    <footer className="bg-navy-gradient text-white/80">
+      <div className="container-xl px-6 py-16 lg:px-12 lg:py-20">
+        <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
+          <div className="lg:col-span-2">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold-gradient text-navy shadow-gold">
+                <Building2 size={18} strokeWidth={2.5} />
+              </span>
+              <span className="flex flex-col leading-none">
+                <span className="font-display text-lg tracking-wide text-white">KAIROS</span>
+                <span className="text-[10px] tracking-[0.3em] text-gold">HOME REALTY</span>
+              </span>
+            </div>
+            <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
+              {SITE.description}
+            </p>
+            <div className="mt-6 flex gap-3">
+              {[Facebook, Instagram, Linkedin, Twitter].map((Icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  aria-label="Social media link"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 transition-colors hover:border-gold hover:text-gold"
+                >
+                  <Icon size={16} />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">Pages</h4>
+            <ul className="space-y-3 text-sm">
+              {NAV_LINKS.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="transition-colors hover:text-gold">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">Services</h4>
+            <ul className="space-y-3 text-sm">
+              {FOOTER_LINKS.services.map((l) => (
+                <li key={l.href}>
+                  <Link href={l.href} className="transition-colors hover:text-gold">
+                    {l.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="mb-4 text-sm font-semibold uppercase tracking-widest text-gold">Contact</h4>
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-start gap-2">
+                <Phone size={16} className="mt-0.5 shrink-0 text-gold" />
+                <span>{SITE.phone}</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <Mail size={16} className="mt-0.5 shrink-0 text-gold" />
+                <span>{SITE.email}</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-gold" />
+                <span>{SITE.address}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs text-white/50 md:flex-row">
+          <p>© {new Date().getFullYear()} Kairos Home Realty. All rights reserved.</p>
+          <div className="flex gap-6">
+            {FOOTER_LINKS.legal.map((l) => (
+              <Link key={l.href} href={l.href} className="hover:text-gold">
+                {l.label}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
