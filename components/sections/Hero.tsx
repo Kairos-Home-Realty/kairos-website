@@ -14,7 +14,7 @@ export function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[780px] w-full overflow-hidden">
+    <section ref={ref} className="relative min-h-screen w-full overflow-hidden pt-28 pb-10 md:h-screen md:min-h-[780px] md:py-0">
       <motion.div style={{ y }} className="absolute inset-0 bg-skyline">
         {/* Skyline silhouette illustration, built purely with CSS/SVG shapes */}
         <svg
@@ -37,7 +37,7 @@ export function Hero() {
       </motion.div>
       <div className="absolute inset-0 bg-hero-gradient" />
 
-      <motion.div style={{ opacity }} className="relative z-10 flex h-full items-center pt-28 pb-10 md:pt-24">
+      <motion.div style={{ opacity }} className="relative z-10 flex md:h-full items-center">
         <div className="container-xl w-full px-6 lg:px-12">
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.6fr_1fr]">
             <div>
@@ -94,7 +94,7 @@ export function Hero() {
               className="hidden animate-float rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-md lg:block"
             >
               <p className="mb-4 text-xs uppercase tracking-widest text-gold">
-                We are the bridge between
+                You are the bridge between
               </p>
               <div className="space-y-2.5">
                 {["Customers", "Builders", "Banks"].map((item) => (
@@ -113,7 +113,7 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            className="mt-16 grid grid-cols-2 gap-6 border-t border-white/15 pt-8 md:grid-cols-4"
+            className="mt-10 grid grid-cols-2 gap-5 border-t border-white/15 pt-6 pb-4 sm:mt-16 sm:gap-6 sm:pt-8 sm:pb-0 md:grid-cols-4"
           >
             {STATS.map((s) => (
               <div key={s.label}>
@@ -124,13 +124,21 @@ export function Hero() {
               </div>
             ))}
           </motion.div>
+
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="mt-4 flex justify-center text-white/50 md:hidden"
+          >
+            <ArrowDown size={20} />
+          </motion.div>
         </div>
       </motion.div>
 
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-6 left-1/2 z-10 -translate-x-1/2 text-white/50"
+        className="absolute bottom-6 left-1/2 z-10 hidden -translate-x-1/2 text-white/50 md:block"
       >
         <ArrowDown size={22} />
       </motion.div>
