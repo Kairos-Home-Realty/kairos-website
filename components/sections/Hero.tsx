@@ -14,7 +14,7 @@ export function Hero() {
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-screen min-h-[720px] w-full overflow-hidden">
+    <section ref={ref} className="relative h-screen min-h-[780px] w-full overflow-hidden">
       <motion.div style={{ y }} className="absolute inset-0 bg-skyline">
         {/* Skyline silhouette illustration, built purely with CSS/SVG shapes */}
         <svg
@@ -37,7 +37,7 @@ export function Hero() {
       </motion.div>
       <div className="absolute inset-0 bg-hero-gradient" />
 
-      <motion.div style={{ opacity }} className="relative z-10 flex h-full items-center">
+      <motion.div style={{ opacity }} className="relative z-10 flex h-full items-center pt-28 pb-10 md:pt-24">
         <div className="container-xl w-full px-6 lg:px-12">
           <div className="grid grid-cols-1 items-end gap-10 lg:grid-cols-[1.6fr_1fr]">
             <div>
