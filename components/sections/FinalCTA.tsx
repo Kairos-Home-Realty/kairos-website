@@ -1,6 +1,7 @@
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, PhoneCall } from "lucide-react";
+import { SITE } from "@/constants/site";
 
 export function FinalCTA() {
   return (
@@ -20,7 +21,7 @@ export function FinalCTA() {
             <Button href="/contact" size="lg">
               Book Free Consultation <ArrowRight size={18} />
             </Button>
-            <Button href="tel:+911234567890" variant="outline" size="lg">
+            <Button href={`tel:${SITE.phone.replace(/\s/g, "")}`} variant="outline" size="lg">
               <PhoneCall size={18} /> Call Now
             </Button>
           </div>

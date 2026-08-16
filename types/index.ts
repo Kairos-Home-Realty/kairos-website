@@ -18,6 +18,8 @@ export interface Builder {
   description: string;
   projects: string[];
   established: string;
+  logo?: string;
+  logoBg?: "light" | "dark";
 }
 
 export interface BankPartner {

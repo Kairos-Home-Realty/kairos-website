@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { BUILDERS } from "@/constants/site";
@@ -7,7 +8,7 @@ import { Building2, ArrowRight } from "lucide-react";
 export const metadata: Metadata = {
   title: "Projects & Builders",
   description:
-    "Explore Kairos Home Realty's trusted builder partners including Prestige, Brigade, Godrej, Lodha, Sobha and Puravankara.",
+    "Explore Kairos Home Realty's trusted builder partners including Prestige Group, Brigade Group, Godrej Properties, Auro Realty, Ramky Group and Hallmark Infracon.",
 };
 
 export default function ProjectsPage() {
@@ -35,9 +36,25 @@ export default function ProjectsPage() {
               <StaggerItem key={builder.name}>
                 <div className="card-hover flex h-full flex-col rounded-xl2 border border-navy/5 shadow-card">
                   <div className="img-zoom relative flex h-44 items-center justify-center overflow-hidden rounded-t-xl2 bg-navy-gradient">
-                    <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gold-gradient text-navy shadow-gold">
-                      <Building2 size={28} />
-                    </div>
+                    {builder.logo ? (
+                      <div
+                        className={`relative h-28 w-36 overflow-hidden rounded-xl p-4 shadow-gold ${
+                          builder.logoBg === "dark" ? "bg-navy" : "bg-white/95"
+                        }`}
+                      >
+                        <Image
+                          src={builder.logo}
+                          alt={`${builder.name} logo`}
+                          fill
+                          className="object-contain p-2"
+                          sizes="144px"
+                        />
+                      </div>
+                    ) : (
+                      <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-gold-gradient text-navy shadow-gold">
+                        <Building2 size={28} />
+                      </div>
+                    )}
                   </div>
                   <div className="flex flex-1 flex-col p-7">
                     <h3 className="font-display text-xl font-semibold text-navy">{builder.name}</h3>

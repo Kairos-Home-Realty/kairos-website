@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
-import { Menu, X, Building2 } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/constants/site";
 import { Button } from "@/components/ui/Button";
 import { cn } from "@/lib/utils";
@@ -32,8 +33,8 @@ export function Navbar() {
     >
       <nav className="container-xl flex items-center justify-between px-6 lg:px-12">
         <Link href="/" className="flex items-center gap-2.5 group">
-          <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold-gradient text-navy shadow-gold">
-            <Building2 size={18} strokeWidth={2.5} />
+          <span className="relative flex h-10 w-10 items-center justify-center overflow-hidden rounded-lg shadow-gold">
+            <Image src="/logo-icon.png" alt="Kairos Home Realty" fill className="object-cover" priority />
           </span>
           <span className="flex flex-col leading-none">
             <span className="font-display text-lg tracking-wide text-white">

@@ -18,14 +18,18 @@ import type {
 
 export const SITE = {
   name: "Kairos Home Realty",
-  tagline: "Find the Right Property. Finance It Right.",
+  tagline: "Right Property. Right Time.",
   description:
     "Kairos Home Realty is a trusted property and financial advisory firm helping customers discover the right home and secure the best financing through verified builder and banking partnerships.",
-  phone: "+91 12345 67890",
-  email: "hello@kairoshomerealty.com",
-  address: "Kairos Home Realty, HITEC City, Hyderabad, Telangana, India",
+  phone: "+91 80892 02089",
+  email: "kairoshomerealty@gmail.com",
+  address: "1201, Regent Park, Nallagandala Flyover, Serilingampally PO, Hyderabad - 500019",
   hours: "Monday – Saturday, 10:00 AM – 6:00 PM",
-  whatsapp: "911234567890",
+  whatsapp: "918089202089",
+  founder: {
+    name: "Abraham Thomas",
+    role: "Founder",
+  },
 };
 
 export const NAV_LINKS: NavLink[] = [
@@ -176,6 +180,7 @@ export const BUILDERS: Builder[] = [
     description: "One of India's most respected developers, known for landmark residential and commercial projects across major cities.",
     projects: ["Prestige Lakeside Habitat", "Prestige Falcon City", "Prestige Shantiniketan"],
     established: "1986",
+    logo: "/builders/prestige-group.png",
   },
   {
     name: "Brigade Group",
@@ -183,6 +188,7 @@ export const BUILDERS: Builder[] = [
     description: "A trusted name in South Indian real estate with a strong reputation for quality construction and timely delivery.",
     projects: ["Brigade Cornerstone Utopia", "Brigade Meadows", "Brigade Exotica"],
     established: "1986",
+    logo: "/builders/brigade-group.jpg",
   },
   {
     name: "Godrej Properties",
@@ -190,27 +196,32 @@ export const BUILDERS: Builder[] = [
     description: "Backed by the Godrej Group's century-long legacy, delivering sustainable and thoughtfully designed homes.",
     projects: ["Godrej Reflections", "Godrej Woodsman Estate", "Godrej Air"],
     established: "1990",
+    logo: "/builders/godrej-properties.png",
   },
   {
-    name: "Lodha Group",
-    tagline: "India's No.1 Real Estate Developer",
-    description: "Renowned for iconic luxury developments and large-scale integrated townships across major metros.",
-    projects: ["Lodha Amara", "Lodha Belmondo", "Lodha Splendora"],
-    established: "1980",
+    name: "Auro Realty",
+    tagline: "Precast Technology, Precision Delivery",
+    description: "A Hyderabad-based developer known for combining Finnish precast construction technology with premium residential and commercial spaces across the city's western corridor.",
+    projects: ["The Pearl", "Orbit", "Auroland"],
+    established: "2012",
+    logo: "/builders/auro-realty.png",
+    // logoBg: "dark",
   },
   {
-    name: "Sobha Limited",
-    tagline: "Crafting Excellence",
-    description: "Recognised for meticulous engineering and backward-integrated construction that ensures uncompromised quality.",
-    projects: ["Sobha Dream Acres", "Sobha City", "Sobha Forest View"],
+    name: "Ramky Group",
+    tagline: "Three Decades of Trusted Development",
+    description: "The real estate arm of the diversified Ramky Group, with nearly three decades of delivering residential and commercial projects across Hyderabad's key growth corridors.",
+    projects: ["Ramky Towers", "The Eminent", "Ramky One Odyssey"],
+    established: "1997",
+    logo: "/builders/ramky-group.png",
+  },
+  {
+    name: "Hallmark Infracon",
+    tagline: "Hyderabad's Premium Villa Specialist",
+    description: "A Hyderabad-focused developer since 1995, recognised for premium villas and large-format gated communities across the city's western residential belt.",
+    projects: ["Hallmark County", "Hallmark Imperia", "Hallmark Altus"],
     established: "1995",
-  },
-  {
-    name: "Puravankara",
-    tagline: "Building for a Billion Aspirations",
-    description: "A pioneer of premium and affordable housing with a multi-city footprint and strong customer trust.",
-    projects: ["Purva Atmosphere", "Provident Sunworth", "Purva Zenium"],
-    established: "1975",
+    logo: "/builders/hallmark-infracon.png",
   },
 ];
 

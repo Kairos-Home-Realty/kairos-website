@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
-import { TIMELINE } from "@/constants/site";
+import { TIMELINE, SITE } from "@/constants/site";
 import { Eye, Target, HeartHandshake, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -132,7 +132,7 @@ export default function AboutPage() {
         <div className="container-xl grid grid-cols-1 items-center gap-10 px-0 lg:grid-cols-[auto_1fr]">
           <FadeIn direction="right">
             <div className="flex h-28 w-28 items-center justify-center rounded-full bg-gold-gradient font-display text-3xl font-bold text-navy shadow-gold">
-              KV
+              AT
             </div>
           </FadeIn>
           <FadeIn direction="left" delay={0.1}>
@@ -143,7 +143,9 @@ export default function AboutPage() {
               trusted guide. Our promise is simple: honest advice, every
               time.&rdquo;
             </p>
-            <p className="mt-4 text-sm text-white/60">Founder &amp; CEO, Kairos Home Realty</p>
+            <p className="mt-4 text-sm text-white/60">
+              {SITE.founder.name} · {SITE.founder.role}, Kairos Home Realty
+            </p>
           </FadeIn>
         </div>
       </section>

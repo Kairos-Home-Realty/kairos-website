@@ -94,7 +94,7 @@ export function Hero() {
               className="hidden animate-float rounded-2xl border border-white/15 bg-white/5 p-6 backdrop-blur-md lg:block"
             >
               <p className="mb-4 text-xs uppercase tracking-widest text-gold">
-                You are the bridge between
+                We are the bridge between
               </p>
               <div className="space-y-2.5">
                 {["Customers", "Builders", "Banks"].map((item) => (

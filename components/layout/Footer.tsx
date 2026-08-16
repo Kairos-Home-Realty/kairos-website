@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Building2, Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import Image from "next/image";
+import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
 import { SITE, FOOTER_LINKS, NAV_LINKS } from "@/constants/site";
 
 export function Footer() {
@@ -8,14 +9,13 @@ export function Footer() {
       <div className="container-xl px-6 py-16 lg:px-12 lg:py-20">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-5">
           <div className="lg:col-span-2">
-            <div className="flex items-center gap-2.5">
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gold-gradient text-navy shadow-gold">
-                <Building2 size={18} strokeWidth={2.5} />
-              </span>
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-lg tracking-wide text-white">KAIROS</span>
-                <span className="text-[10px] tracking-[0.3em] text-gold">HOME REALTY</span>
-              </span>
+            <div className="relative h-32 w-28">
+              <Image
+                src="/logo-full-dark.png"
+                alt="Kairos Home Realty"
+                fill
+                className="object-contain object-left"
+              />
             </div>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-white/60">
               {SITE.description}

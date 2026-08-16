@@ -2,6 +2,7 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { BUILDERS } from "@/constants/site";
 import { Building2, ArrowRight } from "lucide-react";
+import Image from "next/image";
 
 export function FeaturedBuilders() {
   return (
@@ -20,8 +21,22 @@ export function FeaturedBuilders() {
           {BUILDERS.slice(0, 6).map((builder) => (
             <StaggerItem key={builder.name}>
               <div className="card-hover flex h-full flex-col rounded-xl2 border border-navy/5 p-7 shadow-card">
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-lg bg-navy-gradient text-gold">
-                  <Building2 size={22} />
+                <div
+                  className={`relative mb-5 h-16 w-24 overflow-hidden rounded-lg p-2 ${
+                    builder.logoBg === "dark" ? "bg-navy" : "bg-white"
+                  } ${!builder.logo ? "flex items-center justify-center bg-navy-gradient text-gold" : "border border-navy/10"}`}
+                >
+                  {builder.logo ? (
+                    <Image
+                      src={builder.logo}
+                      alt={`${builder.name} logo`}
+                      fill
+                      className="object-contain p-1.5"
+                      sizes="96px"
+                    />
+                  ) : (
+                    <Building2 size={22} />
+                  )}
                 </div>
                 <h3 className="text-lg font-semibold text-navy">{builder.name}</h3>
                 <p className="mt-1 text-xs font-medium uppercase tracking-wide text-gold-dark">
