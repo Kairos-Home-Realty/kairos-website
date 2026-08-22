@@ -225,6 +225,18 @@ export const BUILDERS: Builder[] = [
   },
 ];
 
+export interface TrustedBrand {
+  name: string;
+  logo: string;
+  logoBg?: "light" | "dark";
+}
+
+export const TRUSTED_BRANDS: TrustedBrand[] = [
+  ...BUILDERS.map((b) => ({ name: b.name, logo: b.logo!, logoBg: b.logoBg })),
+  { name: "ICICI Bank", logo: "/banks/icici-bank.jpg" },
+  { name: "IDFC FIRST Bank", logo: "/banks/idfc-first-bank.webp" },
+];
+
 export const BANKS: BankPartner[] = [
   { name: "ICICI Bank", productHighlight: "Fast digital approvals" },
   { name: "HDFC Home Loans", productHighlight: "Competitive fixed & floating rates" },

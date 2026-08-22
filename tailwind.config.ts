@@ -47,6 +47,7 @@ const config: Config = {
       animation: {
         "fade-up": "fadeUp 0.8s ease forwards",
         float: "float 6s ease-in-out infinite",
+        marquee: "marquee 32s linear infinite",
       },
       keyframes: {
         fadeUp: {
@@ -56,6 +57,10 @@ const config: Config = {
         float: {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-14px)" },
+        },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
         },
       },
     },
