@@ -57,7 +57,7 @@ export default function HomeLoansPage() {
         </div>
       </section>
 
-      <section className="section-pad bg-offwhite">
+      {/* <section className="section-pad bg-offwhite">
         <div className="container-xl px-0">
           <FadeIn className="mx-auto mb-14 max-w-2xl text-center">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Eligibility Checker</span>
@@ -69,7 +69,7 @@ export default function HomeLoansPage() {
             <EligibilityChecker />
           </FadeIn>
         </div>
-      </section>
+      </section> */}
 
       <section className="section-pad bg-white">
         <div className="container-xl grid grid-cols-1 gap-14 px-0 lg:grid-cols-2">

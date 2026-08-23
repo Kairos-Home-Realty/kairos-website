@@ -30,10 +30,35 @@ export function ContactForm() {
   });
 
   const onSubmit = async (data: ContactFormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 900));
-    console.log("Contact form submission:", data);
-    toast.success("Thank you! Our team will reach out within 24 hours.");
-    reset();
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || "Failed to send your enquiry");
+      }
+
+      toast.success(
+        "Thank you! Our team will reach out within 24 hours."
+      );
+
+      reset();
+    } catch (error) {
+      console.error("Contact form error:", error);
+
+      toast.error(
+        error instanceof Error
+          ? error.message
+          : "Something went wrong. Please try again."
+      );
+    }
   };
 
   return (
