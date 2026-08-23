@@ -101,7 +101,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      <section className="section-pad bg-white">
+      {/* <section className="section-pad bg-white">
         <div className="container-xl px-0">
           <FadeIn className="mx-auto max-w-2xl text-center">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Our Journey</span>
@@ -126,18 +126,18 @@ export default function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
 
       <section className="section-pad bg-navy-gradient text-white">
-        <div className="container-xl grid grid-cols-1 items-center gap-10 px-0 lg:grid-cols-[auto_1fr]">
+        <div className="container-xl grid grid-cols-1 items-center gap-10 px-0 lg:flex lg:flex-row lg:justify-center">
           <FadeIn direction="right">
             <div className="flex h-28 w-28 items-center justify-center rounded-full bg-gold-gradient font-display text-3xl font-bold text-navy shadow-gold">
               AT
             </div>
           </FadeIn>
-          <FadeIn direction="left" delay={0.1}>
+          <FadeIn direction="left" delay={0.1} className="max-w-2xl lg:text-center">
             <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Founder&apos;s Message</span>
-            <p className="mt-4 max-w-2xl font-display text-xl leading-relaxed text-white/90 md:text-2xl">
+            <p className="mt-4 font-display text-xl leading-relaxed text-white/90 md:text-2xl">
               &ldquo;We started Kairos because we watched too many families
               make the biggest financial decision of their lives without a
               trusted guide. Our promise is simple: honest advice, every

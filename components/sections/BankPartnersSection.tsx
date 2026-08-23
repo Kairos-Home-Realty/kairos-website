@@ -1,8 +1,12 @@
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { BANKS } from "@/constants/site";
-import { Landmark } from "lucide-react";
+import { Landmark, MoreHorizontal } from "lucide-react";
+
+const FEATURED_BANK_NAMES = ["ICICI Bank", "Federal Bank", "IDFC FIRST Bank"];
 
 export function BankPartnersSection() {
+  const featuredBanks = BANKS.filter((bank) => FEATURED_BANK_NAMES.includes(bank.name));
+
   return (
     <section className="section-pad bg-offwhite">
       <div className="container-xl px-0">
@@ -15,8 +19,8 @@ export function BankPartnersSection() {
           </h2>
         </FadeIn>
 
-        <StaggerContainer className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
-          {BANKS.map((bank) => (
+        <StaggerContainer className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-4">
+          {featuredBanks.map((bank) => (
             <StaggerItem key={bank.name}>
               <div className="card-hover flex h-full flex-col items-center rounded-xl2 bg-white p-6 text-center shadow-card">
                 <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-navy-gradient text-gold">
@@ -27,6 +31,15 @@ export function BankPartnersSection() {
               </div>
             </StaggerItem>
           ))}
+          <StaggerItem>
+            <div className="card-hover flex h-full flex-col items-center justify-center rounded-xl2 border-2 border-dashed border-navy/15 bg-transparent p-6 text-center shadow-none">
+              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-navy/5 text-navy/40">
+                <MoreHorizontal size={20} />
+              </div>
+              <p className="text-sm font-semibold text-navy/60">And Many More</p>
+              <p className="mt-1 text-xs text-slate/50">12+ banking partners</p>
+            </div>
+          </StaggerItem>
         </StaggerContainer>
       </div>
     </section>
