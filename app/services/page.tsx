@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { SERVICES, SERVICE_ICONS } from "@/constants/site";
@@ -46,8 +47,20 @@ export default function ServicesPage() {
                 >
                   <FadeIn direction={reversed ? "left" : "right"}>
                     <div className="relative flex aspect-[4/3] w-full items-center justify-center overflow-hidden rounded-xl3 bg-navy-gradient shadow-soft">
-                      <Icon size={100} className="text-gold/40" strokeWidth={1} />
-                      <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+                      {service.image ? (
+                        <Image
+                          src={service.image}
+                          alt={service.title}
+                          fill
+                          className="object-cover"
+                          sizes="(min-width: 1024px) 50vw, 100vw"
+                        />
+                      ) : (
+                        <>
+                          <Icon size={100} className="text-gold/40" strokeWidth={1} />
+                          <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-gold/10 blur-3xl" />
+                        </>
+                      )}
                     </div>
                   </FadeIn>
                   <FadeIn direction={reversed ? "right" : "left"} delay={0.1}>

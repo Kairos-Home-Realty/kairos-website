@@ -10,6 +10,7 @@ export interface Service {
   shortDescription: string;
   description: string;
   benefits: string[];
+  image?: string;
 }
 
 export interface Builder {

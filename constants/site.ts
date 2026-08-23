@@ -82,6 +82,7 @@ export const SERVICES: Service[] = [
       "Access to pre-vetted, RERA-compliant projects",
       "Ongoing support until you find the right fit",
     ],
+    image: "/services/property-advisory.png",
   },
   {
     slug: "builder-guidance",
@@ -97,6 +98,7 @@ export const SERVICES: Service[] = [
       "Verified pricing with no hidden mark-ups",
       "Priority site visit scheduling",
     ],
+    image: "/services/builder-guidance.png",
   },
   {
     slug: "home-loan-solutions",
@@ -112,6 +114,7 @@ export const SERVICES: Service[] = [
       "Fastest approval turnaround",
       "Dedicated relationship manager",
     ],
+    image: "/services/home-loan-solutions.png",
   },
   {
     slug: "investment-advisory",
@@ -127,6 +130,7 @@ export const SERVICES: Service[] = [
       "Portfolio diversification guidance",
       "Exit strategy planning",
     ],
+    image: "/services/investment-advisory.png"
   },
   {
     slug: "documentation-support",
@@ -142,6 +146,7 @@ export const SERVICES: Service[] = [
       "Loan paperwork coordination",
       "Dedicated documentation manager",
     ],
+    image: "/services/documentation-support.png"
   },
   {
     slug: "guided-site-visits",
@@ -157,6 +162,7 @@ export const SERVICES: Service[] = [
       "Neighbourhood & connectivity insight",
       "Flexible scheduling, including weekends",
     ],
+    image: "/services/guided-site-visits.png"
   },
 ];
 
