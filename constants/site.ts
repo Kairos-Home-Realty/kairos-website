@@ -250,14 +250,46 @@ export const TRUSTED_BRANDS: TrustedBrand[] = [
 ];
 
 export const BANKS: BankPartner[] = [
-  { name: "Federal", productHighlight: "Home loan partner" },
-  { name: "HDFC", productHighlight: "Home loan partner" },
-  { name: "IDBI", productHighlight: "Home loan partner" },
-  { name: "ICICI", productHighlight: "Home loan partner" },
-  { name: "Axis", productHighlight: "Home loan partner" },
-  { name: "SBI", productHighlight: "Home loan partner" },
-  { name: "Central Bank", productHighlight: "Home loan partner" },
-  { name: "Bank of Baroda", productHighlight: "Home loan partner" },
+  {
+    name: "Federal",
+    productHighlight: "Home loan partner",
+    logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Federal_bank.logo.svg",
+  },
+  {
+    name: "HDFC",
+    productHighlight: "Home loan partner",
+    logo: "https://commons.wikimedia.org/wiki/Special:FilePath/HDFC_Bank_Logo.svg",
+  },
+  {
+    name: "IDBI",
+    productHighlight: "Home loan partner",
+    logo: "https://en.wikipedia.org/wiki/Special:FilePath/IDBI_Logo.svg",
+  },
+  {
+    name: "ICICI",
+    productHighlight: "Home loan partner",
+    logo: "/banks/icici-bank.jpg",
+  },
+  {
+    name: "Axis",
+    productHighlight: "Home loan partner",
+    logo: "https://commons.wikimedia.org/wiki/Special:FilePath/Axis_Bank_logo.svg",
+  },
+  {
+    name: "SBI",
+    productHighlight: "Home loan partner",
+    logo: "https://commons.wikimedia.org/wiki/Special:FilePath/State-Bank-of-India-Logo.svg",
+  },
+  {
+    name: "Central Bank",
+    productHighlight: "Home loan partner",
+    logo: "https://en.wikipedia.org/wiki/Special:FilePath/Central_Bank_of_India.svg",
+  },
+  {
+    name: "Bank of Baroda",
+    productHighlight: "Home loan partner",
+    logo: "https://en.wikipedia.org/wiki/Special:FilePath/BankOfBarodaLogo.svg",
+  },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
