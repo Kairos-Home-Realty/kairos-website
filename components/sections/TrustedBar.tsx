@@ -35,6 +35,7 @@ export function TrustedBar() {
                     src={brand.logo}
                     alt={brand.name}
                     fill
+                    unoptimized
                     className="object-contain p-2"
                     sizes="288px"
                   />

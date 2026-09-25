@@ -61,8 +61,8 @@ export const FOOTER_LINKS = {
 };
 
 export const STATS = [
-  { value: 500, suffix: "+", label: "Families Guided" },
-  { value: 30, suffix: "+", label: "Builder Partners" },
+  { value: 100, suffix: "+", label: "Families Guided" },
+  { value: 12, suffix: "+", label: "Builder Partners" },
   { value: 12, suffix: "+", label: "Banking Partners" },
   { value: 98, suffix: "%", label: "Client Satisfaction" },
 ];
@@ -244,9 +244,15 @@ export const TRUSTED_BRANDS: TrustedBrand[] = [
   { name: "Ramky", logo: "/builders/ramky-group.png" },
   { name: "Hallmark", logo: "/builders/hallmark-infracon.png" },
   { name: "Auro Realty", logo: "/builders/auro-realty.png" },
-  { name: "Casa Grand" },
-  { name: "Sattva" },
-  { name: "VIAN Properties" },
+  {
+    name: "Casa Grand",
+    logo: "https://pbs.twimg.com/profile_images/898104070518353921/kG71c9E-.jpg",
+  },
+  {
+    name: "Sattva",
+    logo: "https://sattvagroup.com/wp-content/uploads/2022/12/Footer-logo-colored.png",
+  },
+  { name: "VIAN Properties", logo: "https://www.vianproperties.com/favicon.ico" },
 ];
 
 export const BANKS: BankPartner[] = [
@@ -289,6 +295,11 @@ export const BANKS: BankPartner[] = [
     name: "Bank of Baroda",
     productHighlight: "Home loan partner",
     logo: "https://en.wikipedia.org/wiki/Special:FilePath/BankOfBarodaLogo.svg",
+  },
+  {
+    name: "Godrej Capital",
+    productHighlight: "Home loan partner",
+    logo: "https://mma.prnewswire.com/media/1797794/Godrej_Capital_Logo.jpg",
   },
 ];
 
