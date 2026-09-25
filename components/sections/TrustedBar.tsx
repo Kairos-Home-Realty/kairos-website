@@ -36,6 +36,7 @@ export function TrustedBar() {
                     alt={brand.name}
                     fill
                     unoptimized
+                    referrerPolicy="no-referrer"
                     className="object-contain p-2"
                     sizes="288px"
                   />

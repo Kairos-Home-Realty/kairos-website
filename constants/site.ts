@@ -250,9 +250,12 @@ export const TRUSTED_BRANDS: TrustedBrand[] = [
   },
   {
     name: "Sattva",
-    logo: "https://sattvagroup.com/wp-content/uploads/2022/12/Footer-logo-colored.png",
+    logo: "https://indianchamber.org/upload/page/sattva-developers-pvt-ltd.webp",
   },
-  { name: "VIAN Properties", logo: "https://www.vianproperties.com/favicon.ico" },
+  {
+    name: "VIAN Properties",
+    logo: "https://www.vianproperties.com/assets/logo-BXDZqLIm.svg",
+  },
 ];
 
 export const BANKS: BankPartner[] = [
