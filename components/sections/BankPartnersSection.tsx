@@ -1,6 +1,7 @@
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { BANKS } from "@/constants/site";
-import { Landmark, MoreHorizontal } from "lucide-react";
+import Image from "next/image";
+import { MoreHorizontal } from "lucide-react";
 
 export function BankPartnersSection() {
   return (
@@ -19,8 +20,16 @@ export function BankPartnersSection() {
           {BANKS.map((bank) => (
             <StaggerItem key={bank.name}>
               <div className="card-hover flex h-full flex-col items-center rounded-xl2 bg-white p-6 text-center shadow-card">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-navy-gradient text-gold">
-                  <Landmark size={20} />
+                <div className="mb-4 flex h-12 w-full items-center justify-center">
+                  <Image
+                    src={bank.logo}
+                    alt=""
+                    aria-hidden="true"
+                    width={160}
+                    height={48}
+                    unoptimized
+                    className="max-h-10 max-w-[160px] object-contain"
+                  />
                 </div>
                 <p className="text-sm font-semibold text-navy">{bank.name}</p>
                 <p className="mt-1 text-xs text-slate/60">{bank.productHighlight}</p>
