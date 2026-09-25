@@ -1,7 +1,32 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Facebook, Instagram, Linkedin, Twitter, Mail, Phone, MapPin } from "lucide-react";
+import {
+  Facebook,
+  Instagram,
+  Mail,
+  MapPin,
+  MessageCircle,
+  Phone,
+} from "lucide-react";
 import { SITE, FOOTER_LINKS, NAV_LINKS } from "@/constants/site";
+
+const SOCIAL_LINKS = [
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/share/1E112hMToW/",
+    Icon: Facebook,
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/kairoshomerealty?stkn=bHNudzk2amJudjVt",
+    Icon: Instagram,
+  },
+  {
+    label: "WhatsApp",
+    href: `https://wa.me/${SITE.whatsapp}`,
+    Icon: MessageCircle,
+  },
+];
 
 export function Footer() {
   return (
@@ -21,14 +46,23 @@ export function Footer() {
               {SITE.description}
             </p>
             <div className="mt-6 flex gap-3">
-              {[Facebook, Instagram, Linkedin, Twitter].map((Icon, i) => (
+              {SOCIAL_LINKS.map(({ label, href, Icon }) => (
                 <a
-                  key={i}
-                  href="#"
-                  aria-label="Social media link"
+                  key={label}
+                  href={href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Visit us on ${label}`}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-white/15 transition-colors hover:border-gold hover:text-gold"
                 >
-                  <Icon size={16} />
+                  {label === "WhatsApp" ? (
+                    <span className="relative flex h-[18px] w-[18px] items-center justify-center">
+                      <MessageCircle size={18} />
+                      <Phone size={8} className="absolute" />
+                    </span>
+                  ) : (
+                    <Icon size={16} />
+                  )}
                 </a>
               ))}
             </div>
