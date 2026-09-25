@@ -233,22 +233,31 @@ export const BUILDERS: Builder[] = [
 
 export interface TrustedBrand {
   name: string;
-  logo: string;
+  logo?: string;
   logoBg?: "light" | "dark";
 }
 
 export const TRUSTED_BRANDS: TrustedBrand[] = [
-  ...BUILDERS.map((b) => ({ name: b.name, logo: b.logo!, logoBg: b.logoBg })),
-  { name: "ICICI Bank", logo: "/banks/icici-bank.jpg" },
-  { name: "IDFC FIRST Bank", logo: "/banks/idfc-first-bank.webp" },
+  { name: "Prestige Group", logo: "/builders/prestige-group.png" },
+  { name: "Godrej Properties", logo: "/builders/godrej-properties.png" },
+  { name: "Brigade Group", logo: "/builders/brigade-group.jpg" },
+  { name: "Ramky", logo: "/builders/ramky-group.png" },
+  { name: "Hallmark", logo: "/builders/hallmark-infracon.png" },
+  { name: "Auro Realty", logo: "/builders/auro-realty.png" },
+  { name: "Casa Grand" },
+  { name: "Sattva" },
+  { name: "VIAN Properties" },
 ];
 
 export const BANKS: BankPartner[] = [
-  { name: "ICICI Bank", productHighlight: "Fast digital approvals" },
-  { name: "HDFC Home Loans", productHighlight: "Competitive fixed & floating rates" },
-  { name: "IDFC FIRST Bank", productHighlight: "Flexible tenure options" },
-  { name: "Federal Bank", productHighlight: "Low processing fees" },
-  { name: "IDBI Bank", productHighlight: "Attractive rates for salaried buyers" },
+  { name: "Federal", productHighlight: "Home loan partner" },
+  { name: "HDFC", productHighlight: "Home loan partner" },
+  { name: "IDBI", productHighlight: "Home loan partner" },
+  { name: "ICICI", productHighlight: "Home loan partner" },
+  { name: "Axis", productHighlight: "Home loan partner" },
+  { name: "SBI", productHighlight: "Home loan partner" },
+  { name: "Central Bank", productHighlight: "Home loan partner" },
+  { name: "Bank of Baroda", productHighlight: "Home loan partner" },
 ];
 
 export const TESTIMONIALS: Testimonial[] = [

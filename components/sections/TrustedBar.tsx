@@ -11,7 +11,7 @@ export function TrustedBar() {
       <div className="container-xl px-6 lg:px-12">
         <FadeIn>
           <p className="mb-8 text-center text-xs font-semibold uppercase tracking-[0.25em] text-navy/40">
-            Trusted by leading builders and banks
+            Trusted builder partners
           </p>
         </FadeIn>
       </div>
@@ -25,18 +25,24 @@ export function TrustedBar() {
             >
               <div
                 className={`relative flex h-full w-full items-center justify-center grayscale transition-all duration-300 hover:grayscale-0 ${
-                  brand.logoBg === "dark"
+                  brand.logo && brand.logoBg === "dark"
                     ? "rounded-lg bg-navy/85 p-2.5"
                     : "opacity-60 hover:opacity-100"
                 }`}
               >
-                <Image
-                  src={brand.logo}
-                  alt={brand.name}
-                  fill
-                  className="object-contain p-2"
-                  sizes="288px"
-                />
+                {brand.logo ? (
+                  <Image
+                    src={brand.logo}
+                    alt={brand.name}
+                    fill
+                    className="object-contain p-2"
+                    sizes="288px"
+                  />
+                ) : (
+                  <span className="px-4 text-center text-xl font-semibold text-navy">
+                    {brand.name}
+                  </span>
+                )}
               </div>
             </div>
           ))}
