@@ -99,11 +99,21 @@ export function Footer() {
             <ul className="space-y-3 text-sm">
               <li className="flex items-start gap-2">
                 <Phone size={16} className="mt-0.5 shrink-0 text-gold" />
-                <span>{SITE.phone}</span>
+                <a
+                  href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+                  className="transition-colors hover:text-gold"
+                >
+                  {SITE.phone}
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <Mail size={16} className="mt-0.5 shrink-0 text-gold" />
-                <span>{SITE.email}</span>
+                <a
+                  href={`mailto:${SITE.email}`}
+                  className="transition-colors hover:text-gold"
+                >
+                  {SITE.email}
+                </a>
               </li>
               <li className="flex items-start gap-2">
                 <MapPin size={16} className="mt-0.5 shrink-0 text-gold" />

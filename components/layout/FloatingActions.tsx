@@ -16,7 +16,10 @@ export function FloatingActions() {
         whileTap={{ scale: 0.95 }}
         className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg"
       >
-        <MessageCircle size={26} fill="white" strokeWidth={0} />
+        <span className="relative flex h-7 w-7 items-center justify-center">
+          <MessageCircle size={26} strokeWidth={2.5} />
+          <Phone size={11} strokeWidth={2.5} className="absolute" />
+        </span>
       </motion.a>
       <motion.a
         href={`tel:${SITE.phone}`}
