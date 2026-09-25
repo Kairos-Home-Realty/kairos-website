@@ -19,7 +19,7 @@ const contactSchema = z.object({
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-export function ContactForm() {
+export function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
   const {
     register,
     handleSubmit,
@@ -50,6 +50,7 @@ export function ContactForm() {
       );
 
       reset();
+      onSuccess?.();
     } catch (error) {
       console.error("Contact form error:", error);
 
