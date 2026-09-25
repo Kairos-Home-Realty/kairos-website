@@ -26,6 +26,7 @@ export interface Builder {
 export interface BankPartner {
   name: string;
   productHighlight: string;
+  logo: string;
 }
 
 export interface Testimonial {
