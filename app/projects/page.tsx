@@ -19,8 +19,8 @@ function BuilderLabel({ name }: { name: string }) {
   return (
     <span className="inline-flex items-center gap-2">
       {builder?.logo && (
-        <span className="relative h-7 w-12 shrink-0 overflow-hidden rounded bg-white/90 p-0.5">
-          <PartnerLogo name={builder.name} src={builder.logo} showFallbackText={false} className="p-0" />
+        <span className="relative h-10 w-20 shrink-0 overflow-hidden rounded bg-white p-0.5">
+          <PartnerLogo name={builder.name} src={builder.logo} showFallbackText={false} className="!p-0" />
         </span>
       )}
       <span>{name}</span>
