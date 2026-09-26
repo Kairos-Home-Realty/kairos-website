@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { BUILDERS, FEATURED_PROJECTS } from "@/constants/site";
 import { Building2, ArrowRight } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Projects & Builders",
@@ -53,6 +54,55 @@ export default function ProjectsPage() {
                   <ul className="mt-5 flex-1 space-y-2 text-sm leading-relaxed text-slate/70">
                     {project.highlights.map((highlight) => <li key={highlight}>• {highlight}</li>)}
                   </ul>
+                  {project.virtualTour && (
+                    <a
+                      href={project.virtualTour}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
+                    >
+                      Open 360° project view <ArrowRight size={16} />
+                    </a>
+                  )}
+                  {project.masterLayout && (
+                    <div className="mt-7 border-t border-navy/10 pt-6">
+                      <h4 className="text-sm font-semibold text-navy">Project master layout</h4>
+                      <a href={project.masterLayout} target="_blank" rel="noopener noreferrer" className="mt-3 block overflow-hidden rounded-lg bg-offwhite">
+                        <Image
+                          src={project.masterLayout}
+                          alt={`${project.name} master layout plan`}
+                          width={2200}
+                          height={1556}
+                          className="h-auto w-full transition-transform duration-300 hover:scale-[1.02]"
+                          unoptimized
+                        />
+                      </a>
+                      <p className="mt-2 text-xs text-slate/60">Select the plan to open a larger view.</p>
+                    </div>
+                  )}
+                  {project.sampleVideos && project.sampleVideos.length > 0 && (
+                    <div className="mt-7 border-t border-navy/10 pt-6">
+                      <h4 className="text-sm font-semibold text-navy">Sample apartment videos</h4>
+                      <div className="mt-3 grid gap-4 sm:grid-cols-2">
+                        {project.sampleVideos.map((video) => (
+                          <div key={video.videoId}>
+                            <p className="mb-2 text-xs font-medium text-slate/70">{video.label}</p>
+                            <div className="aspect-video overflow-hidden rounded-lg bg-navy/5">
+                              <iframe
+                                src={`https://www.youtube-nocookie.com/embed/${video.videoId}`}
+                                title={`${project.name} ${video.label}`}
+                                className="h-full w-full"
+                                loading="lazy"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerPolicy="strict-origin-when-cross-origin"
+                                allowFullScreen
+                              />
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
                   {project.indicativeStartingPrice && (
                     <div className="mt-5 rounded-lg bg-offwhite p-4">
                       <p className="font-semibold text-navy">Indicative starting price: {project.indicativeStartingPrice}</p>
