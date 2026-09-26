@@ -10,33 +10,64 @@ import { Button } from "@/components/ui/Button";
 const contactSchema = z.object({
   fullName: z.string().min(2, "Please enter your full name"),
   phone: z.string().regex(/^[0-9+\s-]{7,15}$/, "Enter a valid phone number"),
-  email: z.string().email("Enter a valid email address"),
-  requirement: z.string().min(1, "Please select a requirement"),
-  budget: z.string().min(1, "Please select a budget range"),
-  location: z.string().min(2, "Please enter a preferred location"),
+  email: z.string().optional(),
+  requirement: z.string().optional(),
+  budget: z.string().optional(),
+  location: z.string().optional(),
   message: z.string().optional(),
 });
 
 type ContactFormData = z.infer<typeof contactSchema>;
 
-export function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
+export function ContactForm({
+  onSuccess,
+  mode = "full",
+}: {
+  onSuccess?: () => void;
+  mode?: "full" | "quick";
+}) {
   const {
     register,
     handleSubmit,
     reset,
+    setError,
     formState: { errors, isSubmitting },
   } = useForm<ContactFormData>({
     resolver: zodResolver(contactSchema),
   });
 
   const onSubmit = async (data: ContactFormData) => {
+    if (mode === "full" && !data.email) {
+      setError("email", { type: "manual", message: "Please enter your email address" });
+      return;
+    }
+
+    if (data.email && !z.string().email().safeParse(data.email).success) {
+      setError("email", { type: "manual", message: "Enter a valid email address" });
+      return;
+    }
+
+    if (mode === "full") {
+      const requiredFields = [
+        ["requirement", data.requirement, "Please select a requirement"],
+        ["budget", data.budget, "Please select a budget range"],
+        ["location", data.location, "Please enter a preferred location"],
+      ] as const;
+      const missingField = requiredFields.find(([, value]) => !value?.trim());
+
+      if (missingField) {
+        setError(missingField[0], { type: "manual", message: missingField[2] });
+        return;
+      }
+    }
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, quick: mode === "quick" }),
       });
 
       const result = await response.json();
@@ -64,7 +95,7 @@ export function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      {mode === "full" && <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Full Name" error={errors.fullName?.message}>
           <input
             {...register("fullName")}
@@ -81,18 +112,18 @@ export function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
             className="input-field"
           />
         </Field>
-      </div>
+      </div>}
 
-      <Field label="Email Address" error={errors.email?.message}>
+      {mode === "full" && <Field label="Email Address" error={errors.email?.message}>
         <input
           {...register("email")}
           type="email"
           placeholder="you@example.com"
           className="input-field"
         />
-      </Field>
+      </Field>}
 
-      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+      {mode === "full" && <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Requirement" error={errors.requirement?.message}>
           <select {...register("requirement")} className="input-field" defaultValue="">
             <option value="" disabled>Select requirement</option>
@@ -111,29 +142,36 @@ export function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
             <option value="above-2cr">Above ₹2 Crore</option>
           </select>
         </Field>
-      </div>
+      </div>}
 
-      <Field label="Preferred Location" error={errors.location?.message}>
+      {mode === "full" && <Field label="Preferred Location" error={errors.location?.message}>
         <input
           {...register("location")}
           type="text"
           placeholder="e.g. Gachibowli, Hyderabad"
           className="input-field"
         />
-      </Field>
+      </Field>}
 
-      <Field label="Message (optional)" error={errors.message?.message}>
+      {mode === "full" && <Field label="Message (optional)" error={errors.message?.message}>
         <textarea
           {...register("message")}
           rows={4}
           placeholder="Tell us a bit more about what you're looking for..."
           className="input-field resize-none"
         />
-      </Field>
+      </Field>}
 
       <Button type="submit" disabled={isSubmitting} className="w-full justify-center">
-        {isSubmitting ? "Sending..." : "Book Consultation"} <Send size={16} />
+        {isSubmitting ? "Sending..." : mode === "quick" ? "Request a Call" : "Book Consultation"} <Send size={16} />
       </Button>
+
+      <p className="text-center text-xs leading-relaxed text-slate/60">
+        We&apos;ll use your details to respond to this enquiry. See our{" "}
+        <a href="/privacy-policy" className="font-medium text-navy underline underline-offset-2">
+          Privacy Policy
+        </a>.
+      </p>
 
       <style jsx global>{`
         .input-field {

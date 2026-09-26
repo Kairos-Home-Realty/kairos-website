@@ -4,7 +4,6 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown, ArrowRight, Building2 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { AnimatedCounter } from "@/components/ui/AnimatedCounter";
 import { STATS } from "@/constants/site";
 
 export function Hero() {
@@ -113,12 +112,12 @@ export function Hero() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.55 }}
-            className="mt-10 grid grid-cols-2 gap-5 border-t border-white/15 pt-6 pb-4 sm:mt-16 sm:gap-6 sm:pt-8 sm:pb-0 md:grid-cols-4"
+            className="mt-10 grid grid-cols-2 gap-5 border-t border-white/15 pt-6 pb-4 sm:mt-16 sm:gap-6 sm:pt-8 sm:pb-0 md:grid-cols-3"
           >
             {STATS.map((s) => (
               <div key={s.label}>
                 <div className="font-display text-3xl font-semibold text-gold md:text-4xl">
-                  <AnimatedCounter value={s.value} suffix={s.suffix} />
+                  {s.value}{s.suffix}
                 </div>
                 <p className="mt-1 text-xs text-white/60 md:text-sm">{s.label}</p>
               </div>

@@ -26,8 +26,8 @@ export function AboutPreview() {
               <div className="flex flex-1 items-center gap-2.5 rounded-xl border border-white/10 bg-white/10 px-4 py-3 backdrop-blur-md">
                 <Building2 size={18} className="shrink-0 text-gold" />
                 <div>
-                  <p className="font-display text-lg font-semibold leading-none text-white">30+</p>
-                  <p className="mt-1 text-[11px] leading-none text-white/70">Builders</p>
+                <p className="font-display text-lg font-semibold leading-none text-white">12+</p>
+                <p className="mt-1 text-[11px] leading-none text-white/70">Builder Partners</p>
                 </div>
               </div>
               <div className="flex flex-1 items-center gap-2.5 rounded-xl border border-white/10 bg-white/10 px-4 py-3 backdrop-blur-md">

@@ -40,11 +40,15 @@ export default function ContactPage() {
                 <ul className="space-y-4 text-sm text-slate/80">
                   <li className="flex items-start gap-3">
                     <Phone className="mt-0.5 shrink-0 text-gold" size={18} />
-                    {SITE.phone}
+                    <a className="transition-colors hover:text-gold-dark" href={`tel:${SITE.phone.replace(/\s/g, "")}`}>
+                      {SITE.phone}
+                    </a>
                   </li>
                   <li className="flex items-start gap-3">
                     <Mail className="mt-0.5 shrink-0 text-gold" size={18} />
-                    {SITE.email}
+                    <a className="transition-colors hover:text-gold-dark" href={`mailto:${SITE.email}`}>
+                      {SITE.email}
+                    </a>
                   </li>
                   <li className="flex items-start gap-3">
                     <MapPin className="mt-0.5 shrink-0 text-gold" size={18} />
@@ -56,7 +60,7 @@ export default function ContactPage() {
                   </li>
                 </ul>
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                  <Button href={`tel:${SITE.phone}`} variant="secondary" className="flex-1 justify-center">
+                  <Button href={`tel:${SITE.phone.replace(/\s/g, "")}`} variant="secondary" className="flex-1 justify-center">
                     <Phone size={16} /> Call Now
                   </Button>
                   <Button href={`https://wa.me/${SITE.whatsapp}`} className="flex-1 justify-center">

@@ -22,7 +22,7 @@ export function FloatingActions() {
         </span>
       </motion.a>
       <motion.a
-        href={`tel:${SITE.phone}`}
+        href={`tel:${SITE.phone.replace(/\s/g, "")}`}
         aria-label="Call now"
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}

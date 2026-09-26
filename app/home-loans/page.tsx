@@ -36,8 +36,9 @@ export default function HomeLoansPage() {
               Financing made simple, terms made clear
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-white/70">
-              We compare offers across 12+ banking partners to secure you the
-              most competitive rate, then guide you through every document.
+              We help compare offers across 12+ banking partners and guide you
+              through the paperwork. Rates, eligibility and approvals are set by
+              each lender and depend on your application.
             </p>
           </FadeIn>
         </div>
@@ -141,9 +142,9 @@ export default function HomeLoansPage() {
         <div className="container-xl px-0">
           <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-3">
             {[
-              { icon: BadgeCheck, title: "Verified Lenders", desc: "Every partner bank is a regulated, established institution." },
+              { icon: BadgeCheck, title: "Compare Lenders", desc: "Review available offers and fees from our listed banking partners." },
               { icon: ClipboardList, title: "Guided Paperwork", desc: "We prepare and review your documentation before submission." },
-              { icon: Landmark, title: "Rate Negotiation", desc: "We negotiate on your behalf using our partnership volume." },
+              { icon: Landmark, title: "Lender Decisions", desc: "The lender confirms final rates, eligibility, fees and approval." },
             ].map((item) => (
               <StaggerItem key={item.title}>
                 <div className="card-hover h-full rounded-xl2 border border-navy/5 p-7 text-center shadow-card">
