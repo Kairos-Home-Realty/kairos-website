@@ -38,6 +38,9 @@ export interface FeaturedProject {
   rera?: string;
   indicativeStartingPrice?: string;
   priceNote?: string;
+  virtualTour?: string;
+  masterLayout?: string;
+  sampleVideos?: { label: string; videoId: string }[];
 }
 
 export interface Testimonial {

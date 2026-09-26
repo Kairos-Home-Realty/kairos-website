@@ -281,6 +281,12 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       "Amenities include a pool, pickleball and paddle courts, jogging track, pet park and outdoor work pods",
     ],
     rera: "P02200010981",
+    virtualTour: "https://www.brooklynavenue360.com/ddzyn360/",
+    masterLayout: "/projects/godrej-brooklyn-avenue-master-layout.webp",
+    sampleVideos: [
+      { label: "3 BHK sample video", videoId: "7w33rjc9hC0" },
+      { label: "4 BHK sample video", videoId: "uYMthLYjXvA" },
+    ],
   },
 ];
 
