@@ -41,6 +41,7 @@ export interface FeaturedProject {
   indicativeStartingPrice?: string;
   priceNote?: string;
   virtualTour?: string;
+  droneView?: string;
   masterLayout?: string;
   sampleVideos?: { label: string; videoId: string }[];
   detailsPage?: string;
@@ -56,6 +57,7 @@ export interface FeaturedProject {
   galleryImages?: { src: string; alt: string }[];
   priceTableRows?: { label: string; area?: string; amount: string }[];
   priceTableNote?: string;
+  paymentSchedule?: { stage: string; percentage: string }[];
   priceSheet?: {
     villaNo: string;
     status: string;
