@@ -12,6 +12,22 @@ export const metadata: Metadata = {
     "Explore Kairos Home Realty's builder partners and ask about current project availability.",
 };
 
+function BuilderLabel({ name }: { name: string }) {
+  const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const builder = BUILDERS.find((item) => item.name.toLowerCase().replace(/[^a-z0-9]/g, "") === normalizedName);
+
+  return (
+    <span className="inline-flex items-center gap-2">
+      {builder?.logo && (
+        <span className="relative h-7 w-12 shrink-0 overflow-hidden rounded bg-white/90 p-0.5">
+          <PartnerLogo name={builder.name} src={builder.logo} showFallbackText={false} className="p-0" />
+        </span>
+      )}
+      <span>{name}</span>
+    </span>
+  );
+}
+
 export default function ProjectsPage() {
   const villaProjects = FEATURED_PROJECTS.filter((project) => project.category === "villa");
   const otherProjects = FEATURED_PROJECTS.filter((project) => project.category !== "villa");
@@ -48,7 +64,7 @@ export default function ProjectsPage() {
                   <article className="flex h-full flex-col overflow-hidden rounded-xl2 border border-navy/10 bg-white shadow-card">
                     {project.coverImage && <div className="relative aspect-[16/8] bg-offwhite"><Image src={project.coverImage} alt={`${project.name} villa community`} fill className="object-cover" unoptimized /></div>}
                     <div className="flex flex-1 flex-col p-7 md:p-8">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-gold-dark">{project.builder} · Villa community</p>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-gold-dark"><BuilderLabel name={project.builder} /> · Villa community</p>
                       <h3 className="mt-2 font-display text-2xl font-semibold text-navy">{project.name}</h3>
                       <p className="mt-3 text-sm text-slate/70"><span className="font-semibold text-navy">Location:</span> {project.location}</p>
                       <p className="mt-2 text-sm text-slate/70"><span className="font-semibold text-navy">Layouts:</span> {project.configurations}</p>
@@ -89,7 +105,7 @@ export default function ProjectsPage() {
                   )}
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div>
-                      <p className="text-xs font-semibold uppercase tracking-wide text-gold-dark">{project.builder}</p>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-gold-dark"><BuilderLabel name={project.builder} /></p>
                       <h3 className="mt-2 font-display text-2xl font-semibold text-navy">{project.name}</h3>
                     </div>
                     {project.rera && <span className="rounded-full bg-navy/5 px-3 py-1.5 text-xs text-navy/70">RERA: {project.rera}</span>}
