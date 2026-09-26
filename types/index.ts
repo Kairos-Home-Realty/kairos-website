@@ -46,6 +46,8 @@ export interface FeaturedProject {
   detailsPage?: string;
   overview?: string;
   amenities?: string[];
+  amenityGroups?: { category: string; area?: string; amenities: string[] }[];
+  locationMap?: string;
   infrastructure?: string[];
   nearbyPlaces?: { category: string; places: string[] }[];
   specifications?: { category: string; details: string[] }[];
