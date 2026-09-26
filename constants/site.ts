@@ -64,7 +64,6 @@ export const STATS = [
   { value: 100, suffix: "+", label: "Families Guided" },
   { value: 12, suffix: "+", label: "Builder Partners" },
   { value: 12, suffix: "+", label: "Banking Partners" },
-  { value: 98, suffix: "%", label: "Client Satisfaction" },
 ];
 
 export const SERVICES: Service[] = [
@@ -75,11 +74,11 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Unbiased guidance to help you discover the property that truly fits your needs and budget.",
     description:
-      "Our advisory team studies your requirements, lifestyle and budget in detail before recommending properties across our verified builder network. Every recommendation is backed by real market data and site-level insight, not commission incentives.",
+      "Our advisory team studies your requirements, lifestyle and budget before helping you compare properties and request current project details.",
     benefits: [
       "Personalised property shortlisting",
       "Independent, unbiased recommendations",
-      "Access to pre-vetted, RERA-compliant projects",
+      "Project-level RERA details where applicable",
       "Ongoing support until you find the right fit",
     ],
     image: "/services/property-advisory.png",
@@ -107,11 +106,11 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Secure the best financing terms through our trusted banking partnerships.",
     description:
-      "Our in-house loan desk works with leading banks and NBFCs to find you the most competitive interest rates, fastest approvals and most flexible repayment terms available.",
+      "Our loan desk helps compare offers, fees and repayment terms from banking partners, then guides you through the documentation process. Rates and approvals are set by each lender and depend on eligibility.",
     benefits: [
       "Comparison across 12+ banking partners",
       "End-to-end loan documentation support",
-      "Fastest approval turnaround",
+      "Application and document coordination",
       "Dedicated relationship manager",
     ],
     image: "/services/home-loan-solutions.png",
@@ -139,7 +138,7 @@ export const SERVICES: Service[] = [
     shortDescription:
       "Complete assistance with the paperwork that comes with buying a home.",
     description:
-      "From sale agreements to loan paperwork and registration, our team ensures every document is verified, compliant and filed correctly — removing the stress from the process.",
+      "We help you organise sale agreements, loan paperwork and registration documents, and coordinate questions with the relevant professionals.",
     benefits: [
       "Legal document verification",
       "Registration & stamp duty guidance",
@@ -229,6 +228,33 @@ export const BUILDERS: Builder[] = [
     established: "1995",
     logo: "/builders/hallmark-infracon.png",
   },
+  {
+    name: "Casa Grand",
+    tagline: "Builder partner",
+    description:
+      "Ask Kairos about current Casa Grand project availability, pricing and location details.",
+    projects: [],
+    established: "",
+    logo: "https://pbs.twimg.com/profile_images/898104070518353921/kG71c9E-.jpg",
+  },
+  {
+    name: "Sattva",
+    tagline: "Builder partner",
+    description:
+      "Ask Kairos about current Sattva project availability, pricing and location details.",
+    projects: [],
+    established: "",
+    logo: "https://sattvagroup.com/wp-content/uploads/2022/12/Footer-logo-colored.png",
+  },
+  {
+    name: "VIAN Properties",
+    tagline: "Builder partner",
+    description:
+      "Ask Kairos about current VIAN Properties project availability, pricing and location details.",
+    projects: [],
+    established: "",
+    logo: "https://www.vianproperties.com/assets/logo-BXDZqLIm.svg",
+  },
 ];
 
 export interface TrustedBrand {
@@ -250,7 +276,7 @@ export const TRUSTED_BRANDS: TrustedBrand[] = [
   },
   {
     name: "Sattva",
-    logo: "https://indianchamber.org/upload/page/sattva-developers-pvt-ltd.webp",
+    logo: "https://sattvagroup.com/wp-content/uploads/2022/12/Footer-logo-colored.png",
   },
   {
     name: "VIAN Properties",
@@ -408,6 +434,6 @@ export const TIMELINE = [
   { year: "2021", title: "The Idea", description: "Founded on a simple belief: home buying should be transparent, not transactional." },
   { year: "2022", title: "First Partnerships", description: "Formed our first builder and banking partnerships in Hyderabad." },
   { year: "2023", title: "Scaling Trust", description: "Crossed 200 families guided through their home-buying journey." },
-  { year: "2024", title: "Expanding Network", description: "Grew to 30+ builder partners and 12+ banking partners." },
+  { year: "2024", title: "Expanding Network", description: "Expanded our builder and banking network across Hyderabad." },
   { year: "2025", title: "500+ Families", description: "Reached the milestone of 500+ families successfully guided home." },
 ];

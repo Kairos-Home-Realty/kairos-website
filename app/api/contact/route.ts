@@ -15,16 +15,15 @@ export async function POST(request: Request) {
       budget,
       location,
       message,
+      quick,
     } = body;
+    const isQuickEnquiry = quick === true;
 
     // Basic server-side validation
     if (
       !fullName ||
       !phone ||
-      !email ||
-      !requirement ||
-      !budget ||
-      !location
+      (!isQuickEnquiry && (!email || !requirement || !budget || !location))
     ) {
       return NextResponse.json(
         {
@@ -36,14 +35,34 @@ export async function POST(request: Request) {
       );
     }
 
+    const escapeHtml = (value: unknown) =>
+      String(value ?? "").replace(/[&<>\"']/g, (character) => {
+        const entities: Record<string, string> = {
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          '"': "&quot;",
+          "'": "&#39;",
+        };
+        return entities[character];
+      });
+
+    const safeName = escapeHtml(fullName);
+    const safePhone = escapeHtml(phone);
+    const safeEmail = escapeHtml(email);
+    const safeRequirement = escapeHtml(requirement || "Callback request");
+    const safeBudget = escapeHtml(budget || "Not provided");
+    const safeLocation = escapeHtml(location || "Not provided");
+    const safeMessage = escapeHtml(message || "No additional message provided.");
+
     const { data, error } = await resend.emails.send({
       from: "KAIROS HOME REALTY <enquiries@kairoshomerealty.com>",
 
       to: [process.env.CONTACT_EMAIL!],
 
-      replyTo: email,
+      ...(email ? { replyTo: email } : {}),
 
-      subject: `New Enquiry from ${fullName}`,
+      subject: `${isQuickEnquiry ? "Callback Request" : "New Enquiry"} from ${String(fullName).slice(0, 100)}`,
 
       html: `
         <div style="font-family: Arial, sans-serif; color: #071b3b;">
@@ -55,37 +74,37 @@ export async function POST(request: Request) {
 
           <p>
             <strong>Full Name:</strong><br />
-            ${fullName}
+            ${safeName}
           </p>
 
           <p>
             <strong>Email Address:</strong><br />
-            ${email}
+            ${safeEmail || "Not provided"}
           </p>
 
           <p>
             <strong>Phone Number:</strong><br />
-            ${phone}
+            ${safePhone}
           </p>
 
           <p>
             <strong>Requirement:</strong><br />
-            ${requirement}
+            ${safeRequirement}
           </p>
 
           <p>
             <strong>Budget Range:</strong><br />
-            ${budget}
+            ${safeBudget}
           </p>
 
           <p>
             <strong>Preferred Location:</strong><br />
-            ${location}
+            ${safeLocation}
           </p>
 
           <p>
             <strong>Message:</strong><br />
-            ${message || "No additional message provided."}
+            ${safeMessage}
           </p>
 
           <hr />

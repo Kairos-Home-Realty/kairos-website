@@ -2,7 +2,7 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { BUILDERS } from "@/constants/site";
 import { Building2, ArrowRight } from "lucide-react";
-import Image from "next/image";
+import { PartnerLogo } from "@/components/ui/PartnerLogo";
 
 export function FeaturedBuilders() {
   return (
@@ -18,7 +18,7 @@ export function FeaturedBuilders() {
         </FadeIn>
 
         <StaggerContainer className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {BUILDERS.slice(0, 6).map((builder) => (
+          {BUILDERS.map((builder) => (
             <StaggerItem key={builder.name}>
               <div className="card-hover flex h-full flex-col rounded-xl2 border border-navy/5 p-7 shadow-card">
                 <div
@@ -27,20 +27,14 @@ export function FeaturedBuilders() {
                   } ${!builder.logo ? "flex items-center justify-center bg-navy-gradient text-gold" : "border border-navy/10"}`}
                 >
                   {builder.logo ? (
-                    <Image
-                      src={builder.logo}
-                      alt={`${builder.name} logo`}
-                      fill
-                      className="object-contain p-1.5"
-                      sizes="96px"
-                    />
+                    <PartnerLogo name={builder.name} src={builder.logo} className="p-1.5" />
                   ) : (
                     <Building2 size={22} />
                   )}
                 </div>
                 <h3 className="text-lg font-semibold text-navy">{builder.name}</h3>
-                <p className="mt-1 text-xs font-medium uppercase tracking-wide text-gold-dark">
-                  {builder.tagline}
+                    <p className="mt-1 text-xs font-medium uppercase tracking-wide text-gold-dark">
+                      {builder.tagline}{builder.established ? ` · Est. ${builder.established}` : ""}
                 </p>
                 <p className="mt-4 flex-1 text-sm leading-relaxed text-slate/70">
                   {builder.description}

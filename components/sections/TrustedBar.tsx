@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { TRUSTED_BRANDS } from "@/constants/site";
+import { PartnerLogo } from "@/components/ui/PartnerLogo";
 
 export function TrustedBar() {
   // Duplicate the list so the marquee can loop seamlessly at -50%
@@ -31,15 +31,7 @@ export function TrustedBar() {
                 }`}
               >
                 {brand.logo ? (
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    fill
-                    unoptimized
-                    referrerPolicy="no-referrer"
-                    className="object-contain p-2"
-                    sizes="288px"
-                  />
+                  <PartnerLogo name={brand.name} src={brand.logo} />
                 ) : (
                   <span className="px-4 text-center text-xl font-semibold text-navy">
                     {brand.name}

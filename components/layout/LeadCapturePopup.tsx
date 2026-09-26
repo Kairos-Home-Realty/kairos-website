@@ -12,18 +12,26 @@ export function LeadCapturePopup() {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => setReason("visit"), 2500);
+    const visitKey = "kairos-lead-popup-visit-shown";
+    const submittedKey = "kairos-lead-popup-submitted";
+    if (sessionStorage.getItem(visitKey) || sessionStorage.getItem(submittedKey)) return;
+
+    const timer = window.setTimeout(() => {
+      sessionStorage.setItem(visitKey, "true");
+      setReason("visit");
+    }, 8000);
     return () => window.clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
     let hasScrolledDown = false;
-    let exitPopupShown = false;
-
     const openExitPopup = () => {
-      if (dismissed && !submitted && !exitPopupShown) {
-        exitPopupShown = true;
+      const visitShown = sessionStorage.getItem("kairos-lead-popup-visit-shown");
+      const exitShown = sessionStorage.getItem("kairos-lead-popup-exit-shown");
+      const hasSubmitted = sessionStorage.getItem("kairos-lead-popup-submitted");
+      if (visitShown && dismissed && !submitted && !hasSubmitted && !exitShown) {
+        sessionStorage.setItem("kairos-lead-popup-exit-shown", "true");
         setReason("exit");
       }
     };
@@ -89,7 +97,7 @@ export function LeadCapturePopup() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="lead-popup-title"
-        className="relative max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-8"
+        className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-2xl bg-white p-5 shadow-2xl sm:p-7"
       >
         <button
           type="button"
@@ -106,11 +114,13 @@ export function LeadCapturePopup() {
           {reason === "exit" ? "Before you go…" : "How can we help you find your home?"}
         </h2>
         <p className="mb-6 mt-2 text-sm leading-relaxed text-slate/70">
-          Share a few details and our team will get in touch to guide you.
+          Leave your name and phone number and our team will get in touch.
         </p>
         <ContactForm
+          mode="quick"
           onSuccess={() => {
             setSubmitted(true);
+            sessionStorage.setItem("kairos-lead-popup-submitted", "true");
             setReason(null);
           }}
         />
