@@ -28,6 +28,7 @@ export default function BrigadeGatewayNeopolisPage() {
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg">{project.overview}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="/contact" size="lg">Ask about this project <ArrowRight size={17} /></Button>
+              {project.droneView && <a href={project.droneView} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Open Brigade Gateway drone view <ArrowRight size={16} /></a>}
               <a href="#plans" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Explore brochure plans</a>
             </div>
           </FadeIn>

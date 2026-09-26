@@ -55,7 +55,7 @@ export default function ProjectsPage() {
               <div className="mx-auto mb-10 max-w-2xl text-center">
                 <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Villa living</span>
                 <h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Featured villa communities</h2>
-                <p className="mt-3 text-sm leading-relaxed text-slate/70">Explore selected villa projects from Casagrand and Sattva, with a dedicated page for each community.</p>
+                <p className="mt-3 text-sm leading-relaxed text-slate/70">Explore selected villa projects from Auro Realty, Casagrand and Sattva, with a dedicated page for each community.</p>
               </div>
             </FadeIn>
             <StaggerContainer className="grid grid-cols-1 gap-7 lg:grid-cols-2">
@@ -123,6 +123,16 @@ export default function ProjectsPage() {
                       className="mt-6 inline-flex w-fit items-center gap-2 rounded-full bg-navy px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
                     >
                       Open 360° project view <ArrowRight size={16} />
+                    </a>
+                  )}
+                  {project.droneView && (
+                    <a
+                      href={project.droneView}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-navy/15 px-5 py-3 text-sm font-semibold text-navy transition-colors hover:bg-offwhite"
+                    >
+                      Open Brigade Gateway drone view <ArrowRight size={16} />
                     </a>
                   )}
                   {project.masterLayout && (
