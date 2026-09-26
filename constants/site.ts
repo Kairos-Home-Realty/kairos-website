@@ -552,10 +552,21 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
       { category: "Clubhouse and setting", details: ["60,000 sq. ft. grand clubhouse across G+4 floors", "Open views and natural ventilation, as described in the supplied project brief"] },
       { category: "Price and pre-launch offer", details: ["Starting price advertised at ₹2.2 Cr*", "Pre-launch savings advertised up to ₹26 lakh", "Ask Auro Realty/Kairos to confirm current pricing, offer terms, unit availability, taxes and other charges"] },
     ],
+    amenityGroups: [
+      { category: "Landscape level amenities", area: "Approx. 1,60,000 sq. ft.", amenities: ["Coworking nook", "Cycling track", "Hobby room", "Kitty club", "Sand pit", "Senior citizen lounge", "Half basketball court", "Floor games", "Amphitheatre", "Library / reading garden", "Tuition room", "Multipurpose lounge"] },
+      { category: "Podium level amenities", area: "Approx. 44,000 sq. ft.", amenities: ["Golf putting", "Indoor game area", "Library reading area", "Hobby room", "Art and exhibition room", "Screening / stepped seating", "Reading garden", "Gentlemen room", "Instagram niche", "Resting pod", "Zen garden", "Floating garden"] },
+      { category: "Clubhouse amenities", area: "60,000 sq. ft.", amenities: ["Badminton court", "Indoor games", "Swimming pool", "Restaurant and cafe", "Spa", "Multipurpose hall", "Kids’ pool", "Meeting room", "Supermarket", "Gym", "Yoga and meditation", "Zumba / dance room"] },
+    ],
+    locationMap: "/projects/auro-sapphire-location-map.webp",
+    nearbyPlaces: [
+      { category: "Hospitals", places: ["Citizens Speciality Hospital · 5.2 km", "Vanaja Maternity Hospital · 5.3 km", "KIMS Hospitals · 5.5 km", "AIG Hospitals · 7 km"] },
+      { category: "Connectivity", places: ["Chandanagar Railway Station · 2.5 km", "Lingampally Railway Station · 3 km", "Gachibowli ORR · 5.6 km", "Raidurg Metro Station · 7.3 km", "Rajiv Gandhi International Airport · 34 km"] },
+      { category: "IT / corporates", places: ["TCS · 4 km", "DLF · 4.7 km", "Google · 5.6 km", "Deloitte · 6.3 km", "Microsoft · 6.4 km", "ICICI · 7.9 km", "IBM · 8.5 km"] },
+      { category: "Education", places: ["CHIREC International School · 0.6 km", "Hyderabad Central University · 2 km", "EuroKids Preschool · 3.2 km", "IIIT Gachibowli · 4.5 km", "ISB Hyderabad · 5.4 km", "World One School · 6.5 km", "Meru International School · 8 km", "The Gaudium School · 8 km"] },
+      { category: "Entertainment", places: ["Sarath City Capital Mall · 5.3 km", "SLN Terminus · 6 km", "GSM Mall · 7 km", "Inorbit Mall · 8.5 km"] },
+    ],
     galleryImages: [
-      { src: "/projects/auro-sapphire-location-map.webp", alt: "Sapphire Kondapur location and connectivity map from the supplied brochure" },
       { src: "/projects/auro-sapphire-site-plan.webp", alt: "Sapphire project site plan from the supplied brochure" },
-      { src: "/projects/auro-sapphire-amenities.webp", alt: "Sapphire clubhouse and amenity highlights from the supplied brochure" },
       { src: "/projects/auro-sapphire-floor-plan-3bhk.webp", alt: "Sapphire 3 BHK floor plan page from the supplied brochure" },
       { src: "/projects/auro-sapphire-floor-plan-4bhk.webp", alt: "Sapphire 4 BHK floor plan page from the supplied brochure" },
     ],
