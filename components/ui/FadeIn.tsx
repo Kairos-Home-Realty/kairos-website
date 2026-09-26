@@ -44,18 +44,19 @@ export function FadeIn({
 export function StaggerContainer({
   children,
   className,
-  stagger = 0.12,
+  stagger = 0.06,
 }: {
   children: ReactNode;
   className?: string;
   stagger?: number;
 }) {
+  // A low threshold keeps long grids from staying hidden on short viewports.
   return (
     <motion.div
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.15 }}
+      viewport={{ once: true, amount: 0.01 }}
       variants={{
         hidden: {},
         visible: { transition: { staggerChildren: stagger } },
@@ -81,7 +82,7 @@ export function StaggerItem({
         visible: {
           opacity: 1,
           y: 0,
-          transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+          transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] },
         },
       }}
     >
