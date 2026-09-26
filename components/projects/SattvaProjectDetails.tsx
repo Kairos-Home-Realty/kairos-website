@@ -17,6 +17,7 @@ export function SattvaProjectDetails({ project }: { project: FeaturedProject }) 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="/contact" size="lg">Enquire about this project <ArrowRight size={17} /></Button>
               {project.masterLayout && <a href="#plans" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">View plans</a>}
+              {project.locationLink && <a href={project.locationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Open location map</a>}
             </div>
           </FadeIn>
           {project.coverImage && <FadeIn delay={0.1}><div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-xl2 border border-white/15 bg-white shadow-card"><Image src={project.coverImage} alt={`${project.name} project plan`} fill priority className="object-contain" unoptimized /></div></FadeIn>}

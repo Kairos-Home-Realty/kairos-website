@@ -13,6 +13,9 @@ export const metadata: Metadata = {
 };
 
 export default function ProjectsPage() {
+  const villaProjects = FEATURED_PROJECTS.filter((project) => project.category === "villa");
+  const otherProjects = FEATURED_PROJECTS.filter((project) => project.category !== "villa");
+
   return (
     <>
       <section className="bg-navy-gradient pt-40 pb-24 text-white md:pt-48">
@@ -29,17 +32,54 @@ export default function ProjectsPage() {
         </div>
       </section>
 
+      {villaProjects.length > 0 && (
+        <section className="section-pad bg-offwhite">
+          <div className="container-xl px-6 lg:px-12">
+            <FadeIn>
+              <div className="mx-auto mb-10 max-w-2xl text-center">
+                <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Villa living</span>
+                <h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Featured villa communities</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate/70">Explore selected villa projects from Casagrand and Sattva, with a dedicated page for each community.</p>
+              </div>
+            </FadeIn>
+            <StaggerContainer className="grid grid-cols-1 gap-7 lg:grid-cols-2">
+              {villaProjects.map((project) => (
+                <StaggerItem key={project.name}>
+                  <article className="flex h-full flex-col overflow-hidden rounded-xl2 border border-navy/10 bg-white shadow-card">
+                    {project.coverImage && <div className="relative aspect-[16/8] bg-offwhite"><Image src={project.coverImage} alt={`${project.name} villa community`} fill className="object-cover" unoptimized /></div>}
+                    <div className="flex flex-1 flex-col p-7 md:p-8">
+                      <p className="text-xs font-semibold uppercase tracking-wide text-gold-dark">{project.builder} · Villa community</p>
+                      <h3 className="mt-2 font-display text-2xl font-semibold text-navy">{project.name}</h3>
+                      <p className="mt-3 text-sm text-slate/70"><span className="font-semibold text-navy">Location:</span> {project.location}</p>
+                      <p className="mt-2 text-sm text-slate/70"><span className="font-semibold text-navy">Layouts:</span> {project.configurations}</p>
+                      <ul className="mt-5 flex-1 space-y-2 text-sm leading-relaxed text-slate/70">
+                        {project.highlights.map((highlight) => <li key={highlight}>• {highlight}</li>)}
+                      </ul>
+                      {project.indicativeStartingPrice && <div className="mt-5 rounded-lg bg-offwhite p-4"><p className="font-semibold text-navy">Indicative price: {project.indicativeStartingPrice}</p><p className="mt-1 text-xs leading-relaxed text-slate/60">{project.priceNote}</p></div>}
+                      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+                        {project.detailsPage && <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center">See More Details <ArrowRight size={16} /></Button>}
+                        <Button href="/contact" size="sm" className="w-full justify-center">Ask about this villa <ArrowRight size={16} /></Button>
+                      </div>
+                    </div>
+                  </article>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          </div>
+        </section>
+      )}
+
       <section className="section-pad bg-offwhite">
         <div className="container-xl px-6 lg:px-12">
           <FadeIn>
             <div className="mx-auto mb-10 max-w-2xl text-center">
-              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Featured in Hyderabad</span>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Projects to explore</h2>
-              <p className="mt-3 text-sm leading-relaxed text-slate/70">Highlights below are based on the brochures and price sheet provided to Kairos.</p>
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">More properties</span>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Featured projects to explore</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate/70">Browse apartments and other featured projects, with project details and supplied layouts.</p>
             </div>
           </FadeIn>
           <StaggerContainer className="grid grid-cols-1 gap-7 lg:grid-cols-2">
-            {FEATURED_PROJECTS.map((project) => (
+            {otherProjects.map((project) => (
               <StaggerItem key={project.name}>
                 <article className="flex h-full flex-col rounded-xl2 border border-navy/10 bg-white p-7 shadow-card md:p-9">
                   {project.coverImage && (

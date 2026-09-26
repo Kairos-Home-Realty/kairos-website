@@ -32,7 +32,9 @@ export interface BankPartner {
 export interface FeaturedProject {
   name: string;
   builder: string;
+  category?: "villa";
   location: string;
+  locationLink?: string;
   configurations: string;
   highlights: string[];
   rera?: string;
