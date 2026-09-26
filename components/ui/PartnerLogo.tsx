@@ -7,14 +7,17 @@ export function PartnerLogo({
   name,
   src,
   className = "",
+  showFallbackText = true,
 }: {
   name: string;
   src?: string;
   className?: string;
+  showFallbackText?: boolean;
 }) {
   const [failed, setFailed] = useState(!src);
 
   if (failed) {
+    if (!showFallbackText) return null;
     return (
       <span
         aria-label={`${name} logo`}
