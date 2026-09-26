@@ -47,6 +47,24 @@ export interface FeaturedProject {
   infrastructure?: string[];
   nearbyPlaces?: { category: string; places: string[] }[];
   specifications?: { category: string; details: string[] }[];
+  coverImage?: string;
+  priceSheet?: {
+    villaNo: string;
+    status: string;
+    villaType: string;
+    category: string;
+    facing: string;
+    landArea: string;
+    superBuiltUpArea: string;
+    basicCost: string;
+    otherCharges: string;
+    plc: string;
+    totalBeforeGst: string;
+    gst: string;
+    grandTotal: string;
+    exclusions: string;
+    paymentSchedule: { stage: string; percentage: string; amount: string }[];
+  };
 }
 
 export interface Testimonial {
