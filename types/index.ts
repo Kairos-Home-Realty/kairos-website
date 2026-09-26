@@ -48,6 +48,10 @@ export interface FeaturedProject {
   nearbyPlaces?: { category: string; places: string[] }[];
   specifications?: { category: string; details: string[] }[];
   coverImage?: string;
+  quickFacts?: { label: string; value: string }[];
+  galleryImages?: { src: string; alt: string }[];
+  priceTableRows?: { label: string; area?: string; amount: string }[];
+  priceTableNote?: string;
   priceSheet?: {
     villaNo: string;
     status: string;
