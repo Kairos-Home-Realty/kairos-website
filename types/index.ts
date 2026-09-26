@@ -41,6 +41,12 @@ export interface FeaturedProject {
   virtualTour?: string;
   masterLayout?: string;
   sampleVideos?: { label: string; videoId: string }[];
+  detailsPage?: string;
+  overview?: string;
+  amenities?: string[];
+  infrastructure?: string[];
+  nearbyPlaces?: { category: string; places: string[] }[];
+  specifications?: { category: string; details: string[] }[];
 }
 
 export interface Testimonial {

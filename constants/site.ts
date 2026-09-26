@@ -283,9 +283,36 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     rera: "P02200010981",
     virtualTour: "https://www.brooklynavenue360.com/ddzyn360/",
     masterLayout: "/projects/godrej-brooklyn-avenue-master-layout.webp",
+    detailsPage: "/projects/godrej-brooklyn-avenue",
     sampleVideos: [
       { label: "3 BHK sample video", videoId: "7w33rjc9hC0" },
       { label: "4 BHK sample video", videoId: "uYMthLYjXvA" },
+    ],
+    overview:
+      "Godrej Brooklyn Avenue is a residential development in Kukatpally, Hyderabad. The brochure describes a Brooklyn-inspired design with a central avenue, pocket gardens and shared community spaces.",
+    amenities: [
+      "Party spill-over plaza", "Swimming pool", "Leisure seating", "Multi-purpose court", "Box cricket",
+      "Cricket practice net", "Outdoor gym", "Children's play area", "Skating arena", "Paddle court",
+      "Pickleball court", "Pet's play area and pet park", "Butterfly park", "Outdoor working pods",
+      "Cognitive play area", "Outdoor exercise area", "Central avenue", "Amphitheatre", "Pocket garden",
+      "Foot reflexology walkway", "Senior citizens' yoga and exercise lawn", "EV charging parking lot",
+      "Waiting zone", "Jogging track",
+    ],
+    infrastructure: [
+      "Entrance plaza and fire driveway", "Lobby drop-off and triple-height lobby", "Covered parking",
+      "Creche", "Clinic", "Convenience store", "Water feature", "Dedicated entry and exit ramps",
+    ],
+    nearbyPlaces: [
+      { category: "Education", places: ["Jawaharlal Nehru Technological University (JNTU)", "Gowtham Model School", "Samskruti International School", "Laurus - The School of Excellence", "Euro School", "Meridian School"] },
+      { category: "Shopping and leisure", places: ["Lulu Mall", "Nexus Mall", "Sarath City Capital Mall", "E-Galleria", "D-Mart"] },
+      { category: "Healthcare", places: ["Yashoda Hospitals", "Medicover Hospitals", "Rainbow Children's Hospital", "Remedy Hospitals", "Sindhu Hospitals"] },
+      { category: "Transport and business hubs", places: ["JNTU, KPHB and Kukatpally Metro stations", "HITEC City Metro station and railway station", "NH 65", "KPHB Bus Stand", "Raheja Mindspace", "TCS Deccan Park", "Knowledge City"] },
+    ],
+    specifications: [
+      { category: "Structure and doors", details: ["RCC shear-wall structure using Aluform construction", "Brochure states 3.1 m typical floor-to-floor height and 4.0 m ground-floor height", "Main door with hardwood frame, veneer shutter and smart-lock hardware; internal doors with laminated shutters", "UPVC-framed windows and balcony doors with performance glass; mosquito-mesh provision"] },
+      { category: "Finishes", details: ["Anti-skid vitrified tile flooring in toilets; wood-pattern anti-skid vitrified tiles on balconies", "Master bedroom laminate wood flooring; double-charged vitrified tiles listed for kitchen and other bedrooms", "Premium acrylic emulsion wall finishes; bathroom and utility dado tile finishes as specified in the brochure"] },
+      { category: "Electrical, water and safety", details: ["Concealed copper wiring and modular switches/sockets", "The brochure specifies AC piping sleeves and drain provision; confirm equipment and inclusions with the builder", "100% DG backup for apartments at standard diversity, excluding EV charging points", "One EV charging point per apartment; CCTV in selected common areas", "Sprinkler system, fire alarm and public-address system as per the brochure", "Water-treatment plant (WTP), sewage-treatment plant (STP) and water meters"] },
+      { category: "Clubhouse", details: ["The Milestones Club is stated as 75,000 sq. ft.", "Facilities shown include café, banquet hall, gym, yoga, indoor games, conference and co-working rooms, library, salon, spa, jacuzzi, squash and badminton courts, AV room and terrace party area"] },
     ],
   },
 ];

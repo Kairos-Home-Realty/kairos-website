@@ -110,7 +110,14 @@ export default function ProjectsPage() {
                     </div>
                   )}
                   <div className="mt-6">
-                    <Button href="/contact" size="sm" className="w-full justify-center">Ask about this project <ArrowRight size={16} /></Button>
+                    <div className="flex flex-col gap-3 sm:flex-row">
+                      {project.detailsPage && (
+                        <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center">
+                          See More Details <ArrowRight size={16} />
+                        </Button>
+                      )}
+                      <Button href="/contact" size="sm" className="w-full justify-center">Ask about this project <ArrowRight size={16} /></Button>
+                    </div>
                   </div>
                 </article>
               </StaggerItem>
