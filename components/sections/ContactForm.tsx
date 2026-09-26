@@ -95,6 +95,38 @@ export function ContactForm({
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
+      {mode === "quick" && (
+        <>
+          <Field label="Full Name" error={errors.fullName?.message}>
+            <input
+              {...register("fullName")}
+              type="text"
+              autoComplete="name"
+              placeholder="Your full name"
+              className="input-field"
+            />
+          </Field>
+          <Field label="Phone Number" error={errors.phone?.message}>
+            <input
+              {...register("phone")}
+              type="tel"
+              autoComplete="tel"
+              placeholder="+91 98765 43210"
+              className="input-field"
+            />
+          </Field>
+          <Field label="Email Address (optional)" error={errors.email?.message}>
+            <input
+              {...register("email")}
+              type="email"
+              autoComplete="email"
+              placeholder="you@example.com"
+              className="input-field"
+            />
+          </Field>
+        </>
+      )}
+
       {mode === "full" && <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <Field label="Full Name" error={errors.fullName?.message}>
           <input
@@ -163,7 +195,7 @@ export function ContactForm({
       </Field>}
 
       <Button type="submit" disabled={isSubmitting} className="w-full justify-center">
-        {isSubmitting ? "Sending..." : mode === "quick" ? "Request a Call" : "Book Consultation"} <Send size={16} />
+        {isSubmitting ? "Sending..." : mode === "quick" ? "Submit" : "Book Consultation"} <Send size={16} />
       </Button>
 
       <p className="text-center text-xs leading-relaxed text-slate/60">
