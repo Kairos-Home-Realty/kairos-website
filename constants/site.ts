@@ -10,6 +10,7 @@ import type {
   NavLink,
   Service,
   Builder,
+  FeaturedProject,
   BankPartner,
   Testimonial,
   FAQ,
@@ -254,6 +255,32 @@ export const BUILDERS: Builder[] = [
     projects: [],
     established: "",
     logo: "https://www.vianproperties.com/assets/logo-BXDZqLIm.svg",
+  },
+];
+
+export const FEATURED_PROJECTS: FeaturedProject[] = [
+  {
+    name: "Sattva Lake Ridge",
+    builder: "Sattva",
+    location: "Neopolis, Kokapet, Hyderabad",
+    configurations: "3.5 BHK, 3.5 BHK + deck, 4 BHK and 5 BHK",
+    highlights: [
+      "Brochure layouts range from 2,152 to 5,266 sq. ft. super built-up area",
+      "Masterplan includes swimming pools, sports courts, jogging and cycling paths, and an outdoor gym",
+    ],
+    indicativeStartingPrice: "₹3.61 Cr",
+    priceNote: "Indicative total from the supplied price sheet; taxes, registration and other charges may apply. Prices can change.",
+  },
+  {
+    name: "Godrej Brooklyn Avenue",
+    builder: "Godrej Properties",
+    location: "Kukatpally, Hyderabad",
+    configurations: "3 BHK and 4 BHK",
+    highlights: [
+      "75,000 sq. ft. clubhouse, as stated in the supplied brochure",
+      "Amenities include a pool, pickleball and paddle courts, jogging track, pet park and outdoor work pods",
+    ],
+    rera: "P02200010981",
   },
 ];
 

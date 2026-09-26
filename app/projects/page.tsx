@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
-import { BUILDERS } from "@/constants/site";
+import { BUILDERS, FEATURED_PROJECTS } from "@/constants/site";
 import { Building2, ArrowRight } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
 
@@ -25,6 +25,50 @@ export default function ProjectsPage() {
               Browse our builder partners and ask us for current project availability, pricing and project-specific details.
             </p>
           </FadeIn>
+        </div>
+      </section>
+
+      <section className="section-pad bg-offwhite">
+        <div className="container-xl px-6 lg:px-12">
+          <FadeIn>
+            <div className="mx-auto mb-10 max-w-2xl text-center">
+              <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Featured in Hyderabad</span>
+              <h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Projects to explore</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate/70">Highlights below are based on the brochures and price sheet provided to Kairos.</p>
+            </div>
+          </FadeIn>
+          <StaggerContainer className="grid grid-cols-1 gap-7 lg:grid-cols-2">
+            {FEATURED_PROJECTS.map((project) => (
+              <StaggerItem key={project.name}>
+                <article className="flex h-full flex-col rounded-xl2 border border-navy/10 bg-white p-7 shadow-card md:p-9">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="text-xs font-semibold uppercase tracking-wide text-gold-dark">{project.builder}</p>
+                      <h3 className="mt-2 font-display text-2xl font-semibold text-navy">{project.name}</h3>
+                    </div>
+                    {project.rera && <span className="rounded-full bg-navy/5 px-3 py-1.5 text-xs text-navy/70">RERA: {project.rera}</span>}
+                  </div>
+                  <p className="mt-4 text-sm text-slate/70"><span className="font-semibold text-navy">Location:</span> {project.location}</p>
+                  <p className="mt-2 text-sm text-slate/70"><span className="font-semibold text-navy">Layouts:</span> {project.configurations}</p>
+                  <ul className="mt-5 flex-1 space-y-2 text-sm leading-relaxed text-slate/70">
+                    {project.highlights.map((highlight) => <li key={highlight}>• {highlight}</li>)}
+                  </ul>
+                  {project.indicativeStartingPrice && (
+                    <div className="mt-5 rounded-lg bg-offwhite p-4">
+                      <p className="font-semibold text-navy">Indicative starting price: {project.indicativeStartingPrice}</p>
+                      <p className="mt-1 text-xs leading-relaxed text-slate/60">{project.priceNote}</p>
+                    </div>
+                  )}
+                  <div className="mt-6">
+                    <Button href="/contact" size="sm" className="w-full justify-center">Ask about this project <ArrowRight size={16} /></Button>
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+          <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-relaxed text-slate/60">
+            Project details and indicative pricing are based on supplied marketing materials and may change. Verify current availability, final price, inclusions and RERA information with the builder before making a decision. Brochure illustrations are representative only.
+          </p>
         </div>
       </section>
 

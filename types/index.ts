@@ -29,6 +29,17 @@ export interface BankPartner {
   logo: string;
 }
 
+export interface FeaturedProject {
+  name: string;
+  builder: string;
+  location: string;
+  configurations: string;
+  highlights: string[];
+  rera?: string;
+  indicativeStartingPrice?: string;
+  priceNote?: string;
+}
+
 export interface Testimonial {
   name: string;
   location: string;
