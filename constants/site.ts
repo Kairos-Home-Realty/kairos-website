@@ -235,7 +235,7 @@ export const BUILDERS: Builder[] = [
     description: "A featured home-building partner with Casagrand Windsor Court villas in South Hyderabad.",
     projects: ["Casagrand Windsor Court"],
     established: "",
-    logo: "https://pbs.twimg.com/profile_images/898104070518353921/kG71c9E-.jpg",
+    logo: "/builders/casagrand.png",
   },
   {
     name: "Sattva",
@@ -244,7 +244,7 @@ export const BUILDERS: Builder[] = [
       "Explore featured Sattva residential projects in Hyderabad, with project-specific layouts, amenities and indicative pricing.",
     projects: ["Sattva Lake Ridge", "Sattva Lago", "Sattva Amora"],
     established: "",
-    logo: "https://sattvagroup.com/wp-content/uploads/2022/12/Footer-logo-colored.png",
+    logo: "/builders/sattva.png",
   },
   {
     name: "VIAN Properties",
