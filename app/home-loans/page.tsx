@@ -5,6 +5,7 @@ import { EligibilityChecker } from "@/components/sections/EligibilityChecker";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { BANKS, PROCESS_STEPS } from "@/constants/site";
 import { FileCheck2, Landmark, ClipboardList, BadgeCheck, MoreHorizontal } from "lucide-react";
+import { PartnerLogo } from "@/components/ui/PartnerLogo";
 
 export const metadata: Metadata = {
   title: "Home Loan Assistance",
@@ -21,7 +22,7 @@ const DOCUMENTS = [
   "Passport-size photographs",
 ];
 
-const FEATURED_BANK_NAMES = ["ICICI Bank", "Federal Bank", "IDFC FIRST Bank"];
+const FEATURED_BANK_NAMES = ["Federal", "HDFC", "IDBI", "ICICI"];
 
 export default function HomeLoansPage() {
   const featuredBanks = BANKS.filter((bank) => FEATURED_BANK_NAMES.includes(bank.name));
@@ -117,8 +118,8 @@ export default function HomeLoansPage() {
           {featuredBanks.map((bank) => (
             <StaggerItem key={bank.name}>
               <div className="card-hover flex h-full flex-col items-center rounded-xl2 bg-white p-6 text-center shadow-card">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-navy-gradient text-gold">
-                  <Landmark size={20} />
+                <div className="relative mb-4 flex h-14 w-28 items-center justify-center overflow-hidden rounded-lg bg-white p-2 ring-1 ring-navy/10">
+                  <PartnerLogo name={bank.name} src={bank.logo} />
                 </div>
                 <p className="text-sm font-semibold text-navy">{bank.name}</p>
                 <p className="mt-1 text-xs text-slate/60">{bank.productHighlight}</p>

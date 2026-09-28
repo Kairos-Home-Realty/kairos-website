@@ -17,7 +17,7 @@ function BuilderLabel({ name }: { name: string }) {
   const builder = BUILDERS.find((item) => item.name.toLowerCase().replace(/[^a-z0-9]/g, "") === normalizedName);
 
   return (
-    <span className="inline-flex items-center gap-2">
+    <span className="inline-flex items-center gap-2 whitespace-nowrap">
       {builder?.logo && (
         <span className="relative h-10 w-20 shrink-0 overflow-hidden rounded bg-white p-0.5">
           <PartnerLogo name={builder.name} src={builder.logo} showFallbackText={false} className="!p-0" />
@@ -64,7 +64,7 @@ export default function ProjectsPage() {
                   <article className="flex h-full flex-col overflow-hidden rounded-xl2 border border-navy/10 bg-white shadow-card">
                     {project.coverImage && <div className="relative aspect-[16/8] bg-offwhite"><Image src={project.coverImage} alt={`${project.name} villa community`} fill className="object-cover" unoptimized /></div>}
                     <div className="flex flex-1 flex-col p-7 md:p-8">
-                      <p className="text-xs font-semibold uppercase tracking-wide text-gold-dark"><BuilderLabel name={project.builder} /> · Villa community</p>
+                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wide text-gold-dark"><BuilderLabel name={project.builder} /><span aria-hidden="true">·</span><span>Villa community</span></div>
                       <h3 className="mt-2 font-display text-2xl font-semibold text-navy">{project.name}</h3>
                       <p className="mt-3 text-sm text-slate/70"><span className="font-semibold text-navy">Location:</span> {project.location}</p>
                       <p className="mt-2 text-sm text-slate/70"><span className="font-semibold text-navy">Layouts:</span> {project.configurations}</p>
@@ -130,7 +130,7 @@ export default function ProjectsPage() {
                       href={project.droneView}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-navy/15 px-5 py-3 text-sm font-semibold text-navy transition-colors hover:bg-offwhite"
+                      className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-blue-600 bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-blue-700 hover:bg-blue-700"
                     >
                       Open Brigade Gateway drone view <ArrowRight size={16} />
                     </a>
