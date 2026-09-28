@@ -75,6 +75,13 @@ h1, h2, h3, h4 {
   box-shadow: 0 25px 60px -15px rgba(7, 27, 59, 0.2);
 }
 
+.project-carousel-track {
+  scrollbar-width: none;
+}
+.project-carousel-track::-webkit-scrollbar {
+  display: none;
+}
+
 .img-zoom {
   overflow: hidden;
 }

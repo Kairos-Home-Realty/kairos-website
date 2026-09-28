@@ -33,7 +33,7 @@ npm run start
 
 ## Notes
 
-- Contact-form delivery uses the existing Resend integration. Configure `RESEND_API_KEY` and `CONTACT_EMAIL` in the deployment environment; do not commit either value. Call, email and WhatsApp destinations remain configured in `SITE` in `constants/site.ts`.
+- Contact-form delivery uses the existing Resend integration. Configure `RESEND_API_KEY` in the deployment environment; do not commit it. `CONTACT_EMAIL` can override the enquiry recipient; if unset, enquiries go to the existing `SITE.email` value in `constants/site.ts`.
 - Lead forms include the current path, opening CTA and available UTM source/medium/campaign values in the existing contact email. These source fields are optional and do not change the `/api/contact` success contract.
 - Conversion events are dispatched as `kairos:analytics` browser `CustomEvent`s with an `eventName` and non-personal event details. No third-party analytics destination is configured. An integration can subscribe without adding a dependency:
 

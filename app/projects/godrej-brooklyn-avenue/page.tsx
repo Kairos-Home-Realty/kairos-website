@@ -42,6 +42,22 @@ export default function GodrejBrooklynAvenuePage() {
         </div>
       </section>
 
+      {project.coverImage && (
+        <section className="bg-white px-6 py-8 sm:py-12">
+          <div className="container-xl">
+            <Image
+              src={project.coverImage}
+              alt="Godrej Brooklyn Avenue project visual with the Kukatpally location, project features and residential towers"
+              width={1080}
+              height={1350}
+              priority
+              sizes="(max-width: 639px) 100vw, (max-width: 1023px) 80vw, 720px"
+              className="mx-auto h-auto w-full max-w-[720px] rounded-xl2 shadow-card"
+            />
+          </div>
+        </section>
+      )}
+
       <section className="bg-offwhite py-8">
         <div className="container-xl grid grid-cols-1 gap-4 px-6 sm:grid-cols-2 lg:grid-cols-4 lg:px-12">
           {[

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { FEATURED_PROJECTS } from "@/constants/site";
+import { FEATURED_PROJECTS, SITE } from "@/constants/site";
 
 export async function POST(request: Request) {
   try {
@@ -79,8 +79,9 @@ export async function POST(request: Request) {
       }
     }
 
-    if (!process.env.RESEND_API_KEY || !process.env.CONTACT_EMAIL) {
-      console.error("Contact email is not configured. Set RESEND_API_KEY and CONTACT_EMAIL.");
+    const contactEmail = process.env.CONTACT_EMAIL?.trim() || SITE.email;
+    if (!process.env.RESEND_API_KEY) {
+      console.error("Resend is not configured. Set RESEND_API_KEY to enable contact delivery.");
       return NextResponse.json(
         { error: "Enquiry delivery is temporarily unavailable. Please call or WhatsApp Kairos." },
         { status: 503 }
@@ -131,7 +132,7 @@ export async function POST(request: Request) {
     const { data, error } = await resend.emails.send({
       from: "KAIROS HOME REALTY <enquiries@kairoshomerealty.com>",
 
-      to: [process.env.CONTACT_EMAIL],
+      to: [contactEmail],
 
       ...(email ? { replyTo: email } : {}),
 

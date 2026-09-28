@@ -116,7 +116,7 @@ export default function ProjectsPage() {
                 <article className="flex h-full flex-col rounded-xl2 border border-navy/10 bg-white p-7 shadow-card md:p-9">
                   {project.coverImage && (
                     <div className="relative mb-6 aspect-[16/8] overflow-hidden rounded-xl bg-offwhite">
-                    <Image src={project.coverImage} alt={`${project.name} project image`} fill className="object-cover" />
+                    <Image src={project.coverImage} alt={`${project.name} project image`} fill className={project.coverImageFit === "contain" ? "object-contain" : "object-cover"} />
                     </div>
                   )}
                   <div className="flex flex-wrap items-start justify-between gap-3">
