@@ -130,7 +130,7 @@ export default function ProjectsPage() {
                       href={project.droneView}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-blue-600 bg-blue-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:border-blue-700 hover:bg-blue-700"
+                      className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-navy bg-navy px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
                     >
                       Open Brigade Gateway drone view <ArrowRight size={16} />
                     </a>

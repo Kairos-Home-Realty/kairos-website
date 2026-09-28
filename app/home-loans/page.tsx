@@ -22,10 +22,8 @@ const DOCUMENTS = [
   "Passport-size photographs",
 ];
 
-const FEATURED_BANK_NAMES = ["Federal", "HDFC", "IDBI", "ICICI"];
-
 export default function HomeLoansPage() {
-  const featuredBanks = BANKS.filter((bank) => FEATURED_BANK_NAMES.includes(bank.name));
+  const featuredBanks = BANKS;
 
   return (
     <>
