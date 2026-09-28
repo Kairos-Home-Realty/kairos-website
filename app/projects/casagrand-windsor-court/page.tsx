@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
 
 export const metadata: Metadata = {
   title: "Casagrand Windsor Court Villas, South Hyderabad",
@@ -31,7 +32,7 @@ export default function CasagrandWindsorCourtPage() {
             <p className="mt-4 flex items-center gap-2 text-sm text-white/75 md:text-base"><MapPin size={17} />{project.location}</p>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg">{project.overview} A collection of 21 villas with London-inspired elevations and private outdoor living spaces.</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/contact" size="lg">Ask about this project <ArrowRight size={17} /></Button>
+              <LeadActionButton project={project.name} size="lg">Get Current Price <ArrowRight size={17} /></LeadActionButton>
               <a href="#master-plan" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">View master plan</a>
             </div>
           </FadeIn>
@@ -196,7 +197,7 @@ export default function CasagrandWindsorCourtPage() {
           <FadeIn>
             <h2 className="font-display text-3xl font-semibold md:text-4xl">Interested in Windsor Court?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos for a discussion about current availability, final pricing, inclusions and a site visit.</p>
-            <div className="mt-7 flex justify-center"><Button href="/contact" size="lg">Enquire about this project <ArrowRight size={17} /></Button></div>
+            <div className="mt-7 flex justify-center"><LeadActionButton project={project.name} size="lg">Get Current Price <ArrowRight size={17} /></LeadActionButton></div>
             <p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Project information is summarized from user-supplied notes, brochure, Vaastu highlights and an undated Villa 9 price sheet. Brochure imagery and plans are representative. Confirm approved plans, current availability, final pricing, taxes, registration, corpus fund, inclusions and applicable RERA details directly with the builder before making a purchase decision.</p>
           </FadeIn>
         </div>

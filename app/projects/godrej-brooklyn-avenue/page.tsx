@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, ExternalLink, MapPin } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
 
 export const metadata: Metadata = {
   title: "Godrej Brooklyn Avenue, Kukatpally",
@@ -33,7 +34,7 @@ export default function GodrejBrooklynAvenuePage() {
                   Explore the 360° view <ExternalLink size={17} />
                 </a>
               )}
-              <Button href="/contact" variant="outline" className="justify-center">Ask about this project <ArrowRight size={16} /></Button>
+              <LeadActionButton project={project.name} variant="outline" className="justify-center">Get Current Price <ArrowRight size={16} /></LeadActionButton>
             </div>
           </FadeIn>
         </div>
@@ -99,7 +100,7 @@ export default function GodrejBrooklynAvenuePage() {
               <a href={project.masterLayout} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 bg-white p-2 shadow-card">
                 <Image src={project.masterLayout} alt={`${project.name} master layout plan`} width={2200} height={1556} className="h-auto w-full rounded-lg" unoptimized />
               </a>
-              <p className="mt-3 text-xs text-slate/60">Select the layout to open a larger view. The final plan and specifications are subject to the builder's approved documents.</p>
+              <p className="mt-3 text-xs text-slate/60">Select the layout to open a larger view. The final plan and specifications are subject to the builder&apos;s approved documents.</p>
             </FadeIn>
           </div>
         </section>
@@ -190,7 +191,7 @@ export default function GodrejBrooklynAvenuePage() {
             <h2 className="font-display text-3xl font-semibold md:text-4xl">Want current availability or pricing?</h2>
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos to ask about available homes, current pricing, inclusions and a site visit.</p>
             <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-              <Button href="/contact" size="lg">Enquire about this project <ArrowRight size={17} /></Button>
+              <LeadActionButton project={project.name} size="lg">Get Current Price <ArrowRight size={17} /></LeadActionButton>
               {project.virtualTour && <a href={project.virtualTour} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Open 360° view <ExternalLink size={16} /></a>}
             </div>
             <p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Project information is summarized from the supplied Godrej Properties brochure and master layout. Images and plans are for representation; final specifications, availability, price, taxes and other charges are subject to builder confirmation and definitive project documents. RERA: {project.rera}; Permit: 2189/HMDA/SWBP/2026. Verify project information through the Telangana RERA portal and the builder before making a purchase decision.</p>

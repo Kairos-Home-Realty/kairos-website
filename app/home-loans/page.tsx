@@ -6,6 +6,7 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { BANKS, PROCESS_STEPS } from "@/constants/site";
 import { FileCheck2, Landmark, ClipboardList, BadgeCheck, MoreHorizontal } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
+import { HomeLoanLeadForm } from "@/components/leads/HomeLoanLeadForm";
 
 export const metadata: Metadata = {
   title: "Home Loan Assistance",
@@ -40,6 +41,12 @@ export default function HomeLoansPage() {
               each lender and depend on your application.
             </p>
           </FadeIn>
+        </div>
+      </section>
+
+      <section className="section-pad bg-offwhite">
+        <div className="container-xl max-w-3xl px-6 lg:px-12">
+          <HomeLoanLeadForm />
         </div>
       </section>
 

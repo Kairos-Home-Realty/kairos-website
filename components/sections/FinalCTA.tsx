@@ -1,7 +1,10 @@
+"use client";
+
 import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { ArrowRight, PhoneCall } from "lucide-react";
 import { SITE } from "@/constants/site";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
 
 export function FinalCTA() {
   return (
@@ -18,9 +21,9 @@ export function FinalCTA() {
             the first confident step toward your new home.
           </p>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <Button href="/contact" size="lg">
-              Book Free Consultation <ArrowRight size={18} />
-            </Button>
+            <LeadActionButton size="lg">
+              Find My Property <ArrowRight size={18} />
+            </LeadActionButton>
             <Button href={`tel:${SITE.phone.replace(/\s/g, "")}`} variant="outline" size="lg">
               <PhoneCall size={18} /> Call Now
             </Button>

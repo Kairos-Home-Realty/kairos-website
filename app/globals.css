@@ -8,6 +8,27 @@ html {
 
 body {
   @apply bg-offwhite text-slate font-body antialiased;
+  overflow-x: clip;
+}
+
+main {
+  overflow-x: clip;
+}
+
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(4.75rem + env(safe-area-inset-bottom));
+  }
+}
+
+.lead-input:focus-visible {
+  outline: 2px solid #b98b32;
+  outline-offset: 2px;
+  border-color: #b98b32;
+}
+
+.lead-input:invalid:not(:focus) {
+  border-color: rgba(7, 27, 59, 0.15);
 }
 
 h1, h2, h3, h4 {

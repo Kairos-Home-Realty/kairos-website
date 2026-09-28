@@ -5,6 +5,7 @@ import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
 
 export const metadata: Metadata = {
   title: "Brigade Gateway Residences, Neopolis | Hyderabad",
@@ -27,7 +28,7 @@ export default function BrigadeGatewayNeopolisPage() {
             </div>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg">{project.overview}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/contact" size="lg">Ask about this project <ArrowRight size={17} /></Button>
+              <LeadActionButton project={project.name} size="lg">Get Current Price <ArrowRight size={17} /></LeadActionButton>
               {project.droneView && <a href={project.droneView} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Open Brigade Gateway drone view <ArrowRight size={16} /></a>}
               <a href="#plans" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Explore brochure plans</a>
             </div>
@@ -46,7 +47,7 @@ export default function BrigadeGatewayNeopolisPage() {
 
       {project.galleryImages && <section id="plans" className="section-pad scroll-mt-24 bg-offwhite"><div className="container-xl px-6 lg:px-12"><FadeIn><div className="mb-8 max-w-2xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Supplied Brigade brochure</span><h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Master plan and home layouts</h2><p className="mt-3 text-sm leading-relaxed text-slate/70">Select an image to open the brochure page at a larger size. Illustrations and sample layouts are indicative.</p></div></FadeIn><div className="grid gap-5 md:grid-cols-2">{project.galleryImages.map((image) => <a key={image.src} href={image.src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 border border-navy/10 bg-white p-2 shadow-card"><Image src={image.src} alt={image.alt} width={1920} height={1080} className="h-auto w-full rounded-lg" unoptimized /><p className="px-3 py-3 text-sm text-slate/70">{image.alt} · Open larger image</p></a>)}</div></div></section>}
 
-      <section className="bg-navy-gradient py-16 text-white md:py-20"><div className="container-xl px-6 text-center lg:px-12"><FadeIn><h2 className="font-display text-3xl font-semibold md:text-4xl">Explore Brigade Gateway Neopolis</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos for current availability, pricing, home plans and a guided project visit.</p><div className="mt-7 flex justify-center"><Button href="/contact" size="lg">Enquire about this project <ArrowRight size={17} /></Button></div><p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Project details, areas, plans and amenities are based on the supplied brochure and may change. Confirm current availability, final specifications, approvals, pricing and terms directly with the builder before making a decision.</p></FadeIn></div></section>
+      <section className="bg-navy-gradient py-16 text-white md:py-20"><div className="container-xl px-6 text-center lg:px-12"><FadeIn><h2 className="font-display text-3xl font-semibold md:text-4xl">Explore Brigade Gateway Neopolis</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos for current availability, pricing, home plans and a guided project visit.</p><div className="mt-7 flex justify-center"><LeadActionButton project={project.name} size="lg">Get Current Price <ArrowRight size={17} /></LeadActionButton></div><p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Project details, areas, plans and amenities are based on the supplied brochure and may change. Confirm current availability, final specifications, approvals, pricing and terms directly with the builder before making a decision.</p></FadeIn></div></section>
     </>
   );
 }

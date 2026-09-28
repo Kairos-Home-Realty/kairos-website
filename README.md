@@ -32,6 +32,7 @@ npm run start
 
 ## Notes
 
+- Contact-form delivery uses the existing Resend integration. Configure `RESEND_API_KEY` and `CONTACT_EMAIL` in the deployment environment; do not commit either value. Call, email and WhatsApp destinations remain configured in `SITE` in `constants/site.ts`.
 - All content (company name, services, builders, banks, testimonials, FAQs) lives in `constants/site.ts` — edit this single file to update copy across the whole site.
 - Brand colors, fonts and gradients are defined in `tailwind.config.ts` and `app/globals.css`.
 - The hero and builder-card imagery currently use CSS/SVG-built visuals (skyline silhouette, gradient panels) instead of stock photography, since no real licensed images were supplied. Swap in real photography via `next/image` wherever you see a gradient placeholder (Hero background, service icons panels, builder card headers) for the final production look.

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
 import type { FeaturedProject } from "@/types";
 
 export function SattvaProjectDetails({ project }: { project: FeaturedProject }) {
@@ -15,7 +16,7 @@ export function SattvaProjectDetails({ project }: { project: FeaturedProject }) 
             <h1 className="mt-4 max-w-4xl font-display text-4xl font-semibold md:text-6xl">{project.name}</h1>
             <p className="mt-5 max-w-3xl text-base leading-relaxed text-white/75 md:text-lg">{project.overview}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/contact" size="lg">Enquire about this project <ArrowRight size={17} /></Button>
+              <LeadActionButton project={project.name} size="lg">Get Current Price <ArrowRight size={17} /></LeadActionButton>
               {project.masterLayout && <a href="#plans" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">View plans</a>}
               {project.locationLink && <a href={project.locationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Open location map</a>}
             </div>
@@ -89,7 +90,7 @@ export function SattvaProjectDetails({ project }: { project: FeaturedProject }) 
       )}
 
       <section className="bg-navy-gradient py-16 text-white md:py-20">
-        <div className="container-xl px-6 text-center lg:px-12"><FadeIn><h2 className="font-display text-3xl font-semibold md:text-4xl">Want current availability or pricing?</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos to ask about unit availability, current pricing, inclusions and a site visit.</p><div className="mt-7 flex justify-center"><Button href="/contact" size="lg">Enquire about this project <ArrowRight size={17} /></Button></div><p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Project information and prices are summarized from user-supplied notes, brochures, plans and price sheets. Availability, pricing, taxes, charges, approvals and specifications may change; confirm details and current documents directly with Sattva before making a purchase decision.</p></FadeIn></div>
+        <div className="container-xl px-6 text-center lg:px-12"><FadeIn><h2 className="font-display text-3xl font-semibold md:text-4xl">Want current availability or pricing?</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos to ask about unit availability, current pricing, inclusions and a site visit.</p><div className="mt-7 flex justify-center"><LeadActionButton project={project.name} size="lg">Get Current Price <ArrowRight size={17} /></LeadActionButton></div><p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Project information and prices are summarized from user-supplied notes, brochures, plans and price sheets. Availability, pricing, taxes, charges, approvals and specifications may change; confirm details and current documents directly with Sattva before making a purchase decision.</p></FadeIn></div>
       </section>
     </>
   );
