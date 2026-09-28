@@ -4,12 +4,14 @@ import { FadeIn } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { SERVICES, SERVICE_ICONS } from "@/constants/site";
 import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Services",
   description:
     "Explore Kairos Home Realty's full range of property advisory, builder guidance, home loan and documentation services.",
-};
+  pathname: "/services",
+});
 
 export default function ServicesPage() {
   return (

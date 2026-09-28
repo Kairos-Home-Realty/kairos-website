@@ -7,12 +7,14 @@ import { BANKS, PROCESS_STEPS } from "@/constants/site";
 import { FileCheck2, Landmark, ClipboardList, BadgeCheck, MoreHorizontal } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
 import { HomeLoanLeadForm } from "@/components/leads/HomeLoanLeadForm";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Home Loan Assistance",
   description:
     "Understand the home loan process, eligibility, required documents and partner banks. Use our EMI calculator and eligibility checker.",
-};
+  pathname: "/home-loans",
+});
 
 const DOCUMENTS = [
   "Identity proof (Aadhaar, PAN, Passport)",

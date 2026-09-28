@@ -7,6 +7,8 @@ import { FloatingActions } from "@/components/layout/FloatingActions";
 import { LeadCapturePopup } from "@/components/layout/LeadCapturePopup";
 import { LeadFlowProvider } from "@/components/leads/LeadFlow";
 import { Toaster } from "sonner";
+import { OrganizationStructuredData } from "@/components/layout/OrganizationStructuredData";
+import { AnalyticsNavigationTracker } from "@/components/layout/AnalyticsNavigationTracker";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -68,7 +70,9 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
+        <OrganizationStructuredData />
         <LeadFlowProvider>
+          <AnalyticsNavigationTracker />
           <Navbar />
           <main>{children}</main>
           <Footer />

@@ -2,18 +2,36 @@
 
 import { motion } from "framer-motion";
 import { Phone, MessageCircle } from "lucide-react";
-import { SITE } from "@/constants/site";
+import { usePathname } from "next/navigation";
+import { FEATURED_PROJECTS, SITE } from "@/constants/site";
 import { LeadActionButton } from "@/components/leads/LeadFlow";
 
 export function FloatingActions() {
+  const pathname = usePathname();
+  const project = FEATURED_PROJECTS.find((item) => item.detailsPage === pathname);
+  const message = project
+    ? `Hi Kairos, I’m interested in ${project.name}. Please share the latest available details.`
+    : "Hi Kairos, I’d like help finding the right property.";
+  const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
+
   return (
     <>
       <div className="fixed bottom-6 right-6 z-40 hidden flex-col gap-3 lg:flex">
+        {project && (
+          <LeadActionButton
+            project={project.name}
+            aria-label={`Get current price for ${project.name}`}
+            className="flex h-14 w-14 items-center justify-center rounded-full bg-gold text-navy shadow-lg"
+          >
+            <span className="text-xs font-bold">Price</span>
+          </LeadActionButton>
+        )}
         <motion.a
-          href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hi Kairos, I’d like help finding the right property.")}`}
+          href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="Chat on WhatsApp"
+          aria-label={project ? `Ask about ${project.name} on WhatsApp` : "Chat on WhatsApp"}
+          data-project={project?.name}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg"
@@ -26,6 +44,7 @@ export function FloatingActions() {
         <motion.a
           href={`tel:${SITE.phone.replace(/\s/g, "")}`}
           aria-label="Call now"
+          data-project={project?.name}
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
           className="flex h-14 w-14 items-center justify-center rounded-full bg-navy text-gold shadow-lg"
@@ -39,20 +58,23 @@ export function FloatingActions() {
       >
         <a
           href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+          data-project={project?.name}
           className="flex min-h-12 min-w-0 items-center justify-center gap-1 rounded-lg bg-navy px-1 text-xs font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold sm:px-2 sm:text-sm"
         >
           <Phone size={16} aria-hidden="true" /> Call
         </a>
         <a
-          href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent("Hi Kairos, I’d like help finding the right property.")}`}
+          href={whatsappUrl}
           target="_blank"
           rel="noopener noreferrer"
+          data-project={project?.name}
           className="flex min-h-12 min-w-0 items-center justify-center gap-1 rounded-lg bg-[#128C4A] px-1 text-xs font-semibold text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold sm:px-2 sm:text-sm"
         >
           <MessageCircle size={16} aria-hidden="true" /> WhatsApp
         </a>
         <LeadActionButton
           kind="site-visit"
+          project={project?.name}
           className="min-h-12 rounded-lg px-2 text-xs sm:text-sm"
         >
           Site Visit

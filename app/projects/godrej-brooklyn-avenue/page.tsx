@@ -6,12 +6,14 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
 import { LeadActionButton } from "@/components/leads/LeadFlow";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Godrej Brooklyn Avenue, Kukatpally",
   description:
     "Explore Godrej Brooklyn Avenue in Kukatpally, Hyderabad: location highlights, amenities, specifications, master layout, 360° tour and sample apartment videos.",
-};
+  pathname: "/projects/godrej-brooklyn-avenue",
+});
 
 export default function GodrejBrooklynAvenuePage() {
   const project = FEATURED_PROJECTS.find((item) => item.name === "Godrej Brooklyn Avenue");

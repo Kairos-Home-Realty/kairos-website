@@ -21,7 +21,7 @@ export function SattvaProjectDetails({ project }: { project: FeaturedProject }) 
               {project.locationLink && <a href={project.locationLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Open location map</a>}
             </div>
           </FadeIn>
-          {project.coverImage && <FadeIn delay={0.1}><div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-xl2 border border-white/15 bg-white shadow-card"><Image src={project.coverImage} alt={`${project.name} project plan`} fill priority className="object-contain" unoptimized /></div></FadeIn>}
+          {project.coverImage && <FadeIn delay={0.1}><div className="relative mt-10 aspect-[16/9] overflow-hidden rounded-xl2 border border-white/15 bg-white shadow-card"><Image src={project.coverImage} alt={`${project.name} project plan`} fill priority className="object-contain" /></div></FadeIn>}
         </div>
       </section>
 
@@ -38,7 +38,7 @@ export function SattvaProjectDetails({ project }: { project: FeaturedProject }) 
           <div className="container-xl px-6 lg:px-12">
             <FadeIn>
               <div className="mb-8 max-w-2xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Plans and layouts</span><h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Explore the project plan</h2><p className="mt-3 text-sm leading-relaxed text-slate/70">Select the plan to open a larger view. Final plans and inventory are subject to confirmation by Sattva.</p></div>
-              <a href={project.masterLayout} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 border border-navy/10 bg-offwhite p-2 shadow-card"><Image src={project.masterLayout} alt={`${project.name} master plan`} width={2200} height={1800} className="h-auto w-full rounded-lg" unoptimized /></a>
+              <a href={project.masterLayout} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 border border-navy/10 bg-offwhite p-2 shadow-card"><Image src={project.masterLayout} alt={`${project.name} master plan`} width={2200} height={1800} className="h-auto w-full rounded-lg" /></a>
             </FadeIn>
           </div>
         </section>
@@ -49,7 +49,7 @@ export function SattvaProjectDetails({ project }: { project: FeaturedProject }) 
           <div className="container-xl px-6 lg:px-12">
             <FadeIn><div className="mb-8 max-w-2xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Supplied brochure plans</span><h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Tower floor plans</h2></div></FadeIn>
             <div className="grid gap-5 md:grid-cols-2">
-              {project.galleryImages.map((image) => <a key={image.src} href={image.src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 border border-navy/10 bg-white p-2 shadow-card"><Image src={image.src} alt={image.alt} width={1800} height={1200} className="h-auto w-full rounded-lg" unoptimized /><p className="px-3 py-3 text-sm text-slate/70">{image.alt} · Open larger image</p></a>)}
+              {project.galleryImages.map((image) => <a key={image.src} href={image.src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 border border-navy/10 bg-white p-2 shadow-card"><Image src={image.src} alt={image.alt} width={1800} height={1200} className="h-auto w-full rounded-lg" /><p className="px-3 py-3 text-sm text-slate/70">{image.alt} · Open larger image</p></a>)}
             </div>
           </div>
         </section>

@@ -3,12 +3,14 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { COMPARISON_ROWS } from "@/constants/site";
 import { Check, X, Layers, ShieldCheck, HandCoins, Users, ArrowRight } from "lucide-react";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Why Kairos",
   description:
     "See why customers choose Kairos Home Realty over traditional brokers — transparent advice, verified partnerships and end-to-end support.",
-};
+  pathname: "/why-kairos",
+});
 
 const REASONS = [
   { icon: Layers, title: "One Platform, Multiple Options", desc: "Compare builders and banks side by side instead of chasing them separately." },

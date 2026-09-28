@@ -1,10 +1,10 @@
 "use client";
 
 import { FadeIn } from "@/components/ui/FadeIn";
-import { Button } from "@/components/ui/Button";
 import { ArrowRight, PhoneCall } from "lucide-react";
 import { SITE } from "@/constants/site";
 import { LeadActionButton } from "@/components/leads/LeadFlow";
+import { TrackedContactLink } from "@/components/ui/TrackedContactLink";
 
 export function FinalCTA() {
   return (
@@ -24,9 +24,12 @@ export function FinalCTA() {
             <LeadActionButton size="lg">
               Find My Property <ArrowRight size={18} />
             </LeadActionButton>
-            <Button href={`tel:${SITE.phone.replace(/\s/g, "")}`} variant="outline" size="lg">
+            <TrackedContactLink
+              href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+              className="relative inline-flex items-center justify-center gap-2 overflow-hidden rounded-full border border-white/40 px-9 py-4 text-base font-semibold tracking-wide text-white transition-colors hover:border-white hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            >
               <PhoneCall size={18} /> Call Now
-            </Button>
+            </TrackedContactLink>
           </div>
         </FadeIn>
       </div>

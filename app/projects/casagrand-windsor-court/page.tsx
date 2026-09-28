@@ -6,12 +6,14 @@ import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
 import { LeadActionButton } from "@/components/leads/LeadFlow";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Casagrand Windsor Court Villas, South Hyderabad",
   description:
     "Explore Casagrand Windsor Court in Mankhal, South Hyderabad: villa highlights, amenities, master plan, Vaastu notes and indicative pricing.",
-};
+  pathname: "/projects/casagrand-windsor-court",
+});
 
 export default function CasagrandWindsorCourtPage() {
   const project = FEATURED_PROJECTS.find((item) => item.name === "Casagrand Windsor Court");
@@ -39,7 +41,7 @@ export default function CasagrandWindsorCourtPage() {
           {project.coverImage && (
             <FadeIn delay={0.1}>
               <div className="relative mt-10 aspect-[16/8] overflow-hidden rounded-xl2 border border-white/15 shadow-card">
-                <Image src={project.coverImage} alt="Casagrand Windsor Court villa exterior" fill priority className="object-cover" unoptimized />
+                <Image src={project.coverImage} alt="Casagrand Windsor Court villa exterior" fill priority className="object-cover" />
               </div>
             </FadeIn>
           )}
@@ -96,7 +98,7 @@ export default function CasagrandWindsorCourtPage() {
                 <p className="mt-3 text-sm leading-relaxed text-slate/70">Open the supplied plan at full size to inspect villa placement, landscaped spaces and community amenities.</p>
               </div>
               <a href={project.masterLayout} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 bg-white p-2 shadow-card">
-                <Image src={project.masterLayout} alt="Casagrand Windsor Court master plan" width={2200} height={2200} className="h-auto w-full rounded-lg" unoptimized />
+                <Image src={project.masterLayout} alt="Casagrand Windsor Court master plan" width={2200} height={2200} className="h-auto w-full rounded-lg" />
               </a>
               <p className="mt-3 text-xs text-slate/60">The plan is reproduced from the supplied brochure. Refer to the builder’s approved documents for final plans and specifications.</p>
             </FadeIn>

@@ -18,6 +18,11 @@ export async function POST(request: Request) {
     const location = getValue("location");
     const message = getValue("message");
     const leadType = getValue("leadType");
+    const sourcePage = getValue("sourcePage");
+    const sourceCTA = getValue("sourceCTA");
+    const utmSource = getValue("utmSource");
+    const utmMedium = getValue("utmMedium");
+    const utmCampaign = getValue("utmCampaign");
     const isQuickEnquiry = values.quick === true;
 
     if (
@@ -30,6 +35,15 @@ export async function POST(request: Request) {
         { error: "Please fill in all required fields." },
         { status: 400 }
       );
+    }
+    if (
+      sourcePage.length > 300 ||
+      sourceCTA.length > 200 ||
+      utmSource.length > 200 ||
+      utmMedium.length > 200 ||
+      utmCampaign.length > 200
+    ) {
+      return NextResponse.json({ error: "Please submit a valid enquiry." }, { status: 400 });
     }
 
     if (leadType) {
@@ -101,6 +115,11 @@ export async function POST(request: Request) {
       ["Approximate monthly EMI (₹)", "emi"],
       ["Preferred site visit date", "preferredDate"],
       ["Preferred site visit time", "preferredTime"],
+      ["Page", "sourcePage"],
+      ["CTA source", "sourceCTA"],
+      ["UTM source", "utmSource"],
+      ["UTM medium", "utmMedium"],
+      ["UTM campaign", "utmCampaign"],
     ]
       .map(([label, key]) => {
         const value = getValue(key);

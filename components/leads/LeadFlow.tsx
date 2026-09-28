@@ -15,12 +15,14 @@ import { X } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
+import { captureLeadSource, trackAnalyticsEvent } from "@/lib/analytics";
 
 type LeadKind = "property" | "site-visit";
 type LeadRequest = {
   kind: LeadKind;
   project?: string;
   title?: string;
+  source?: ReturnType<typeof captureLeadSource>;
   onClose?: () => void;
   onSuccess?: () => void;
 };
@@ -51,13 +53,29 @@ function projectType(name?: string) {
 }
 
 export async function submitLead(values: Record<string, string>) {
-  const response = await fetch("/api/contact", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...values, quick: true }),
-  });
-  const result = await response.json();
-  if (!response.ok) throw new Error(result.error || "Unable to send your enquiry.");
+  const currentSource = captureLeadSource(values.sourceCTA || "direct-form");
+  let response: Response;
+  try {
+    response = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...values,
+        quick: true,
+        sourcePage: values.sourcePage || currentSource.sourcePage,
+        sourceCTA: values.sourceCTA || currentSource.sourceCta,
+        utmSource: values.utmSource || currentSource.utmSource,
+        utmMedium: values.utmMedium || currentSource.utmMedium,
+        utmCampaign: values.utmCampaign || currentSource.utmCampaign,
+      }),
+    });
+  } catch {
+    throw new Error("We couldn’t connect. Check your internet connection and try again.");
+  }
+  const result = await response.json().catch(() => null) as { success?: boolean; error?: string } | null;
+  if (!response.ok || result?.success !== true) {
+    throw new Error(result?.error || "Unable to send your enquiry. Please try again.");
+  }
 }
 
 function LeadForm({
@@ -76,6 +94,7 @@ function LeadForm({
     FEATURED_PROJECTS.find((item) => item.name === request.project)?.configurations ?? ""
   );
   const [submitting, setSubmitting] = useState(false);
+  const submissionLock = useRef(false);
 
   useEffect(() => {
     setProject(request.project ?? "");
@@ -95,20 +114,33 @@ function LeadForm({
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (submissionLock.current) return;
     if (!event.currentTarget.reportValidity()) return;
+    submissionLock.current = true;
     setSubmitting(true);
     const formData = new FormData(event.currentTarget);
     const values = Object.fromEntries(
       Array.from(formData.entries()).map(([key, value]) => [key, String(value).trim()])
     );
+    const leadSource = request.source ?? captureLeadSource("direct-form");
+    values.sourcePage = leadSource.sourcePage;
+    values.sourceCTA = leadSource.sourceCta;
+    values.utmSource = leadSource.utmSource;
+    values.utmMedium = leadSource.utmMedium;
+    values.utmCampaign = leadSource.utmCampaign;
     try {
       await submitLead(values);
+      trackAnalyticsEvent(
+        request.kind === "site-visit" ? "site_visit_submit" : "enquiry_submit",
+        { page: values.sourcePage, project: project || undefined }
+      );
       toast.success("Thank you. Our team will be in touch about your enquiry.");
       onSuccess();
     } catch (error) {
       console.error("Lead form error:", error);
       toast.error(error instanceof Error ? error.message : "Unable to send your enquiry.");
     } finally {
+      submissionLock.current = false;
       setSubmitting(false);
     }
   };
@@ -116,6 +148,11 @@ function LeadForm({
   return (
     <form className="space-y-4" onSubmit={onSubmit}>
       <input type="hidden" name="leadType" value={request.kind} />
+      <input type="hidden" name="sourcePage" value={request.source?.sourcePage ?? ""} />
+      <input type="hidden" name="sourceCTA" value={request.source?.sourceCta ?? ""} />
+      <input type="hidden" name="utmSource" value={request.source?.utmSource ?? ""} />
+      <input type="hidden" name="utmMedium" value={request.source?.utmMedium ?? ""} />
+      <input type="hidden" name="utmCampaign" value={request.source?.utmCampaign ?? ""} />
       {request.kind === "property" ? (
         <>
           <div className="grid gap-4 sm:grid-cols-2">
@@ -284,8 +321,15 @@ export function LeadFlowProvider({ children }: { children: ReactNode }) {
   const dialogRef = useRef<HTMLElement>(null);
   const requestRef = useRef<LeadRequest | null>(null);
   const openLead = useCallback((next: LeadRequest) => {
-    requestRef.current = next;
-    setRequest(next);
+    const source = next.source ?? captureLeadSource(next.title ?? (next.kind === "site-visit" ? "site-visit" : "property-enquiry"));
+    trackAnalyticsEvent(next.kind === "site-visit" ? "site_visit_open" : "enquiry_open", {
+      page: source.sourcePage,
+      project: next.project,
+      sourceCTA: source.sourceCta,
+    });
+    const requestWithSource = { ...next, source };
+    requestRef.current = requestWithSource;
+    setRequest(requestWithSource);
   }, []);
 
   const closeDialog = useCallback((submitted = false) => {
@@ -414,13 +458,17 @@ export function LeadActionButton({
   variant?: "primary" | "secondary" | "ghost" | "outline";
   size?: "sm" | "md" | "lg";
   className?: string;
+  "aria-label"?: string;
 }) {
   const { openLead } = useLeadFlow();
   return (
     <Button
       {...buttonProps}
       type="button"
-      onClick={() => openLead({ kind, project, title })}
+      onClick={(event) => {
+        const source = captureLeadSource(event.currentTarget.textContent?.trim() || "lead-action");
+        openLead({ kind, project, title, source });
+      }}
     >
       {children}
     </Button>

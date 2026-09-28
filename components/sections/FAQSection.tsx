@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { FAQS } from "@/constants/site";
@@ -27,9 +26,11 @@ export function FAQSection() {
             <FadeIn key={faq.question} delay={i * 0.03}>
               <div className="overflow-hidden rounded-xl2 border border-navy/10 bg-white shadow-card">
                 <button
-                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+                  id={`faq-question-${i}`}
+                  className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-gold"
                   onClick={() => setOpen(open === i ? null : i)}
                   aria-expanded={open === i}
+                  aria-controls={`faq-answer-${i}`}
                 >
                   <span className="font-semibold text-navy">{faq.question}</span>
                   <ChevronDown
@@ -39,20 +40,16 @@ export function FAQSection() {
                     )}
                   />
                 </button>
-                <AnimatePresence initial={false}>
-                  {open === i && (
-                    <motion.div
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3 }}
-                    >
-                      <p className="px-6 pb-5 text-sm leading-relaxed text-slate/70">
-                        {faq.answer}
-                      </p>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+                <div
+                  id={`faq-answer-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-question-${i}`}
+                  hidden={open !== i}
+                >
+                  <p className="px-6 pb-5 text-sm leading-relaxed text-slate/70">
+                    {faq.answer}
+                  </p>
+                </div>
               </div>
             </FadeIn>
           ))}

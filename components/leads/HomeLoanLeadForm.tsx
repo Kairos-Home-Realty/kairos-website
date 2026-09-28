@@ -1,10 +1,11 @@
 "use client";
 
-import { type FormEvent, useState } from "react";
+import { type FormEvent, useRef, useState } from "react";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
 import { submitLead } from "@/components/leads/LeadFlow";
 import { Button } from "@/components/ui/Button";
+import { captureLeadSource, trackAnalyticsEvent } from "@/lib/analytics";
 
 const budgets = [
   "Under ₹50 Lakhs",
@@ -21,25 +22,37 @@ const labelClass = "block text-sm font-medium text-navy";
 export function HomeLoanLeadForm() {
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const hasTrackedOpen = useRef(false);
+  const submissionLock = useRef(false);
 
   const onSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (submissionLock.current) return;
     const form = event.currentTarget;
     if (!form.reportValidity()) return;
+    submissionLock.current = true;
     setSubmitting(true);
     const formData = new FormData(form);
     const values = Object.fromEntries(
       Array.from(formData.entries()).map(([key, value]) => [key, String(value).trim()])
     );
+    const source = captureLeadSource("home-loan-advisor-form");
+    values.sourcePage = source.sourcePage;
+    values.sourceCTA = source.sourceCta;
+    values.utmSource = source.utmSource;
+    values.utmMedium = source.utmMedium;
+    values.utmCampaign = source.utmCampaign;
     try {
       await submitLead({ ...values, leadType: "home-loan" });
       setSubmitted(true);
       form.reset();
+      trackAnalyticsEvent("home_loan_submit", { page: values.sourcePage });
       toast.success("Thank you. A Kairos advisor will be in touch.");
     } catch (error) {
       console.error("Home-loan enquiry error:", error);
       toast.error(error instanceof Error ? error.message : "Unable to send your enquiry.");
     } finally {
+      submissionLock.current = false;
       setSubmitting(false);
     }
   };
@@ -65,8 +78,18 @@ export function HomeLoanLeadForm() {
           <p className="mt-2 text-sm leading-relaxed text-slate/70">
             Share a few details and we&apos;ll help you understand lender options. Eligibility, rates and approvals are determined by each lender.
           </p>
-          <form className="mt-6 space-y-4" onSubmit={onSubmit}>
+          <form
+            className="mt-6 space-y-4"
+            onSubmit={onSubmit}
+            onFocusCapture={() => {
+              if (!hasTrackedOpen.current) {
+                hasTrackedOpen.current = true;
+                trackAnalyticsEvent("home_loan_open", { page: "/home-loans" });
+              }
+            }}
+          >
             <input type="hidden" name="leadType" value="home-loan" />
+            <input type="hidden" name="sourceCTA" value="home-loan-advisor-form" />
             <div className="grid gap-4 sm:grid-cols-2">
               <label className={labelClass}>
                 Full name

@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SITE } from "@/constants/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Terms & Conditions",
   description: "Review the terms and conditions governing the use of Kairos Home Realty's website and advisory services.",
-};
+  pathname: "/terms-conditions",
+});
 
 const SECTIONS = [
   {
