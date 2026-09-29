@@ -5,14 +5,12 @@ import { Phone, MessageCircle } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { FEATURED_PROJECTS, SITE } from "@/constants/site";
 import { LeadActionButton } from "@/components/leads/LeadFlow";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export function FloatingActions() {
   const pathname = usePathname();
   const project = FEATURED_PROJECTS.find((item) => item.detailsPage === pathname);
-  const message = project
-    ? `Hi Kairos, I’m interested in ${project.name}. Please share the latest available details.`
-    : "Hi Kairos, I’d like help finding the right property.";
-  const whatsappUrl = `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
+  const whatsappUrl = getWhatsAppUrl(project?.name);
 
   return (
     <>
