@@ -6,59 +6,100 @@ import { ContactForm } from "@/components/sections/ContactForm";
 
 type PopupReason = "visit" | "exit";
 
+// Tuned to be less aggressive:
+// - The first popup waits for real engagement: 45s dwell OR 50% page scroll.
+// - Dismissal/submission persist across visits via localStorage, so returning
+//   visitors are never nagged again.
+// - Exit-intent offers one last-chance popup per visit, only after the
+//   visitor has actually engaged — never on a quick bounce.
+const POPUP_STORAGE_KEYS = {
+  shown: "kairos-lead-popup-shown",
+  submitted: "kairos-lead-popup-submitted",
+} as const;
+
+const TIME_ON_PAGE_TRIGGER_MS = 45_000;
+const SCROLL_DEPTH_TRIGGER_RATIO = 0.5;
+
+function hasPopupBeenShownBefore(): boolean {
+  try {
+    return Boolean(
+      localStorage.getItem(POPUP_STORAGE_KEYS.shown) ||
+        localStorage.getItem(POPUP_STORAGE_KEYS.submitted)
+    );
+  } catch {
+    return false;
+  }
+}
+
+function markPopupShown(): void {
+  try {
+    localStorage.setItem(POPUP_STORAGE_KEYS.shown, "true");
+  } catch {
+    // Storage unavailable (private mode, etc.) — popup just behaves per-visit
+  }
+}
+
+function markPopupSubmitted(): void {
+  try {
+    localStorage.setItem(POPUP_STORAGE_KEYS.submitted, "true");
+  } catch {
+    // Storage unavailable (private mode, etc.)
+  }
+}
+
 export function LeadCapturePopup() {
   const [reason, setReason] = useState<PopupReason | null>(null);
-  const [dismissed, setDismissed] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
-    const visitKey = "kairos-lead-popup-visit-shown";
-    const submittedKey = "kairos-lead-popup-submitted";
-    if (sessionStorage.getItem(visitKey) || sessionStorage.getItem(submittedKey)) return;
+    if (hasPopupBeenShownBefore()) return;
 
-    const timer = window.setTimeout(() => {
-      sessionStorage.setItem(visitKey, "true");
-      setReason("visit");
-    }, 2500);
-    return () => window.clearTimeout(timer);
-  }, []);
+    let exitAlreadyOffered = false;
 
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    let hasScrolledDown = false;
-    const openExitPopup = () => {
-      const visitShown = sessionStorage.getItem("kairos-lead-popup-visit-shown");
-      const exitShown = sessionStorage.getItem("kairos-lead-popup-exit-shown");
-      const hasSubmitted = sessionStorage.getItem("kairos-lead-popup-submitted");
-      if (visitShown && dismissed && !submitted && !hasSubmitted && !exitShown) {
-        sessionStorage.setItem("kairos-lead-popup-exit-shown", "true");
-        setReason("exit");
+    const hasEngaged = () =>
+      window.scrollY > 300 || performance.now() > TIME_ON_PAGE_TRIGGER_MS;
+
+    const openPopup = (nextReason: PopupReason) => {
+      setReason((current) => {
+        if (current) return current;
+        markPopupShown();
+        return nextReason;
+      });
+    };
+
+    const onScroll = () => {
+      const doc = document.documentElement;
+      const scrollable = doc.scrollHeight - window.innerHeight;
+      if (scrollable <= 0) return;
+      if (window.scrollY / scrollable >= SCROLL_DEPTH_TRIGGER_RATIO) {
+        openPopup("visit");
       }
     };
 
     const onMouseOut = (event: MouseEvent) => {
-      if (event.clientY <= 0 && event.relatedTarget === null) {
-        openExitPopup();
-      }
+      if (event.clientY > 0 || event.relatedTarget !== null) return;
+      if (exitAlreadyOffered) return;
+      // Exit-intent only counts as a genuine "about to leave" moment if the
+      // visitor engaged first; otherwise stay silent and let them go.
+      if (!hasEngaged()) return;
+      exitAlreadyOffered = true;
+      openPopup("exit");
     };
 
-    const onScroll = () => {
-      const currentScrollY = window.scrollY;
-      if (currentScrollY > 300) hasScrolledDown = true;
-      if (hasScrolledDown && currentScrollY < lastScrollY && currentScrollY < 100) {
-        openExitPopup();
-      }
-      lastScrollY = currentScrollY;
-    };
+    const timer = window.setTimeout(
+      () => openPopup("visit"),
+      TIME_ON_PAGE_TRIGGER_MS
+    );
 
     document.addEventListener("mouseout", onMouseOut);
     window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
+      window.clearTimeout(timer);
       document.removeEventListener("mouseout", onMouseOut);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [dismissed, submitted]);
+  }, []);
 
   useEffect(() => {
     if (!reason) return;
@@ -67,7 +108,6 @@ export function LeadCapturePopup() {
     document.body.style.overflow = "hidden";
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
-        setDismissed(true);
         setReason(null);
       }
     };
@@ -81,10 +121,7 @@ export function LeadCapturePopup() {
 
   if (!reason) return null;
 
-  const closePopup = () => {
-    setDismissed(true);
-    setReason(null);
-  };
+  const closePopup = () => setReason(null);
 
   return (
     <div
@@ -120,7 +157,7 @@ export function LeadCapturePopup() {
           mode="quick"
           onSuccess={() => {
             setSubmitted(true);
-            sessionStorage.setItem("kairos-lead-popup-submitted", "true");
+            markPopupSubmitted();
             setReason(null);
           }}
         />
