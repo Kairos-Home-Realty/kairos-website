@@ -7,3 +7,8 @@ export function getWhatsAppUrl(projectName?: string) {
 
   return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
 }
+
+export function getProjectDetailsWhatsAppUrl(projectName: string) {
+  const message = `Hi Kairos Home Realty Team, I’d like current details about ${projectName}.`;
+  return `https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(message)}`;
+}

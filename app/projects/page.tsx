@@ -8,7 +8,7 @@ import { PartnerLogo } from "@/components/ui/PartnerLogo";
 import Image from "next/image";
 import { createPageMetadata } from "@/lib/metadata";
 import { TrackedContactLink } from "@/components/ui/TrackedContactLink";
-import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { getProjectDetailsWhatsAppUrl } from "@/lib/whatsapp";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Projects & Builders",
@@ -84,7 +84,7 @@ export default function ProjectsPage() {
                           <ArrowRight size={16} />
                         </LeadActionButton>
                         <TrackedContactLink
-                          href={getWhatsAppUrl(project.name)}
+                          href={getProjectDetailsWhatsAppUrl(project.name)}
                           target="_blank"
                           rel="noopener noreferrer"
                           project={project.name}
@@ -208,7 +208,7 @@ export default function ProjectsPage() {
                         <ArrowRight size={16} />
                       </LeadActionButton>
                       <TrackedContactLink
-                        href={getWhatsAppUrl(project.name)}
+                        href={getProjectDetailsWhatsAppUrl(project.name)}
                         target="_blank"
                         rel="noopener noreferrer"
                         project={project.name}
