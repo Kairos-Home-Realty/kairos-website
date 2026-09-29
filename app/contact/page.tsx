@@ -4,12 +4,15 @@ import { ContactForm } from "@/components/sections/ContactForm";
 import { Button } from "@/components/ui/Button";
 import { SITE } from "@/constants/site";
 import { Phone, Mail, MapPin, Clock, MessageCircle } from "lucide-react";
+import { createPageMetadata } from "@/lib/metadata";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Contact Us",
   description:
     "Get in touch with Kairos Home Realty to book a free consultation, discuss home loan options, or plan a site visit.",
-};
+  pathname: "/contact",
+});
 
 export default function ContactPage() {
   return (
@@ -63,7 +66,7 @@ export default function ContactPage() {
                   <Button href={`tel:${SITE.phone.replace(/\s/g, "")}`} variant="secondary" className="flex-1 justify-center">
                     <Phone size={16} /> Call Now
                   </Button>
-                  <Button href={`https://wa.me/${SITE.whatsapp}`} className="flex-1 justify-center">
+                  <Button href={getWhatsAppUrl()} className="flex-1 justify-center">
                     <MessageCircle size={16} /> WhatsApp
                   </Button>
                 </div>

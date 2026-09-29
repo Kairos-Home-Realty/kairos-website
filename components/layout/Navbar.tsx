@@ -7,7 +7,7 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/constants/site";
-import { Button } from "@/components/ui/Button";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
@@ -68,9 +68,9 @@ export function Navbar() {
         </div>
 
         <div className="hidden lg:flex">
-          <Button href="/contact" size="sm">
+          <LeadActionButton size="sm">
             Book Free Consultation
-          </Button>
+          </LeadActionButton>
         </div>
 
         <button
@@ -104,9 +104,9 @@ export function Navbar() {
                 </Link>
               ))}
               <div className="mt-3">
-                <Button href="/contact" className="w-full">
+                <LeadActionButton className="w-full">
                   Book Free Consultation
-                </Button>
+                </LeadActionButton>
               </div>
             </div>
           </motion.div>

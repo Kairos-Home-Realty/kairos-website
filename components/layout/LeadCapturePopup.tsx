@@ -1,8 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { X } from "lucide-react";
-import { ContactForm } from "@/components/sections/ContactForm";
+import { useLeadFlow } from "@/components/leads/LeadFlow";
 
 type PopupReason = "visit" | "exit";
 
@@ -48,12 +47,18 @@ function markPopupSubmitted(): void {
 }
 
 export function LeadCapturePopup() {
+<<<<<<< HEAD
   const [reason, setReason] = useState<PopupReason | null>(null);
+=======
+  const { openLead, isOpen } = useLeadFlow();
+  const [dismissed, setDismissed] = useState(false);
+>>>>>>> 87af789e5032362ac9341a972fc4bc8677d50af8
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {
     if (hasPopupBeenShownBefore()) return;
 
+<<<<<<< HEAD
     let exitAlreadyOffered = false;
 
     const hasEngaged = () =>
@@ -73,10 +78,51 @@ export function LeadCapturePopup() {
       if (scrollable <= 0) return;
       if (window.scrollY / scrollable >= SCROLL_DEPTH_TRIGGER_RATIO) {
         openPopup("visit");
+=======
+    const timer = window.setTimeout(() => {
+      if (isOpen) return;
+      sessionStorage.setItem(visitKey, "true");
+      openPopup("visit");
+    }, 2500);
+    return () => window.clearTimeout(timer);
+
+    function openPopup(reason: PopupReason) {
+      openLead({
+        kind: "property",
+        title: reason === "exit" ? "Before you go…" : "How can we help you find your home?",
+        onClose: () => setDismissed(true),
+        onSuccess: () => {
+          setSubmitted(true);
+          sessionStorage.setItem("kairos-lead-popup-submitted", "true");
+        },
+      });
+    }
+  }, [isOpen, openLead]);
+
+  useEffect(() => {
+    let lastScrollY = window.scrollY;
+    let hasScrolledDown = false;
+    const openExitPopup = () => {
+      const visitShown = sessionStorage.getItem("kairos-lead-popup-visit-shown");
+      const exitShown = sessionStorage.getItem("kairos-lead-popup-exit-shown");
+      const hasSubmitted = sessionStorage.getItem("kairos-lead-popup-submitted");
+      if (visitShown && dismissed && !submitted && !hasSubmitted && !exitShown && !isOpen) {
+        sessionStorage.setItem("kairos-lead-popup-exit-shown", "true");
+        openLead({
+          kind: "property",
+          title: "Before you go…",
+          onClose: () => setDismissed(true),
+          onSuccess: () => {
+            setSubmitted(true);
+            sessionStorage.setItem("kairos-lead-popup-submitted", "true");
+          },
+        });
+>>>>>>> 87af789e5032362ac9341a972fc4bc8677d50af8
       }
     };
 
     const onMouseOut = (event: MouseEvent) => {
+<<<<<<< HEAD
       if (event.clientY > 0 || event.relatedTarget !== null) return;
       if (exitAlreadyOffered) return;
       // Exit-intent only counts as a genuine "about to leave" moment if the
@@ -90,15 +136,25 @@ export function LeadCapturePopup() {
       () => openPopup("visit"),
       TIME_ON_PAGE_TRIGGER_MS
     );
+=======
+      if (event.clientY <= 0 && event.relatedTarget === null) openExitPopup();
+    };
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      if (currentScrollY > 300) hasScrolledDown = true;
+      if (hasScrolledDown && currentScrollY < lastScrollY && currentScrollY < 100) openExitPopup();
+      lastScrollY = currentScrollY;
+    };
+>>>>>>> 87af789e5032362ac9341a972fc4bc8677d50af8
 
     document.addEventListener("mouseout", onMouseOut);
     window.addEventListener("scroll", onScroll, { passive: true });
-
     return () => {
       window.clearTimeout(timer);
       document.removeEventListener("mouseout", onMouseOut);
       window.removeEventListener("scroll", onScroll);
     };
+<<<<<<< HEAD
   }, []);
 
   useEffect(() => {
@@ -164,4 +220,9 @@ export function LeadCapturePopup() {
       </section>
     </div>
   );
+=======
+  }, [dismissed, submitted, isOpen, openLead]);
+
+  return null;
+>>>>>>> 87af789e5032362ac9341a972fc4bc8677d50af8
 }

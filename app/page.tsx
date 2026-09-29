@@ -11,25 +11,31 @@ import { BankPartnersSection } from "@/components/sections/BankPartnersSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
 import { FinalCTA } from "@/components/sections/FinalCTA";
+import { FeaturedProjects } from "@/components/sections/FeaturedProjects";
+import { createPageMetadata } from "@/lib/metadata";
+import { ProjectAdvantages } from "@/components/sections/ProjectAdvantages";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Kairos Home Realty | Property & Financial Advisory",
   description:
     "Discover the right property and secure the best home loan through Kairos Home Realty's trusted builder and banking partnerships.",
-};
+  pathname: "/",
+});
 
 export default function HomePage() {
   return (
     <>
       <Hero />
-      <MissionQuote />
-      <TrustedBar />
-      <AboutPreview />
-      <ServicesOverview />
+      <FeaturedProjects />
       <WhyChoose />
+      <ProjectAdvantages />
+      <AboutPreview />
+      <MissionQuote />
+      <ServicesOverview />
       <HowWeWork />
       <FeaturedBuilders />
       <BankPartnersSection />
+      <TrustedBar />
       <TestimonialsSection />
       <FAQSection />
       <FinalCTA />

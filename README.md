@@ -20,10 +20,11 @@ npm run start
 
 ## Pages
 
-- `/` — Home (hero, trust bar, about preview, services, why choose us, process, builders, banks, testimonials, FAQ, final CTA)
+- `/` — Home (hero, featured projects, why Kairos, location/project advantages, company and service information, partner trust, testimonials, FAQ, final CTA)
 - `/about` — Story, vision, mission, values, timeline, founder message
 - `/services` — All 6 services in detail
-- `/projects` — Builder partner cards
+- `/projects` — Builder and project cards
+- `/projects/*` — Available project detail pages
 - `/home-loans` — EMI calculator, eligibility checker, process, documents, partner banks
 - `/why-kairos` — Reasons + Kairos vs. traditional broker comparison table
 - `/contact` — Split layout with form (React Hook Form + Zod), map embed, WhatsApp/Call
@@ -32,6 +33,17 @@ npm run start
 
 ## Notes
 
+- Contact-form delivery uses the existing Resend integration. Configure `RESEND_API_KEY` in the deployment environment; do not commit it. `CONTACT_EMAIL` can override the enquiry recipient; if unset, enquiries go to the existing `SITE.email` value in `constants/site.ts`.
+- Lead forms include the current path, opening CTA and available UTM source/medium/campaign values in the existing contact email. These source fields are optional and do not change the `/api/contact` success contract.
+- Conversion events are dispatched as `kairos:analytics` browser `CustomEvent`s with an `eventName` and non-personal event details. No third-party analytics destination is configured. An integration can subscribe without adding a dependency:
+
+  ```js
+  window.addEventListener("kairos:analytics", (event) => {
+    console.info(event.detail.eventName, event.detail);
+  });
+  ```
+
+- Page metadata and canonical links are defined per route. `app/sitemap.ts` includes the available project detail routes from `FEATURED_PROJECTS`.
 - All content (company name, services, builders, banks, testimonials, FAQs) lives in `constants/site.ts` — edit this single file to update copy across the whole site.
 - Brand colors, fonts and gradients are defined in `tailwind.config.ts` and `app/globals.css`.
 - The hero and builder-card imagery currently use CSS/SVG-built visuals (skyline silhouette, gradient panels) instead of stock photography, since no real licensed images were supplied. Swap in real photography via `next/image` wherever you see a gradient placeholder (Hero background, service icons panels, builder card headers) for the final production look.

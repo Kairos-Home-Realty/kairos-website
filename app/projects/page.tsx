@@ -1,16 +1,21 @@
 import type { Metadata } from "next";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
-import { BUILDERS, FEATURED_PROJECTS } from "@/constants/site";
-import { Building2, ArrowRight } from "lucide-react";
+import { BUILDERS, FEATURED_PROJECTS, SITE } from "@/constants/site";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
+import { Building2, ArrowRight, MessageCircle } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
 import Image from "next/image";
+import { createPageMetadata } from "@/lib/metadata";
+import { TrackedContactLink } from "@/components/ui/TrackedContactLink";
+import { getProjectDetailsWhatsAppUrl } from "@/lib/whatsapp";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Projects & Builders",
   description:
     "Explore Kairos Home Realty's builder partners and ask about current project availability.",
-};
+  pathname: "/projects",
+});
 
 function BuilderLabel({ name }: { name: string }) {
   const normalizedName = name.toLowerCase().replace(/[^a-z0-9]/g, "");
@@ -62,7 +67,7 @@ export default function ProjectsPage() {
               {villaProjects.map((project) => (
                 <StaggerItem key={project.name}>
                   <article className="flex h-full flex-col overflow-hidden rounded-xl2 border border-navy/10 bg-white shadow-card">
-                    {project.coverImage && <div className="relative aspect-[16/8] bg-offwhite"><Image src={project.coverImage} alt={`${project.name} villa community`} fill className="object-cover" unoptimized /></div>}
+                    {project.coverImage && <div className="relative aspect-[16/8] bg-offwhite"><Image src={project.coverImage} alt={`${project.name} villa community`} fill className="object-cover" /></div>}
                     <div className="flex flex-1 flex-col p-7 md:p-8">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-semibold uppercase tracking-wide text-gold-dark"><BuilderLabel name={project.builder} /><span aria-hidden="true">·</span><span>Villa community</span></div>
                       <h3 className="mt-2 font-display text-2xl font-semibold text-navy">{project.name}</h3>
@@ -72,9 +77,21 @@ export default function ProjectsPage() {
                         {project.highlights.map((highlight) => <li key={highlight}>• {highlight}</li>)}
                       </ul>
                       {project.indicativeStartingPrice && <div className="mt-5 rounded-lg bg-offwhite p-4"><p className="font-semibold text-navy">Indicative price: {project.indicativeStartingPrice}</p><p className="mt-1 text-xs leading-relaxed text-slate/60">{project.priceNote}</p></div>}
-                      <div className="mt-6 flex flex-col gap-3 sm:flex-row">
-                        {project.detailsPage && <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center">See More Details <ArrowRight size={16} /></Button>}
-                        <Button href="/contact" size="sm" className="w-full justify-center">Ask about this villa <ArrowRight size={16} /></Button>
+                      <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+                        {project.detailsPage && <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center sm:w-auto">View Project <ArrowRight size={16} /></Button>}
+                        <LeadActionButton project={project.name} size="sm" className="w-full justify-center sm:w-auto">
+                          {project.indicativeStartingPrice ? "Get Current Price" : "Get Price"}
+                          <ArrowRight size={16} />
+                        </LeadActionButton>
+                        <TrackedContactLink
+                          href={getProjectDetailsWhatsAppUrl(project.name)}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          project={project.name}
+                          className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#128C4A] px-5 py-2.5 text-sm font-semibold text-[#08743b] hover:bg-[#128C4A]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold sm:w-auto"
+                        >
+                          <MessageCircle size={16} /> WhatsApp
+                        </TrackedContactLink>
                       </div>
                     </div>
                   </article>
@@ -100,7 +117,7 @@ export default function ProjectsPage() {
                 <article className="flex h-full flex-col rounded-xl2 border border-navy/10 bg-white p-7 shadow-card md:p-9">
                   {project.coverImage && (
                     <div className="relative mb-6 aspect-[16/8] overflow-hidden rounded-xl bg-offwhite">
-                      <Image src={project.coverImage} alt={`${project.name} villa exterior`} fill className="object-cover" unoptimized />
+                    <Image src={project.coverImage} alt={`${project.name} project image`} fill className={project.coverImageFit === "contain" ? "object-contain" : "object-cover"} />
                     </div>
                   )}
                   <div className="flex flex-wrap items-start justify-between gap-3">
@@ -145,7 +162,6 @@ export default function ProjectsPage() {
                           width={2200}
                           height={1556}
                           className="h-auto w-full transition-transform duration-300 hover:scale-[1.02]"
-                          unoptimized
                         />
                       </a>
                       <p className="mt-2 text-xs text-slate/60">Select the plan to open a larger view.</p>
@@ -181,13 +197,25 @@ export default function ProjectsPage() {
                     </div>
                   )}
                   <div className="mt-6">
-                    <div className="flex flex-col gap-3 sm:flex-row">
+                    <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap">
                       {project.detailsPage && (
-                        <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center">
-                          See More Details <ArrowRight size={16} />
+                        <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center sm:w-auto">
+                          View Project <ArrowRight size={16} />
                         </Button>
                       )}
-                      <Button href="/contact" size="sm" className="w-full justify-center">Ask about this project <ArrowRight size={16} /></Button>
+                      <LeadActionButton project={project.name} size="sm" className="w-full justify-center sm:w-auto">
+                        {project.indicativeStartingPrice ? "Get Current Price" : "Get Price"}
+                        <ArrowRight size={16} />
+                      </LeadActionButton>
+                      <TrackedContactLink
+                        href={getProjectDetailsWhatsAppUrl(project.name)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        project={project.name}
+                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-[#128C4A] px-5 py-2.5 text-sm font-semibold text-[#08743b] hover:bg-[#128C4A]/5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold sm:w-auto"
+                      >
+                        <MessageCircle size={16} /> WhatsApp
+                      </TrackedContactLink>
                     </div>
                   </div>
                 </article>

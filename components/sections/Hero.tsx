@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { ArrowDown, ArrowRight, Building2 } from "lucide-react";
-import { Button } from "@/components/ui/Button";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
 import { STATS } from "@/constants/site";
 
 export function Hero() {
@@ -46,7 +46,7 @@ export function Hero() {
                 transition={{ duration: 0.7 }}
                 className="mb-6 inline-flex items-center gap-2 rounded-full border border-gold/40 bg-white/5 px-4 py-2 text-xs tracking-widest text-gold backdrop-blur-sm"
               >
-                <Building2 size={14} /> PROPERTY &amp; FINANCIAL ADVISORY
+                <Building2 size={14} /> RIGHT PROPERTY. RIGHT TIME.
               </motion.div>
 
               <motion.h1
@@ -66,9 +66,8 @@ export function Hero() {
                 transition={{ duration: 0.8, delay: 0.25 }}
                 className="mt-6 max-w-xl text-base leading-relaxed text-white/75 md:text-lg"
               >
-                Helping you discover your dream property while securing the
-                best home loan through trusted builder and banking
-                partnerships.
+                Compare verified properties, trusted builders and home-loan
+                options with clear, personal guidance from Kairos.
               </motion.p>
 
               <motion.div
@@ -77,12 +76,12 @@ export function Hero() {
                 transition={{ duration: 0.8, delay: 0.4 }}
                 className="mt-9 flex flex-wrap gap-4"
               >
-                <Button href="/contact" size="lg">
-                  Book Free Consultation <ArrowRight size={18} />
-                </Button>
-                <Button href="/projects" variant="outline" size="lg">
-                  Explore Projects
-                </Button>
+                <LeadActionButton size="lg">
+                  Find My Property <ArrowRight size={18} />
+                </LeadActionButton>
+                <LeadActionButton variant="outline" size="lg" title="Talk to an Advisor">
+                  Talk to an Advisor
+                </LeadActionButton>
               </motion.div>
             </div>
 

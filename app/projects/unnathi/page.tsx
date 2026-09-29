@@ -5,11 +5,15 @@ import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
+import { SITE } from "@/constants/site";
+import { LeadActionButton } from "@/components/leads/LeadFlow";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Unnathi Premium Villas by Auro Realty | Kairos Home Realty",
   description: "Explore Unnathi premium villas at Munirabad Junction: plot sizes, indicative pre-launch offer, price sheet and site visit enquiry.",
-};
+  pathname: "/projects/unnathi",
+});
 
 export default function UnnathiPage() {
   const project = FEATURED_PROJECTS.find((item) => item.name === "Unnathi");
@@ -34,7 +38,7 @@ export default function UnnathiPage() {
                   <p className="mt-1 text-sm text-white/70">Savings up to ₹50 lakh advertised · confirm current terms and availability</p>
                 </div>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-                  <Button href="/contact" size="lg">Plan a site visit <ArrowRight size={17} /></Button>
+                  <LeadActionButton kind="site-visit" project={project.name} size="lg">Plan a site visit <ArrowRight size={17} /></LeadActionButton>
                   <a href="#details" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Explore villa details</a>
                 </div>
               </div>
@@ -60,7 +64,7 @@ export default function UnnathiPage() {
             <div className="rounded-xl2 bg-offwhite p-7 md:p-9">
               <h3 className="font-display text-2xl font-semibold text-navy">Plan your visit</h3>
               <p className="mt-3 text-sm leading-relaxed text-slate/70">Speak with Abraham for site visit support and current pricing.</p>
-              <a href="tel:+918089202089" className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3 font-semibold text-white transition-colors hover:bg-navy-light">Call Abraham · 80892 02089 <ArrowRight size={16} /></a>
+              <a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="mt-5 inline-flex items-center gap-2 rounded-full bg-navy px-6 py-3 font-semibold text-white transition-colors hover:bg-navy-light">Call Us <ArrowRight size={16} /></a>
               <p className="mt-5 text-xs leading-relaxed text-slate/60">The promotional image states approximately 2 minutes from ORR Exit 6 and 45 minutes from HITEC City. Travel time varies by route and traffic.</p>
             </div>
           </FadeIn>
@@ -73,9 +77,9 @@ export default function UnnathiPage() {
 
       {project.paymentSchedule && <section className="section-pad bg-offwhite"><div className="container-xl px-6 lg:px-12"><FadeIn><div className="mb-8 max-w-2xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Supplied price sheet</span><h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Construction-linked payment schedule</h2></div></FadeIn><div className="grid gap-3 md:grid-cols-2">{project.paymentSchedule.map((item) => <div key={item.stage} className="flex items-center justify-between gap-4 rounded-xl border border-navy/10 bg-white p-4"><p className="text-sm leading-relaxed text-slate/75">{item.stage}</p><span className="shrink-0 rounded-full bg-gold/20 px-3 py-1.5 text-sm font-semibold text-navy">{item.percentage}</span></div>)}</div><p className="mt-4 text-xs leading-relaxed text-slate/60">GST applies as noted in the price sheet. Taxes, registration, local authority fees and other applicable costs may be extra. Ask Auro Realty for the current payment terms.</p></div></section>}
 
-      {project.galleryImages && <section className="section-pad bg-white"><div className="container-xl px-6 lg:px-12"><FadeIn><div className="mb-8 max-w-2xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Project visuals</span><h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Unnathi promotional images</h2><p className="mt-3 text-sm leading-relaxed text-slate/70">Images supplied for this project. Renderings and offers are illustrative and subject to confirmation.</p></div></FadeIn><StaggerContainer className="grid gap-5 md:grid-cols-2">{project.galleryImages.map((image) => <StaggerItem key={image.src}><a href={image.src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 border border-navy/10 bg-offwhite p-2 shadow-card"><Image src={image.src} alt={image.alt} width={1200} height={1500} className="mx-auto h-auto max-h-[760px] w-full rounded-lg object-contain" unoptimized /><p className="px-3 py-3 text-sm text-slate/70">{image.alt} · Open larger image</p></a></StaggerItem>)}</StaggerContainer></div></section>}
+      {project.galleryImages && <section className="section-pad bg-white"><div className="container-xl px-6 lg:px-12"><FadeIn><div className="mb-8 max-w-2xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Project visuals</span><h2 className="mt-3 font-display text-3xl font-semibold text-navy md:text-4xl">Unnathi promotional images</h2><p className="mt-3 text-sm leading-relaxed text-slate/70">Images supplied for this project. Renderings and offers are illustrative and subject to confirmation.</p></div></FadeIn><StaggerContainer className="grid gap-5 md:grid-cols-2">{project.galleryImages.map((image) => <StaggerItem key={image.src}><a href={image.src} target="_blank" rel="noopener noreferrer" className="block overflow-hidden rounded-xl2 border border-navy/10 bg-offwhite p-2 shadow-card"><Image src={image.src} alt={image.alt} width={1200} height={1500} className="mx-auto h-auto max-h-[760px] w-full rounded-lg object-contain" /><p className="px-3 py-3 text-sm text-slate/70">{image.alt} · Open larger image</p></a></StaggerItem>)}</StaggerContainer></div></section>}
 
-      <section className="bg-navy-gradient py-16 text-white md:py-20"><div className="container-xl px-6 text-center lg:px-12"><FadeIn><h2 className="font-display text-3xl font-semibold md:text-4xl">Experience Unnathi</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos to arrange a guided site visit and confirm current pricing, villa availability and offer terms.</p><div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row"><Button href="/contact" size="lg">Request a site visit <ArrowRight size={17} /></Button><a href="tel:+918089202089" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white hover:bg-white/10">Call Abraham · 80892 02089</a></div><p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Prices, charges and launch offers are based on supplied materials and may change. Confirm current approvals, specifications, taxes, availability and payment terms with Auro Realty before booking.</p></FadeIn></div></section>
+      <section className="bg-navy-gradient py-16 text-white md:py-20"><div className="container-xl px-6 text-center lg:px-12"><FadeIn><h2 className="font-display text-3xl font-semibold md:text-4xl">Experience Unnathi</h2><p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-white/70">Contact Kairos to arrange a guided site visit and confirm current pricing, villa availability and offer terms.</p><div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row"><LeadActionButton kind="site-visit" project={project.name} size="lg">Request a site visit <ArrowRight size={17} /></LeadActionButton><a href={`tel:${SITE.phone.replace(/\s/g, "")}`} className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white hover:bg-white/10">Call Us</a></div><p className="mx-auto mt-8 max-w-4xl text-xs leading-relaxed text-white/55">Prices, charges and launch offers are based on supplied materials and may change. Confirm current approvals, specifications, taxes, availability and payment terms with Auro Realty before booking.</p></FadeIn></div></section>
     </>
   );
 }

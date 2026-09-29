@@ -271,6 +271,8 @@ export const FEATURED_PROJECTS: FeaturedProject[] = [
     virtualTour: "https://www.brooklynavenue360.com/ddzyn360/",
     masterLayout: "/projects/godrej-brooklyn-avenue-master-layout.webp",
     detailsPage: "/projects/godrej-brooklyn-avenue",
+    coverImage: "/projects/godrej-brooklyn-avenue-cover.png",
+    coverImageFit: "contain",
     sampleVideos: [
       { label: "3 BHK sample video", videoId: "7w33rjc9hC0" },
       { label: "4 BHK sample video", videoId: "uYMthLYjXvA" },

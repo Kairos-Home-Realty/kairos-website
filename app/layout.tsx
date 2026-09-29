@@ -5,7 +5,10 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import { LeadCapturePopup } from "@/components/layout/LeadCapturePopup";
+import { LeadFlowProvider } from "@/components/leads/LeadFlow";
 import { Toaster } from "sonner";
+import { OrganizationStructuredData } from "@/components/layout/OrganizationStructuredData";
+import { AnalyticsNavigationTracker } from "@/components/layout/AnalyticsNavigationTracker";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -67,11 +70,15 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <Navbar />
-        <main>{children}</main>
-        <Footer />
-        <FloatingActions />
-        <LeadCapturePopup />
+        <OrganizationStructuredData />
+        <LeadFlowProvider>
+          <AnalyticsNavigationTracker />
+          <Navbar />
+          <main>{children}</main>
+          <Footer />
+          <FloatingActions />
+          <LeadCapturePopup />
+        </LeadFlowProvider>
         <Toaster position="top-center" richColors />
       </body>
     </html>

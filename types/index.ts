@@ -53,6 +53,7 @@ export interface FeaturedProject {
   nearbyPlaces?: { category: string; places: string[] }[];
   specifications?: { category: string; details: string[] }[];
   coverImage?: string;
+  coverImageFit?: "cover" | "contain";
   quickFacts?: { label: string; value: string }[];
   galleryImages?: { src: string; alt: string }[];
   priceTableRows?: { label: string; area?: string; amount: string }[];

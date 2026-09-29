@@ -1,11 +1,13 @@
 "use client";
 
+import { cloneElement, isValidElement, useRef, useState, type ReactElement, type ReactNode } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { captureLeadSource, trackAnalyticsEvent } from "@/lib/analytics";
 
 const contactSchema = z.object({
   fullName: z.string().min(2, "Please enter your full name"),
@@ -26,6 +28,8 @@ export function ContactForm({
   onSuccess?: () => void;
   mode?: "full" | "quick";
 }) {
+  const [submitted, setSubmitted] = useState(false);
+  const submissionLock = useRef(false);
   const {
     register,
     handleSubmit,
@@ -61,37 +65,70 @@ export function ContactForm({
       }
     }
 
+    if (submissionLock.current) return;
+    submissionLock.current = true;
     try {
+      const source = captureLeadSource(mode === "quick" ? "quick-contact-form" : "contact-form");
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, quick: mode === "quick" }),
+        body: JSON.stringify({
+          ...data,
+          quick: mode === "quick",
+          sourcePage: source.sourcePage,
+          sourceCTA: source.sourceCta,
+          utmSource: source.utmSource,
+          utmMedium: source.utmMedium,
+          utmCampaign: source.utmCampaign,
+        }),
       });
 
-      const result = await response.json();
+      const result = await response.json().catch(() => null) as { success?: boolean; error?: string } | null;
 
-      if (!response.ok) {
-        throw new Error(result.error || "Failed to send your enquiry");
+      if (!response.ok || result?.success !== true) {
+        throw new Error(result?.error || "Failed to send your enquiry");
       }
 
+      trackAnalyticsEvent("enquiry_submit", { page: source.sourcePage });
       toast.success(
         "Thank you! Our team will reach out within 24 hours."
       );
 
       reset();
+      setSubmitted(true);
       onSuccess?.();
     } catch (error) {
       console.error("Contact form error:", error);
 
       toast.error(
-        error instanceof Error
+        error instanceof TypeError
+          ? "We couldn’t connect. Check your internet connection and try again."
+          : error instanceof Error
           ? error.message
           : "Something went wrong. Please try again."
       );
+    } finally {
+      submissionLock.current = false;
     }
   };
+
+  if (submitted) {
+    return (
+      <div role="status" className="rounded-xl bg-offwhite p-6 text-center">
+        <h3 className="font-display text-xl font-semibold text-navy">Thank you for contacting Kairos</h3>
+        <p className="mt-2 text-sm text-slate/70">Your enquiry has been sent to our team.</p>
+        <button
+          type="button"
+          className="mt-4 min-h-11 rounded-full px-4 text-sm font-semibold text-navy underline underline-offset-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold"
+          onClick={() => setSubmitted(false)}
+        >
+          Send another enquiry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-5" noValidate>
@@ -233,13 +270,26 @@ function Field({
 }: {
   label: string;
   error?: string;
-  children: React.ReactNode;
+  children: ReactNode;
 }) {
+  const id = `contact-${label.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "")}`;
+  const control = isValidElement(children)
+    ? cloneElement(children as ReactElement<{
+        id?: string;
+        "aria-invalid"?: boolean;
+        "aria-describedby"?: string;
+      }>, {
+        id,
+        "aria-invalid": Boolean(error),
+        "aria-describedby": error ? `${id}-error` : undefined,
+      })
+    : children;
+
   return (
     <div>
-      <label className="mb-1.5 block text-sm font-medium text-navy/70">{label}</label>
-      {children}
-      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+      <label htmlFor={id} className="mb-1.5 block text-sm font-medium text-navy/70">{label}</label>
+      {control}
+      {error && <p id={`${id}-error`} role="alert" className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 }

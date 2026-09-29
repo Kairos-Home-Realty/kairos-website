@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { FadeIn } from "@/components/ui/FadeIn";
 import { SITE } from "@/constants/site";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Privacy Policy",
   description: "Read Kairos Home Realty's privacy policy on how we collect, use and protect your personal information.",
-};
+  pathname: "/privacy-policy",
+});
 
 const SECTIONS = [
   {

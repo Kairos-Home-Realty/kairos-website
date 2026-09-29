@@ -6,12 +6,15 @@ import { FAQSection } from "@/components/sections/FAQSection";
 import { BANKS, PROCESS_STEPS } from "@/constants/site";
 import { FileCheck2, Landmark, ClipboardList, BadgeCheck, MoreHorizontal } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
+import { HomeLoanLeadForm } from "@/components/leads/HomeLoanLeadForm";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "Home Loan Assistance",
   description:
     "Understand the home loan process, eligibility, required documents and partner banks. Use our EMI calculator and eligibility checker.",
-};
+  pathname: "/home-loans",
+});
 
 const DOCUMENTS = [
   "Identity proof (Aadhaar, PAN, Passport)",
@@ -40,6 +43,12 @@ export default function HomeLoansPage() {
               each lender and depend on your application.
             </p>
           </FadeIn>
+        </div>
+      </section>
+
+      <section className="section-pad bg-offwhite">
+        <div className="container-xl max-w-3xl px-6 lg:px-12">
+          <HomeLoanLeadForm />
         </div>
       </section>
 

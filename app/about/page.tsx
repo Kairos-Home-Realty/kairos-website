@@ -2,12 +2,14 @@ import type { Metadata } from "next";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { TIMELINE, SITE } from "@/constants/site";
 import { Eye, Target, HeartHandshake, Sparkles } from "lucide-react";
+import { createPageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = createPageMetadata({
   title: "About Us",
   description:
     "Learn about Kairos Home Realty's story, vision, mission and values as a trusted property and financial advisory firm.",
-};
+  pathname: "/about",
+});
 
 const VALUES = [
   { icon: HeartHandshake, title: "Transparency", description: "No hidden agendas, no biased pushing — every recommendation is honest." },
