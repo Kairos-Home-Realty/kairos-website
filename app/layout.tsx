@@ -8,6 +8,7 @@ import { LeadCapturePopup } from "@/components/layout/LeadCapturePopup";
 import { LeadFlowProvider } from "@/components/leads/LeadFlow";
 import { Toaster } from "sonner";
 import { OrganizationStructuredData } from "@/components/layout/OrganizationStructuredData";
+import { BreadcrumbStructuredData } from "@/components/layout/BreadcrumbStructuredData";
 import { AnalyticsNavigationTracker } from "@/components/layout/AnalyticsNavigationTracker";
 
 const playfair = Playfair_Display({
@@ -57,6 +58,13 @@ export const metadata: Metadata = {
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
@@ -71,6 +79,7 @@ export default function RootLayout({
     >
       <body>
         <OrganizationStructuredData />
+        <BreadcrumbStructuredData />
         <LeadFlowProvider>
           <AnalyticsNavigationTracker />
           <Navbar />
