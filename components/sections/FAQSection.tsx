@@ -27,6 +27,7 @@ export function FAQSection() {
             <FadeIn key={faq.question} delay={i * 0.03}>
               <div className="overflow-hidden rounded-xl2 border border-navy/10 bg-white shadow-card">
                 <button
+                  type="button"
                   className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
                   onClick={() => setOpen(open === i ? null : i)}
                   aria-expanded={open === i}

@@ -6,6 +6,8 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { Send } from "lucide-react";
 import { Button } from "@/components/ui/Button";
+import { getLeadSource } from "@/lib/lead-source";
+import { trackEvent } from "@/lib/analytics";
 
 const contactSchema = z.object({
   fullName: z.string().min(2, "Please enter your full name"),
@@ -22,9 +24,11 @@ type ContactFormData = z.infer<typeof contactSchema>;
 export function ContactForm({
   onSuccess,
   mode = "full",
+  source = "contact_form",
 }: {
   onSuccess?: () => void;
   mode?: "full" | "quick";
+  source?: string;
 }) {
   const {
     register,
@@ -67,7 +71,7 @@ export function ContactForm({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...data, quick: mode === "quick" }),
+        body: JSON.stringify({ ...data, quick: mode === "quick", leadSource: getLeadSource(source) }),
       });
 
       const result = await response.json();
@@ -81,6 +85,7 @@ export function ContactForm({
       );
 
       reset();
+      trackEvent("enquiry_submit", { source, page: window.location.pathname });
       onSuccess?.();
     } catch (error) {
       console.error("Contact form error:", error);

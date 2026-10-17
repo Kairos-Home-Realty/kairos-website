@@ -15,7 +15,6 @@ export function AboutPreview() {
               alt="City skyline at dusk"
               fill
               className="object-cover"
-              priority
             />
 
             {/* Gradient overlays for text legibility over the photo */}

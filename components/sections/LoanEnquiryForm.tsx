@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Send } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/Button";
+import { getLeadSource } from "@/lib/lead-source";
+import { trackEvent } from "@/lib/analytics";
 
 type EnquiryMode = "new-home-loan" | "balance-transfer";
 
@@ -21,11 +23,12 @@ export function LoanEnquiryForm({ initialMode = "new-home-loan" }: { initialMode
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...values, quick: false, requirement: mode }),
+        body: JSON.stringify({ ...values, quick: false, requirement: mode, leadSource: getLeadSource(mode === "balance-transfer" ? "balance_transfer_form" : "home_loan_form") }),
       });
       const result = await response.json();
       if (!response.ok) throw new Error(result.error || "Unable to send your enquiry");
       toast.success("Thanks — a Kairos loan advisor will call you within 24 hours.");
+      trackEvent("home_loan_submit", { mode });
       form.reset();
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "Please try again.");

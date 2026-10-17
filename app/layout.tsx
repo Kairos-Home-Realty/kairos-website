@@ -5,6 +5,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { FloatingActions } from "@/components/layout/FloatingActions";
 import { LeadCapturePopup } from "@/components/layout/LeadCapturePopup";
+import { MobileStickyActions } from "@/components/layout/MobileStickyActions";
 import { Toaster } from "sonner";
 
 const playfair = Playfair_Display({
@@ -71,6 +72,7 @@ export default function RootLayout({
         <main>{children}</main>
         <Footer />
         <FloatingActions />
+        <MobileStickyActions />
         <LeadCapturePopup />
         <Toaster position="top-center" richColors />
       </body>

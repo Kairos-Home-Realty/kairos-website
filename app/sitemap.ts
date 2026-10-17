@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { FEATURED_PROJECTS } from "@/constants/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://www.kairoshomerealty.com";
@@ -12,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/contact",
     "/privacy-policy",
     "/terms-conditions",
-  ];
+  ].concat(FEATURED_PROJECTS.flatMap((project) => project.detailsPage ? [project.detailsPage] : []));
 
   return routes.map((route) => ({
     url: `${base}${route}`,

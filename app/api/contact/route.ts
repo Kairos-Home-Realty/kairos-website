@@ -19,6 +19,7 @@ export async function POST(request: Request) {
       loanAmount,
       currentLender,
       website,
+      leadSource,
     } = body;
     const isQuickEnquiry = quick === true;
 
@@ -63,6 +64,11 @@ export async function POST(request: Request) {
     const safeMessage = escapeHtml(message || "No additional message provided.");
     const safeLoanAmount = escapeHtml(loanAmount || "Not provided");
     const safeCurrentLender = escapeHtml(currentLender || "Not provided");
+    const safeLeadPage = escapeHtml(leadSource?.page || "Not provided");
+    const safeLeadSource = escapeHtml(leadSource?.source || "Not provided");
+    const safeUtmSource = escapeHtml(leadSource?.utmSource || "Not provided");
+    const safeUtmMedium = escapeHtml(leadSource?.utmMedium || "Not provided");
+    const safeUtmCampaign = escapeHtml(leadSource?.utmCampaign || "Not provided");
 
     const { data, error } = await resend.emails.send({
       from: "KAIROS HOME REALTY <enquiries@kairoshomerealty.com>",
@@ -124,6 +130,14 @@ export async function POST(request: Request) {
           <p>
             <strong>Message:</strong><br />
             ${safeMessage}
+          </p>
+
+          <p>
+            <strong>Lead source:</strong> ${safeLeadSource}<br />
+            <strong>Page:</strong> ${safeLeadPage}<br />
+            <strong>UTM source:</strong> ${safeUtmSource}<br />
+            <strong>UTM medium:</strong> ${safeUtmMedium}<br />
+            <strong>UTM campaign:</strong> ${safeUtmCampaign}
           </p>
 
           <hr />

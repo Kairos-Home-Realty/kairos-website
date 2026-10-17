@@ -3,12 +3,14 @@
 import { motion } from "framer-motion";
 import { Phone, MessageCircle } from "lucide-react";
 import { SITE } from "@/constants/site";
+import { trackEvent } from "@/lib/analytics";
 
 export function FloatingActions() {
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
       <motion.a
         href={`https://wa.me/${SITE.whatsapp}`}
+        onClick={() => trackEvent("whatsapp_click", { source: "floating_action" })}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
@@ -23,6 +25,7 @@ export function FloatingActions() {
       </motion.a>
       <motion.a
         href={`tel:${SITE.phone.replace(/\s/g, "")}`}
+        onClick={() => trackEvent("call_click", { source: "floating_action" })}
         aria-label="Call now"
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.95 }}

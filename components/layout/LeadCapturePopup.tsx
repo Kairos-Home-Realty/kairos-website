@@ -118,6 +118,7 @@ export function LeadCapturePopup() {
         </p>
         <ContactForm
           mode="quick"
+          source="lead_popup"
           onSuccess={() => {
             setSubmitted(true);
             sessionStorage.setItem("kairos-lead-popup-submitted", "true");
