@@ -28,8 +28,8 @@ export const SITE = {
   hours: "Monday – Saturday, 10:00 AM – 6:00 PM",
   whatsapp: "918089202089",
   founder: {
-    name: "Abraham Thomas",
-    role: "Founder",
+    name: "Abraham P Thomas",
+    role: "Founder and CEO",
   },
 };
 

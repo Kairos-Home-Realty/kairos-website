@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
-import { TIMELINE, SITE } from "@/constants/site";
+import { FEATURED_PROJECTS, SITE } from "@/constants/site";
 import { Eye, Target, HeartHandshake, Sparkles } from "lucide-react";
 
 export const metadata: Metadata = {
@@ -14,6 +14,14 @@ const VALUES = [
   { icon: Target, title: "Customer-First", description: "Your needs and budget always come before any partner relationship." },
   { icon: Sparkles, title: "Excellence", description: "We hold ourselves to the same premium standard we expect from our partners." },
   { icon: Eye, title: "Integrity", description: "We say what we mean, even when it means recommending you wait." },
+];
+
+const TRUST_STATS = [
+  { value: "12+", label: "Builder partners" },
+  { value: "12+", label: "Banking partners" },
+  { value: `${FEATURED_PROJECTS.length}`, label: "Projects showcased" },
+  { value: "100+", label: "Families assisted" },
+  { value: "Hyderabad", label: "Our market" },
 ];
 
 export default function AboutPage() {
@@ -101,32 +109,44 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* <section className="section-pad bg-white">
+      <section className="section-pad bg-white">
         <div className="container-xl px-0">
           <FadeIn className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Our Journey</span>
-            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">From an idea to 500+ families served</h2>
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Kairos in numbers</span>
+            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">A growing network, grounded in guidance</h2>
+            <p className="mt-4 text-sm leading-relaxed text-slate/70">Our network helps customers compare property and financing options across Hyderabad with one clear point of contact.</p>
           </FadeIn>
-          <div className="relative mx-auto mt-16 max-w-3xl">
-            <div className="absolute left-[27px] top-0 h-full w-px bg-navy/10 md:left-1/2" />
-            <div className="space-y-10">
-              {TIMELINE.map((item, i) => (
-                <FadeIn key={item.year} direction={i % 2 === 0 ? "right" : "left"}>
-                  <div className="relative flex items-start gap-6 md:justify-center">
-                    <div className="z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-gold-gradient font-display text-sm font-bold text-navy shadow-gold md:absolute md:left-1/2 md:-translate-x-1/2">
-                      {item.year}
-                    </div>
-                    <div className="rounded-xl2 border border-navy/5 bg-offwhite p-6 shadow-card md:ml-24 md:w-[calc(50%-3rem)]">
-                      <h3 className="font-semibold text-navy">{item.title}</h3>
-                      <p className="mt-1 text-sm text-slate/70">{item.description}</p>
-                    </div>
-                  </div>
-                </FadeIn>
-              ))}
-            </div>
-          </div>
+          <StaggerContainer className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-5">
+            {TRUST_STATS.map((stat) => (
+              <StaggerItem key={stat.label}>
+                <div className="h-full rounded-xl2 border border-navy/8 bg-offwhite p-6 text-center shadow-card">
+                  <p className="font-display text-3xl font-semibold text-navy">{stat.value}</p>
+                  <p className="mt-2 text-xs font-semibold uppercase tracking-wide text-gold-dark">{stat.label}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
         </div>
-      </section> */}
+      </section>
+
+      <section className="section-pad bg-offwhite">
+        <div className="container-xl grid gap-10 px-0 lg:grid-cols-[.8fr_1.2fr] lg:items-center">
+          <FadeIn>
+            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Our beginning</span>
+            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">Built to make the home journey clearer.</h2>
+            <p className="mt-5 text-sm leading-relaxed text-slate/70">Kairos Home Realty began in Hyderabad in 2026 under the leadership of Abraham P Thomas, Founder and CEO. The firm brings property discovery, builder comparison and home-loan guidance together so families can make an informed decision with confidence.</p>
+          </FadeIn>
+          <FadeIn direction="left">
+            <div className="rounded-xl3 bg-navy p-8 text-white shadow-soft md:p-10">
+              <div className="flex items-center gap-4">
+                <div className="flex h-14 w-14 items-center justify-center rounded-full bg-gold-gradient font-display text-xl font-bold text-navy">2026</div>
+                <div><p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Founded in Hyderabad</p><h3 className="mt-1 text-xl font-semibold">One trusted point of contact</h3></div>
+              </div>
+              <p className="mt-6 text-sm leading-relaxed text-white/70">From the first property shortlist to the final financing conversation, our role is to make the process easier to understand—not to replace the independent decisions of the customer, builder or lender.</p>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
 
       <section className="section-pad bg-navy-gradient text-white">
         <div className="container-xl grid grid-cols-1 items-center gap-10 px-0 lg:flex lg:flex-row lg:justify-center">
