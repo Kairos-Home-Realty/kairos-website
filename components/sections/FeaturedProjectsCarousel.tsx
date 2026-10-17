@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
 import { FEATURED_PROJECTS } from "@/constants/site";
 import { FadeIn } from "@/components/ui/FadeIn";
@@ -12,34 +12,57 @@ const PROJECTS = PROJECT_NAMES.map((name) => FEATURED_PROJECTS.find((project) =>
 
 export function FeaturedProjectsCarousel() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const activeRef = useRef(0);
   const [active, setActive] = useState(0);
 
-  const move = (direction: 1 | -1) => {
+  const syncActive = useCallback(() => {
+    const track = trackRef.current;
+    const card = track?.querySelector<HTMLElement>("[data-project-card]");
+    if (!track || !card) return;
+    const next = Math.round(track.scrollLeft / (card.offsetWidth + 20)) % PROJECTS.length;
+    if (next !== activeRef.current) {
+      activeRef.current = next;
+      setActive(next);
+    }
+  }, []);
+
+  const move = useCallback((direction: 1 | -1) => {
     const track = trackRef.current;
     if (!track) return;
     const card = track.querySelector<HTMLElement>("[data-project-card]");
     if (!card) return;
-    const next = (active + direction + PROJECTS.length) % PROJECTS.length;
+    const next = (activeRef.current + direction + PROJECTS.length) % PROJECTS.length;
     track.scrollTo({ left: next * (card.offsetWidth + 20), behavior: "smooth" });
+    activeRef.current = next;
     setActive(next);
-  };
+  }, []);
 
   useEffect(() => {
     const timer = window.setInterval(() => move(1), 4800);
     return () => window.clearInterval(timer);
-  });
+  }, [move]);
 
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
-    const onScroll = () => {
-      const card = track.querySelector<HTMLElement>("[data-project-card]");
-      if (!card) return;
-      setActive(Math.round(track.scrollLeft / (card.offsetWidth + 20)) % PROJECTS.length);
+    const onPointerRelease = () => window.requestAnimationFrame(syncActive);
+    track.addEventListener("scrollend", syncActive);
+    track.addEventListener("pointerup", onPointerRelease, { passive: true });
+    track.addEventListener("touchend", onPointerRelease, { passive: true });
+    return () => {
+      track.removeEventListener("scrollend", syncActive);
+      track.removeEventListener("pointerup", onPointerRelease);
+      track.removeEventListener("touchend", onPointerRelease);
     };
-    track.addEventListener("scroll", onScroll, { passive: true });
-    return () => track.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [syncActive]);
+
+  const goTo = (index: number) => {
+    const track = trackRef.current;
+    const card = track?.querySelector<HTMLElement>("[data-project-card]");
+    if (track && card) track.scrollTo({ left: index * (card.offsetWidth + 20), behavior: "smooth" });
+    activeRef.current = index;
+    setActive(index);
+  };
 
   return <section className="section-pad overflow-hidden bg-offwhite">
     <div className="container-xl px-0">
@@ -69,7 +92,7 @@ export function FeaturedProjectsCarousel() {
           </div>
         </article>)}
       </div>
-      <div className="mt-2 flex justify-center gap-2" aria-label="Carousel position">{PROJECTS.map((project, index) => <button key={project.name} type="button" aria-label={`Go to ${project.name}`} onClick={() => { const track = trackRef.current; const card = track?.querySelector<HTMLElement>("[data-project-card]"); if (track && card) track.scrollTo({ left: index * (card.offsetWidth + 20), behavior: "smooth" }); setActive(index); }} className={`h-1.5 rounded-full transition-all ${active === index ? "w-8 bg-gold" : "w-1.5 bg-navy/20"}`} />)}</div>
+      <div className="mt-2 flex justify-center gap-2" aria-label="Carousel position">{PROJECTS.map((project, index) => <button key={project.name} type="button" aria-label={`Go to ${project.name}`} onClick={() => goTo(index)} className={`h-1.5 rounded-full transition-all ${active === index ? "w-8 bg-gold" : "w-1.5 bg-navy/20"}`} />)}</div>
     </div>
   </section>;
 }
