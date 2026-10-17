@@ -9,6 +9,7 @@ import {
   Phone,
 } from "lucide-react";
 import { SITE, FOOTER_LINKS, NAV_LINKS } from "@/constants/site";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 const SOCIAL_LINKS = [
   {
@@ -23,7 +24,7 @@ const SOCIAL_LINKS = [
   },
   {
     label: "WhatsApp",
-    href: `https://wa.me/${SITE.whatsapp}`,
+    href: getWhatsAppUrl(),
     Icon: MessageCircle,
   },
 ];

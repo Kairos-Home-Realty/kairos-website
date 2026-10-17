@@ -4,12 +4,13 @@ import { motion } from "framer-motion";
 import { Phone, MessageCircle } from "lucide-react";
 import { SITE } from "@/constants/site";
 import { trackEvent } from "@/lib/analytics";
+import { getWhatsAppUrl } from "@/lib/whatsapp";
 
 export function FloatingActions() {
   return (
     <div className="fixed bottom-6 right-6 z-40 flex flex-col gap-3">
       <motion.a
-        href={`https://wa.me/${SITE.whatsapp}`}
+        href={getWhatsAppUrl()}
         onClick={() => trackEvent("whatsapp_click", { source: "floating_action" })}
         target="_blank"
         rel="noopener noreferrer"
