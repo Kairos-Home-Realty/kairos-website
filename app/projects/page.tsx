@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
-import { BUILDERS, FEATURED_PROJECTS } from "@/constants/site";
-import { Building2, ArrowRight } from "lucide-react";
+import { BUILDERS, FEATURED_PROJECTS, SITE } from "@/constants/site";
+import { Building2, ArrowRight, MessageCircle } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
 import Image from "next/image";
 
@@ -75,6 +75,7 @@ export default function ProjectsPage() {
                       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         {project.detailsPage && <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center">See More Details <ArrowRight size={16} /></Button>}
                         <Button href="/contact" size="sm" className="w-full justify-center">Ask about this villa <ArrowRight size={16} /></Button>
+                        <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hi Kairos, I would like details about ${project.name}.`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
                       </div>
                     </div>
                   </article>
@@ -130,7 +131,7 @@ export default function ProjectsPage() {
                       href={project.droneView}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-navy/15 px-5 py-3 text-sm font-semibold text-navy transition-colors hover:bg-offwhite"
+                      className="mt-3 inline-flex w-fit items-center gap-2 rounded-full border border-navy bg-navy px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-navy-light"
                     >
                       Open Brigade Gateway drone view <ArrowRight size={16} />
                     </a>
@@ -188,6 +189,7 @@ export default function ProjectsPage() {
                         </Button>
                       )}
                       <Button href="/contact" size="sm" className="w-full justify-center">Ask about this project <ArrowRight size={16} /></Button>
+                      <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hi Kairos, I would like details about ${project.name}.`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
                     </div>
                   </div>
                 </article>

@@ -8,6 +8,7 @@ import { WhyChoose } from "@/components/sections/WhyChoose";
 import { HowWeWork } from "@/components/sections/HowWeWork";
 import { FeaturedBuilders } from "@/components/sections/FeaturedBuilders";
 import { FeaturedProjectsCarousel } from "@/components/sections/FeaturedProjectsCarousel";
+import { ProjectComparison } from "@/components/sections/ProjectComparison";
 import { BankPartnersSection } from "@/components/sections/BankPartnersSection";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { FAQSection } from "@/components/sections/FAQSection";
@@ -29,6 +30,7 @@ export default function HomePage() {
       <AboutPreview />
       <ServicesOverview />
       <WhyChoose />
+      <ProjectComparison />
       <HowWeWork />
       <FeaturedBuilders />
       <BankPartnersSection />
