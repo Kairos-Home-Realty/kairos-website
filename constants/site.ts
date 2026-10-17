@@ -35,11 +35,11 @@ export const SITE = {
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/" },
-  { label: "About Us", href: "/about" },
-  { label: "Services", href: "/services" },
   { label: "Projects", href: "/projects" },
   { label: "Home Loans", href: "/home-loans" },
+  { label: "Services", href: "/services" },
   { label: "Why Kairos", href: "/why-kairos" },
+  { label: "About Us", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
