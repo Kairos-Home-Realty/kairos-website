@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, MessageCircle } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
+import { getProjectWhatsAppUrl } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Unnathi Premium Villas by Auro Realty | Kairos Home Realty",
@@ -35,6 +36,7 @@ export default function UnnathiPage() {
                 </div>
                 <div className="mt-7 flex flex-col gap-3 sm:flex-row">
                   <Button href="/contact" size="lg">Plan a site visit <ArrowRight size={17} /></Button>
+                  <a href={getProjectWhatsAppUrl(project.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366] px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#25D366]/15"><MessageCircle size={17} /> WhatsApp</a>
                   <a href="#details" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Explore villa details</a>
                 </div>
               </div>

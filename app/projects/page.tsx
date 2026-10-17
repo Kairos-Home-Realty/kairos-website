@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { BUILDERS, FEATURED_PROJECTS, SITE } from "@/constants/site";
-import { getWhatsAppUrl } from "@/lib/whatsapp";
+import { getProjectWhatsAppUrl } from "@/lib/whatsapp";
 import { Building2, ArrowRight, MessageCircle } from "lucide-react";
 import { PartnerLogo } from "@/components/ui/PartnerLogo";
 import Image from "next/image";
@@ -76,7 +76,7 @@ export default function ProjectsPage() {
                       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         {project.detailsPage && <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center">See More Details <ArrowRight size={16} /></Button>}
                         <Button href="/contact" size="sm" className="w-full justify-center">Ask about this villa <ArrowRight size={16} /></Button>
-                        <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
+                        <a href={getProjectWhatsAppUrl(project.name)} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
                       </div>
                     </div>
                   </article>
@@ -190,7 +190,7 @@ export default function ProjectsPage() {
                         </Button>
                       )}
                       <Button href="/contact" size="sm" className="w-full justify-center">Ask about this project <ArrowRight size={16} /></Button>
-                      <a href={getWhatsAppUrl()} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
+                      <a href={getProjectWhatsAppUrl(project.name)} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
                     </div>
                   </div>
                 </article>

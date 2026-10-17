@@ -6,3 +6,9 @@ const DEFAULT_WHATSAPP_MESSAGE =
 export function getWhatsAppUrl(message = DEFAULT_WHATSAPP_MESSAGE) {
   return `https://api.whatsapp.com/send?phone=${SITE.whatsapp}&text=${encodeURIComponent(message)}`;
 }
+
+export function getProjectWhatsAppUrl(projectName: string) {
+  return getWhatsAppUrl(
+    `Hi Kairos Home Realty Team, I’d like current details about ${projectName}.`,
+  );
+}

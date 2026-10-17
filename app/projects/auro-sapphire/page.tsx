@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
-import { ArrowLeft, ArrowRight, MapPin } from "lucide-react";
+import { ArrowLeft, ArrowRight, MapPin, MessageCircle } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { Button } from "@/components/ui/Button";
 import { FEATURED_PROJECTS } from "@/constants/site";
+import { getProjectWhatsAppUrl } from "@/lib/whatsapp";
 
 export const metadata: Metadata = {
   title: "Sapphire by Auro Realty | Kondapur",
@@ -29,6 +30,7 @@ export default function AuroSapphirePage() {
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <Button href="/contact" size="lg">Arrange a guided site visit <ArrowRight size={17} /></Button>
               <a href="tel:+918089202089" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Call Us · 80892 02089</a>
+              <a href={getProjectWhatsAppUrl(project.name)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-2 rounded-full border border-[#25D366] px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-[#25D366]/15"><MessageCircle size={17} /> WhatsApp</a>
               <a href="#plans" className="inline-flex items-center justify-center rounded-full border border-white/40 px-7 py-4 text-sm font-semibold text-white transition-colors hover:bg-white/10">Explore brochure plans</a>
             </div>
           </FadeIn>
