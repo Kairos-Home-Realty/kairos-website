@@ -16,8 +16,15 @@ export async function POST(request: Request) {
       location,
       message,
       quick,
+      loanAmount,
+      currentLender,
+      website,
     } = body;
     const isQuickEnquiry = quick === true;
+
+    if (website) {
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
 
     // Basic server-side validation
     if (
@@ -54,6 +61,8 @@ export async function POST(request: Request) {
     const safeBudget = escapeHtml(budget || "Not provided");
     const safeLocation = escapeHtml(location || "Not provided");
     const safeMessage = escapeHtml(message || "No additional message provided.");
+    const safeLoanAmount = escapeHtml(loanAmount || "Not provided");
+    const safeCurrentLender = escapeHtml(currentLender || "Not provided");
 
     const { data, error } = await resend.emails.send({
       from: "KAIROS HOME REALTY <enquiries@kairoshomerealty.com>",
@@ -100,6 +109,16 @@ export async function POST(request: Request) {
           <p>
             <strong>Preferred Location:</strong><br />
             ${safeLocation}
+          </p>
+
+          <p>
+            <strong>Loan amount / balance:</strong><br />
+            ${safeLoanAmount}
+          </p>
+
+          <p>
+            <strong>Current lender:</strong><br />
+            ${safeCurrentLender}
           </p>
 
           <p>

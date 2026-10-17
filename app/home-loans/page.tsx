@@ -1,164 +1,43 @@
 import type { Metadata } from "next";
+import Image from "next/image";
+import { ArrowRight, BadgeCheck, CheckCircle2, FileCheck2, Landmark, ShieldCheck, UserRound } from "lucide-react";
 import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/FadeIn";
 import { EMICalculator } from "@/components/sections/EMICalculator";
-import { EligibilityChecker } from "@/components/sections/EligibilityChecker";
 import { FAQSection } from "@/components/sections/FAQSection";
+import { LoanEnquiryForm } from "@/components/sections/LoanEnquiryForm";
 import { BANKS, PROCESS_STEPS } from "@/constants/site";
-import { FileCheck2, Landmark, ClipboardList, BadgeCheck, MoreHorizontal } from "lucide-react";
+import { PartnerLogo } from "@/components/ui/PartnerLogo";
 
 export const metadata: Metadata = {
-  title: "Home Loan Assistance",
-  description:
-    "Understand the home loan process, eligibility, required documents and partner banks. Use our EMI calculator and eligibility checker.",
+  title: "Home Loan Assistance & Balance Transfer",
+  description: "Compare home loan options, estimate your EMI and get guided support for a new home loan or balance transfer in Hyderabad.",
 };
 
-const DOCUMENTS = [
-  "Identity proof (Aadhaar, PAN, Passport)",
-  "Address proof (utility bill, rental agreement)",
-  "Income proof (salary slips, ITR, Form 16)",
-  "Bank statements (last 6 months)",
-  "Property documents (sale agreement, title deed)",
-  "Passport-size photographs",
-];
-
-const FEATURED_BANK_NAMES = ["ICICI Bank", "Federal Bank", "IDFC FIRST Bank"];
+const DOCUMENTS = ["Identity proof — Aadhaar, PAN or Passport", "Address proof — utility bill or rental agreement", "Income proof — salary slips, ITR or Form 16", "Bank statements — typically the last 6 months", "Property documents — sale agreement and title documents", "Passport-size photographs and lender forms"];
+const FEATURED_BANK_NAMES = ["ICICI Bank", "Federal Bank", "IDFC FIRST Bank", "HDFC"];
 
 export default function HomeLoansPage() {
-  const featuredBanks = BANKS.filter((bank) => FEATURED_BANK_NAMES.includes(bank.name));
+  const featuredBanks = BANKS.filter((bank) => FEATURED_BANK_NAMES.some((name) => bank.name.toLowerCase().includes(name.toLowerCase().replace(" bank", "")))).slice(0, 4);
+  return <>
+    <section className="relative isolate min-h-[680px] overflow-hidden bg-navy text-white">
+      <Image src="/home-loans/hero-home.png" alt="Premium modern home at sunset" fill priority className="object-cover object-center" sizes="100vw" />
+      <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,15,38,.94)_0%,rgba(7,27,59,.76)_44%,rgba(7,27,59,.18)_100%)]" />
+      <div className="container-xl relative flex min-h-[680px] items-end px-6 pb-20 pt-40 lg:px-12 lg:pb-28"><FadeIn>
+        <div className="max-w-2xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Home Loan Assistance · Hyderabad</span><h1 className="mt-5 max-w-xl text-4xl font-semibold leading-tight md:text-6xl">Your home deserves a clear financial plan.</h1><p className="mt-6 max-w-xl text-base leading-relaxed text-white/75 md:text-lg">Compare lenders, understand the numbers and move from shortlist to sanction with a Kairos loan advisor beside you.</p><div className="mt-8 flex flex-col gap-3 sm:flex-row"><a href="#loan-enquiry" className="inline-flex items-center justify-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-semibold text-navy hover:bg-gold-light">Get a loan plan <ArrowRight size={17} /></a><a href="#emi-calculator" className="inline-flex items-center justify-center rounded-full border border-white/35 px-6 py-3.5 text-sm font-semibold text-white hover:bg-white/10">Calculate your EMI</a></div><div className="mt-10 flex flex-wrap gap-x-6 gap-y-3 text-xs text-white/70"><span className="flex items-center gap-2"><ShieldCheck size={16} className="text-gold" />Secure enquiry handling</span><span className="flex items-center gap-2"><BadgeCheck size={16} className="text-gold" />12+ lender relationships</span></div></div>
+      </FadeIn></div>
+    </section>
 
-  return (
-    <>
-      <section className="bg-navy-gradient pt-40 pb-24 text-white md:pt-48">
-        <div className="container-xl px-6 text-center lg:px-12">
-          <FadeIn>
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Home Loan Assistance</span>
-            <h1 className="mx-auto mt-5 max-w-3xl text-4xl font-semibold md:text-5xl lg:text-6xl">
-              Financing made simple, terms made clear
-            </h1>
-            <p className="mx-auto mt-6 max-w-2xl text-white/70">
-              We help compare offers across 12+ banking partners and guide you
-              through the paperwork. Rates, eligibility and approvals are set by
-              each lender and depend on your application.
-            </p>
-          </FadeIn>
-        </div>
-      </section>
+    <section className="section-pad bg-white"><div className="container-xl grid items-center gap-10 px-0 lg:grid-cols-[.9fr_1.1fr]"><FadeIn><div className="relative h-[360px] overflow-hidden rounded-xl3 shadow-soft"><div className="absolute inset-0 bg-[url('/home-loans/loan-storyboard.png')] bg-[length:200%_200%] bg-[position:100%_0%]" role="img" aria-label="Couple reviewing home loan documents" /><div className="absolute bottom-5 left-5 rounded-xl bg-white/95 px-4 py-3 shadow-card"><p className="text-xs font-semibold uppercase tracking-widest text-gold-dark">Specialist support</p><p className="mt-1 text-sm font-semibold text-navy">Balance Transfer + Top-Up</p></div></div></FadeIn><FadeIn direction="left"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Lower your repayment burden</span><h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">A smarter way to review your existing home loan</h2><p className="mt-5 text-sm leading-relaxed text-slate/70">If your current rate no longer works for you, we can help compare a transfer to another lender and explore an eligible top-up for interiors, renovation or other planned needs.</p><div className="mt-7 grid gap-3 sm:grid-cols-2">{["Compare effective rates and fees", "Estimate savings after transfer costs", "Review top-up eligibility", "Coordinate documents and next steps"].map((item) => <div key={item} className="flex gap-2 text-sm text-slate/80"><CheckCircle2 size={17} className="mt-0.5 shrink-0 text-gold-dark" />{item}</div>)}</div><a href="#emi-calculator" className="mt-8 inline-flex items-center gap-2 text-sm font-semibold text-navy hover:text-gold-dark">Check transfer savings <ArrowRight size={16} /></a></FadeIn></div></section>
 
-      <section className="section-pad bg-white">
-        <div className="container-xl px-0">
-          <FadeIn className="mx-auto mb-14 max-w-2xl text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">EMI Calculator</span>
-            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">
-              Estimate your monthly repayment
-            </h2>
-          </FadeIn>
-          <FadeIn>
-            <EMICalculator />
-          </FadeIn>
-        </div>
-      </section>
+    <section id="emi-calculator" className="section-pad scroll-mt-20 bg-offwhite"><div className="container-xl px-0"><FadeIn className="mx-auto mb-12 max-w-2xl text-center"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Interactive EMI calculator</span><h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">See the monthly number before you decide</h2><p className="mt-4 text-sm leading-relaxed text-slate/70">Switch between a new home loan and balance transfer to see estimated EMI, interest and transfer savings after the costs you enter.</p></FadeIn><FadeIn><EMICalculator /></FadeIn></div></section>
 
-      {/* <section className="section-pad bg-offwhite">
-        <div className="container-xl px-0">
-          <FadeIn className="mx-auto mb-14 max-w-2xl text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Eligibility Checker</span>
-            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">
-              See how much you may qualify for
-            </h2>
-          </FadeIn>
-          <FadeIn>
-            <EligibilityChecker />
-          </FadeIn>
-        </div>
-      </section> */}
+    <section className="section-pad bg-white"><div className="container-xl grid gap-12 px-0 lg:grid-cols-[1.1fr_.9fr] lg:items-center"><FadeIn><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">A guided process</span><h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">Six steps from conversation to application</h2><div className="mt-8 grid gap-4 sm:grid-cols-2">{PROCESS_STEPS.slice(0, 6).map((step) => <div key={step.step} className="flex gap-4 rounded-xl2 border border-navy/8 bg-offwhite p-5"><span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy text-sm font-bold text-gold">{step.step}</span><div><h3 className="font-semibold text-navy">{step.title}</h3><p className="mt-1 text-xs leading-relaxed text-slate/65">{step.description}</p></div></div>)}</div></FadeIn><FadeIn direction="left"><div className="relative h-[420px] overflow-hidden rounded-xl3 shadow-soft"><div className="absolute inset-0 bg-[url('/home-loans/loan-storyboard.png')] bg-[length:200%_200%] bg-[position:0%_100%]" role="img" aria-label="Loan advisor consulting with a couple" /><div className="absolute inset-x-5 bottom-5 rounded-xl bg-navy/90 p-5 text-white backdrop-blur"><p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-gold"><UserRound size={15} /> One point of contact</p><p className="mt-2 text-sm leading-relaxed text-white/75">Your advisor helps you understand documents, timelines and lender questions without promising an approval.</p></div></div></FadeIn></div></section>
 
-      <section className="section-pad bg-white">
-        <div className="container-xl grid grid-cols-1 gap-14 px-0 lg:grid-cols-2">
-          <FadeIn direction="right">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Loan Process</span>
-            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">How financing works with us</h2>
-            <div className="mt-8 space-y-5">
-              {PROCESS_STEPS.slice(5).map((step) => (
-                <div key={step.step} className="flex gap-4">
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-navy-gradient font-display text-sm font-bold text-gold">
-                    {step.step}
-                  </span>
-                  <div>
-                    <p className="font-semibold text-navy">{step.title}</p>
-                    <p className="text-sm text-slate/70">{step.description}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </FadeIn>
+    <section className="section-pad bg-offwhite"><div className="container-xl grid gap-12 px-0 lg:grid-cols-[.85fr_1.15fr] lg:items-center"><FadeIn><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Ready when you are</span><h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">Documents that keep your application moving</h2><p className="mt-4 text-sm leading-relaxed text-slate/70">Exact requirements vary by applicant, property and lender. This checklist is a helpful starting point, not a final sanction checklist.</p><ul className="mt-7 space-y-3">{DOCUMENTS.map((doc) => <li key={doc} className="flex items-start gap-3 rounded-xl bg-white p-4 text-sm text-slate/75 shadow-card"><FileCheck2 className="mt-0.5 shrink-0 text-gold-dark" size={18} />{doc}</li>)}</ul></FadeIn><FadeIn direction="left"><div className="rounded-xl3 bg-white p-7 shadow-soft md:p-9"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Your enquiry is conditional</span><h2 className="mt-3 text-2xl font-semibold text-navy">Start with a no-pressure conversation</h2><p className="mt-3 text-sm leading-relaxed text-slate/65">Tell us whether you are buying a home or reviewing an existing loan. We&apos;ll respond with the next sensible step.</p><div id="loan-enquiry" className="mt-7 scroll-mt-24"><LoanEnquiryForm /></div></div></FadeIn></div></section>
 
-          <FadeIn direction="left" delay={0.1}>
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Required Documents</span>
-            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">What you&apos;ll need</h2>
-            <ul className="mt-8 space-y-4">
-              {DOCUMENTS.map((doc) => (
-                <li key={doc} className="flex items-start gap-3 rounded-xl2 border border-navy/5 bg-offwhite p-4 text-sm text-slate/80 shadow-card">
-                  <FileCheck2 className="mt-0.5 shrink-0 text-gold" size={18} />
-                  {doc}
-                </li>
-              ))}
-            </ul>
-          </FadeIn>
-        </div>
-      </section>
+    <section className="section-pad bg-white"><div className="container-xl px-0"><FadeIn className="mx-auto max-w-2xl text-center"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold-dark">Verified partner network</span><h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">Compare options, then choose with context</h2><p className="mt-4 text-sm leading-relaxed text-slate/70">Partner availability, product suitability, rates and approval decisions are determined by each lender.</p></FadeIn><StaggerContainer className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-4">{featuredBanks.map((bank) => <StaggerItem key={bank.name}><div className="relative flex h-28 items-center justify-center rounded-xl2 border border-navy/8 bg-white p-5 shadow-card"><PartnerLogo name={bank.name} src={bank.logo} /></div></StaggerItem>)}</StaggerContainer></div></section>
 
-      <section className="section-pad bg-offwhite">
-        <div className="container-xl px-0">
-          <FadeIn className="mx-auto max-w-2xl text-center">
-            <span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Partner Banks</span>
-            <h2 className="mt-4 text-3xl font-semibold text-navy md:text-4xl">Financing options we compare for you</h2>
-          </FadeIn>
-          <StaggerContainer className="mt-14 grid grid-cols-2 gap-5 sm:grid-cols-4">
-          {featuredBanks.map((bank) => (
-            <StaggerItem key={bank.name}>
-              <div className="card-hover flex h-full flex-col items-center rounded-xl2 bg-white p-6 text-center shadow-card">
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-navy-gradient text-gold">
-                  <Landmark size={20} />
-                </div>
-                <p className="text-sm font-semibold text-navy">{bank.name}</p>
-                <p className="mt-1 text-xs text-slate/60">{bank.productHighlight}</p>
-              </div>
-            </StaggerItem>
-          ))}
-          <StaggerItem>
-            <div className="card-hover flex h-full flex-col items-center justify-center rounded-xl2 border-2 border-dashed border-navy/15 bg-transparent p-6 text-center shadow-none">
-              <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-navy/5 text-navy/40">
-                <MoreHorizontal size={20} />
-              </div>
-              <p className="text-sm font-semibold text-navy/60">And Many More</p>
-              <p className="mt-1 text-xs text-slate/50">12+ banking partners</p>
-            </div>
-          </StaggerItem>
-        </StaggerContainer>
-        </div>
-      </section>
-
-      <section className="section-pad bg-white">
-        <div className="container-xl px-0">
-          <StaggerContainer className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-            {[
-              { icon: BadgeCheck, title: "Compare Lenders", desc: "Review available offers and fees from our listed banking partners." },
-              { icon: ClipboardList, title: "Guided Paperwork", desc: "We prepare and review your documentation before submission." },
-              { icon: Landmark, title: "Lender Decisions", desc: "The lender confirms final rates, eligibility, fees and approval." },
-            ].map((item) => (
-              <StaggerItem key={item.title}>
-                <div className="card-hover h-full rounded-xl2 border border-navy/5 p-7 text-center shadow-card">
-                  <item.icon className="mx-auto mb-4 text-gold" size={32} />
-                  <h3 className="font-semibold text-navy">{item.title}</h3>
-                  <p className="mt-2 text-sm text-slate/70">{item.desc}</p>
-                </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      <FAQSection />
-    </>
-  );
+    <section className="relative overflow-hidden bg-navy py-20 text-white"><div className="absolute inset-y-0 right-0 hidden w-1/2 bg-[url('/home-loans/loan-storyboard.png')] bg-[length:200%_200%] bg-[position:100%_100%] opacity-45 lg:block" role="img" aria-label="Indian family in their new home" /><div className="container-xl relative px-6 lg:px-12"><FadeIn><div className="max-w-xl"><span className="text-xs font-semibold uppercase tracking-[0.25em] text-gold">Home financing, made human</span><h2 className="mt-4 text-3xl font-semibold md:text-4xl">Make room for the life you are planning.</h2><p className="mt-4 text-sm leading-relaxed text-white/70">Kairos helps you make an informed property and financing decision. We are not the lender, do not sanction loans and do not guarantee rates or approvals.</p><a href="#loan-enquiry" className="mt-7 inline-flex items-center gap-2 rounded-full bg-gold px-6 py-3.5 text-sm font-semibold text-navy hover:bg-gold-light">Talk to Kairos <ArrowRight size={17} /></a></div></FadeIn></div></section>
+    <FAQSection />
+  </>;
 }
