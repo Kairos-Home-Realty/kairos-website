@@ -75,7 +75,7 @@ export default function ProjectsPage() {
                       <div className="mt-6 flex flex-col gap-3 sm:flex-row">
                         {project.detailsPage && <Button href={project.detailsPage} variant="secondary" size="sm" className="w-full justify-center">See More Details <ArrowRight size={16} /></Button>}
                         <Button href="/contact" size="sm" className="w-full justify-center">Ask about this villa <ArrowRight size={16} /></Button>
-                        <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hi Kairos, I would like details about ${project.name}.`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
+                        <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hi Kairos Home Realty Team, I’d like current details about ${project.name}.`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
                       </div>
                     </div>
                   </article>
@@ -189,7 +189,7 @@ export default function ProjectsPage() {
                         </Button>
                       )}
                       <Button href="/contact" size="sm" className="w-full justify-center">Ask about this project <ArrowRight size={16} /></Button>
-                      <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hi Kairos, I would like details about ${project.name}.`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
+                      <a href={`https://wa.me/${SITE.whatsapp}?text=${encodeURIComponent(`Hi Kairos Home Realty Team, I’d like current details about ${project.name}.`)}`} target="_blank" rel="noopener noreferrer" className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-[#25D366] px-4 py-2.5 text-sm font-semibold text-[#168c45] transition hover:bg-[#25D366]/10"><MessageCircle size={16} /> WhatsApp</a>
                     </div>
                   </div>
                 </article>
